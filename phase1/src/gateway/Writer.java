@@ -9,11 +9,28 @@ import java.io.IOException;
 
 
 public class Writer implements IWriter {
+    /**
+     * a string representing the file path of the file
+     */
     String filePath;
+    /**
+     * a file object to be instantiated based on the filePath
+     */
     File file;
+    /**
+     * a file output stream object to be instantiated based on the file object
+     */
     FileOutputStream fileOutputStream;
+    /**
+     * an object output stream object to be instantiated based on the file output stream
+     */
     ObjectOutputStream objectOutputStream;
 
+    /**
+     * Constructor of an object that writes a serializable object to  data in a given file path.
+     *
+     * @param filePath a string representing the file path of the file.
+     */
     public Writer(String filePath)  {
         this.filePath = filePath;
         file = new File(filePath);
@@ -27,6 +44,9 @@ public class Writer implements IWriter {
         }
     }
 
+    /**
+     * Write the serializable object to the file given by filePath.
+     */
     @Override
     public void write(Serializable object) {
         try {

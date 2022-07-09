@@ -2,53 +2,74 @@ package useCases;
 
 import exception.*;
 import gateway.*;
-import org.json.simple.JSONObject;
 
 import entities.Account;
 
+import java.sql.SQLOutput;
 import java.time.LocalDateTime;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
 public class AccountManager implements IAccountManager {
+    /**
+     * a mapping of username of the account to the account entity
+     */
     HashMap<String, Account> accountMap;
 
-    // called in all controllers
+    /**
+     * Constructor of a use case responsible for managing users.
+     *
+     * @param accountMap a mapping of username of the account to the account entity
+     */
     public AccountManager(HashMap<String, Account> accountMap) {
         this.accountMap = accountMap;
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
-    public HashMap<String, Account> getAccountMap() {
+    public HashMap<String, Account> getMap(){
         return accountMap;
     }
 
-    // call in SignUpController
+    /**
+     * @inheritDoc
+     */
     @Override
     public boolean containsUser(String username) {
         return accountMap.containsKey(username);
     }
 
-    // call in LoginController
+    /**
+     * @inheritDoc
+     */
     @Override
     public boolean isAdmin(String username) {
         return accountMap.get(username).getIsAdmin();
     }
 
-    // call in DeleteUserController, PromoteUserController
+    /**
+     * @inheritDoc
+     */
     @Override
     public Account getUser(String username) {
         return accountMap.get(username);
     }
 
-    // call in SignUpController
+    /**
+     * @inheritDoc
+     */
     @Override
     public void addUser(String username, Account account) {
         accountMap.put(username, account);
     }
 
-    // call in DeleteUserController
+    /**
+     * @inheritDoc
+     */
     @Override
     public void deleteUser(String username) throws UsernameNotFoundException, UserIsAdminException {
         if (!containsUser(username)) {
@@ -56,16 +77,32 @@ public class AccountManager implements IAccountManager {
         } else if (getUser(username).getIsAdmin()) {
             throw new UserIsAdminException("Unsuccessful deletion, target user is an admin");
         } else {
-            accountMap.remove(username);
+            deleteSelf(username);
         }
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
-    public void deleteSelf(String username) {
+    public void deleteSelf(String username){
+        try {
+            for (String followee : getUser(username).getFollowees()) {
+                unfollow(username, followee);
+            }
+            for (String follower : getUser(username).getFollowers()) {
+                unfollow(follower, username);
+            }
+        }
+        catch (UsernameNotFoundException | UserNotFollowedException e) {
+            System.out.println(e.getMessage());
+        }
         accountMap.remove(username);
     }
 
-    // call in LoginController
+    /**
+     * @inheritDoc
+     */
     @Override
     public void login(String username, String password) throws
             IncorrectPasswordException,
@@ -88,6 +125,9 @@ public class AccountManager implements IAccountManager {
         }
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public boolean ban(String username) throws UsernameNotFoundException, UserIsAdminException {
         if (!containsUser(username)) {
@@ -99,6 +139,9 @@ public class AccountManager implements IAccountManager {
         }
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public boolean unban(String username) throws UsernameNotFoundException, UserIsAdminException {
         if (!containsUser(username)) {
@@ -110,6 +153,9 @@ public class AccountManager implements IAccountManager {
         }
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public void signUp(String username, String password) throws UsernameExistsException {
         if (containsUser(username)) {
@@ -123,6 +169,9 @@ public class AccountManager implements IAccountManager {
         }
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public void createAdmin(String username, String password) throws UsernameExistsException {
         if (containsUser(username)) {
@@ -136,6 +185,9 @@ public class AccountManager implements IAccountManager {
         }
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public void promoteToAdmin(String username) throws UsernameNotFoundException, UserIsAdminException {
         if (!(containsUser(username))) {
@@ -147,8 +199,64 @@ public class AccountManager implements IAccountManager {
         }
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public List<LocalDateTime> getUserHistory(String username) {
         return accountMap.get(username).getHistory();
     }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
+    public void follow(String follower, String followee) throws UsernameNotFoundException, UserFollowedException {
+        if (!containsUser(follower)) {
+            throw new UsernameNotFoundException("Unsuccessful, " + follower + " does not exist.");
+        } else if (!containsUser(followee)) {
+            throw new UsernameNotFoundException("Unsuccessful, " + followee + " does not exist.");
+        } else if (getFolloweesOf(follower).contains(followee)) {
+            throw new UserFollowedException("Unsuccessful, " + followee + " is already followed");
+        }
+        Account followerAccount = accountMap.get(follower);
+        Account followeeAccount = accountMap.get(followee);
+        followerAccount.follow(followee);
+        followeeAccount.addFollower(follower);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
+    public void unfollow(String follower, String followee) throws UsernameNotFoundException, UserNotFollowedException {
+        if (!containsUser(follower)) {
+            throw new UsernameNotFoundException("Unsuccessful, " + follower + " does not exist.");
+        } else if (!containsUser(followee)) {
+            throw new UsernameNotFoundException("Unsuccessful, " + followee + " does not exist.");
+        } else if (!getFollowersOf(followee).contains(follower)) {
+            throw new UserNotFollowedException("Unsuccessful, " + followee + " is already not followed");
+        }
+        Account followerAccount = accountMap.get(follower);
+        Account followeeAccount = accountMap.get(followee);
+        followerAccount.unfollow(followee);
+        followeeAccount.removeFollower(follower);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
+    public HashSet<String> getFollowersOf(String username) {
+        return getUser(username).getFollowers();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
+    public HashSet<String> getFolloweesOf(String username) {
+        return getUser(username).getFollowees();
+    }
+
 }

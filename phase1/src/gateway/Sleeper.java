@@ -1,6 +1,9 @@
 package gateway;
 
 public class Sleeper implements ISleeper {
+    /**
+     * @inheritDoc
+     */
     @Override
     public void sleep(int milliseconds) {
         try {

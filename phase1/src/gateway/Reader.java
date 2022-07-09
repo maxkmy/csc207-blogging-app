@@ -7,10 +7,28 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class Reader implements IReader {
+    /**
+     * a string representing the file path of the file
+     */
     String filePath;
+    /**
+     * a file object to be instantiated based on the filePath
+     */
     File file;
+    /**
+     * a file input stream object to be instantiated based on the file object
+     */
     FileInputStream fileInputStream;
+    /**
+     * an object input stream object to be instantiated based on the file input stream
+     */
     ObjectInputStream objectInputStream;
+
+    /**
+     * Constructor of an object that reads serialized data in a given file path.
+     *
+     * @param filePath a string representing the file path of the file.
+     */
     public Reader(String filePath) {
         this.filePath = filePath;
         file = new File(filePath);
@@ -24,6 +42,11 @@ public class Reader implements IReader {
         }
     }
 
+    /**
+     * Reads the object stored in the file given by filePath.
+     *
+     * @return the object that is read from the file stored in the file given by filePath
+     */
     @Override
     public Object read() {
         try {
