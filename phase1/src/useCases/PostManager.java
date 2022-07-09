@@ -1,0 +1,85 @@
+package useCases;
+
+import java.util.UUID;
+import java.util.HashMap;
+import java.util.ArrayList;
+import entities.Post;
+
+public class PostManager implements IPostManager{
+    /**
+     * a mapping of id of the post to the post entity
+     */
+    HashMap<UUID, Post> posts;
+
+    /**
+     * Constructor of a use case responsible for managing posts.
+     *
+     * @param posts a mapping of id of the post to the post entities
+     */
+    public PostManager(HashMap<UUID, Post> posts) {
+        this.posts = posts;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
+    public ArrayList<Post> getPostsWrittenBy(String username) {
+        ArrayList<Post> posts = new ArrayList<>();
+        for (UUID id : this.posts.keySet()) {
+            Post post = this.posts.get(id);
+            if (post.getAuthor().equals(username)) {
+                posts.add(post);
+            }
+        }
+        return posts;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
+    public void deletePostsWrittenBy(String username) {
+        for (Post post : getPostsWrittenBy(username)) {
+            deletePost(post.getId());
+        }
+    }
+
+    private Post createPost(String title, String content, String author) {
+        return new Post(title, content, author);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
+    public UUID addPost(String title, String content, String author) {
+        Post post = createPost(title, content, author);
+        posts.put(post.getId(), post);
+        return post.getId();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
+    public void deletePost(UUID id) {
+        posts.remove(id);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
+    public Post getPost(UUID id) {
+        return posts.get(id);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
+    public HashMap<UUID, Post> getMap() {
+        return posts;
+    }
+}
