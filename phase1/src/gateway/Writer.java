@@ -13,18 +13,6 @@ public class Writer implements IWriter {
      * a string representing the file path of the file
      */
     String filePath;
-    /**
-     * a file object to be instantiated based on the filePath
-     */
-    File file;
-    /**
-     * a file output stream object to be instantiated based on the file object
-     */
-    FileOutputStream fileOutputStream;
-    /**
-     * an object output stream object to be instantiated based on the file output stream
-     */
-    ObjectOutputStream objectOutputStream;
 
     /**
      * Constructor of an object that writes a serializable object to  data in a given file path.
@@ -33,15 +21,6 @@ public class Writer implements IWriter {
      */
     public Writer(String filePath)  {
         this.filePath = filePath;
-        file = new File(filePath);
-        try {
-            fileOutputStream = new FileOutputStream(file);
-            objectOutputStream = new ObjectOutputStream(fileOutputStream);
-        } catch(FileNotFoundException e) {
-            System.out.println("The provided file path is invalid.");
-        } catch (IOException e) {
-            System.out.println("An error has occurred.");
-        }
     }
 
     /**
@@ -50,6 +29,9 @@ public class Writer implements IWriter {
     @Override
     public void write(Serializable object) {
         try {
+            File file = new File(filePath);
+            FileOutputStream fileOutputStream = new FileOutputStream(file);
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
             objectOutputStream.writeObject(object);
             objectOutputStream.close();
         } catch (IOException e) {

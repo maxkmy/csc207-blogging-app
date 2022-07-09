@@ -3,6 +3,8 @@ import controllers.appWide.RequestFacade;
 import controllers.landing.LoginController;
 import controllers.landing.QuitController;
 import controllers.landing.SignUpController;
+import gateway.IWriter;
+import gateway.Writer;
 import useCases.AccountManager;
 import useCases.IAccountManager;
 import useCases.PostManager;
@@ -10,22 +12,16 @@ import useCases.IPostManager;
 import gateway.IReader;
 import gateway.Reader;
 
-import entities.Account;
-import entities.Post;
-
-import java.util.HashMap;
-import java.util.UUID;
-
 public class App {
     public static void main(String[] args) {
         final String userDataFileDirectory = "data/userData.txt";
         final String postDataFileDirectory = "data/postData.txt";
         IReader reader1 = new Reader(userDataFileDirectory);
-        HashMap<String, Account> accountMap = (HashMap<String, Account>) reader1.read();
         IReader reader2 = new Reader(postDataFileDirectory);
-        HashMap<UUID, Post> posts = (HashMap<UUID, Post>) reader2.read();
-        IAccountManager accountManager = new AccountManager(accountMap);
-        IPostManager postManager = new PostManager(posts);
+        IWriter writer1 = new Writer(userDataFileDirectory);
+        IWriter writer2 = new Writer(postDataFileDirectory);
+        IAccountManager accountManager = new AccountManager(reader1, writer1);
+        IPostManager postManager = new PostManager(reader2, writer2);
         RequestFacade landingPageFacade = new RequestFacade(new RequestController[]{
                 new LoginController(accountManager, postManager),
                 new SignUpController(accountManager, postManager),

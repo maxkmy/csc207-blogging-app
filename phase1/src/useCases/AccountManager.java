@@ -5,7 +5,6 @@ import gateway.*;
 
 import entities.Account;
 
-import java.sql.SQLOutput;
 import java.time.LocalDateTime;
 
 import java.util.HashMap;
@@ -16,23 +15,26 @@ public class AccountManager implements IAccountManager {
     /**
      * a mapping of username of the account to the account entity
      */
-    HashMap<String, Account> accountMap;
+    HashMap<String, Account> accountMap = new HashMap<>();
+    /**
+     * a gateway responsible for reading objects
+     */
+    IReader reader;
+    /**
+     * a gateway responsible for writing objects
+     */
+    IWriter writer;
 
     /**
-     * Constructor of a use case responsible for managing users.
+     * Constructor of a use case responsible for managing accounts.
      *
-     * @param accountMap a mapping of username of the account to the account entity
+     * @param reader a gateway responsible for reading objects
+     * @param writer a gateway responsible for writing objects
      */
-    public AccountManager(HashMap<String, Account> accountMap) {
-        this.accountMap = accountMap;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    @Override
-    public HashMap<String, Account> getMap(){
-        return accountMap;
+    public AccountManager(IReader reader, IWriter writer) {
+        this.reader = reader;
+        this.writer = writer;
+        accountMap = reader.read(accountMap.getClass());
     }
 
     /**
@@ -259,4 +261,11 @@ public class AccountManager implements IAccountManager {
         return getUser(username).getFollowees();
     }
 
+    /**
+     * @inheritDoc
+     */
+    @Override
+    public void save() {
+        writer.write(accountMap);
+    }
 }
