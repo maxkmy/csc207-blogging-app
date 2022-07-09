@@ -45,10 +45,8 @@ public class QuitController extends RequestController {
      */
     @Override
     public boolean handleRequest(String requester) {
-        IWriter writer1 = new Writer(userDataFileDirectory);
-        writer1.write(accountManager.getMap());
-        IWriter writer2 = new Writer(postDataFileDirectory);
-        writer2.write(postManager.getMap());
+        accountManager.save();
+        postManager.save();
         return true;
     }
 }

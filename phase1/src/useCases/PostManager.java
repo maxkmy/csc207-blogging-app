@@ -4,20 +4,33 @@ import java.util.UUID;
 import java.util.HashMap;
 import java.util.ArrayList;
 import entities.Post;
+import gateway.IReader;
+import gateway.IWriter;
 
 public class PostManager implements IPostManager{
     /**
      * a mapping of id of the post to the post entity
      */
-    HashMap<UUID, Post> posts;
+    HashMap<UUID, Post> posts = new HashMap<>();
+    /**
+     * a gateway responsible for reading objects
+     */
+    IReader reader;
+    /**
+     * a gateway responsible for writing objects
+     */
+    IWriter writer;
 
     /**
      * Constructor of a use case responsible for managing posts.
      *
-     * @param posts a mapping of id of the post to the post entities
+     * @param reader a gateway responsible for reading objects
+     * @param writer a gateway responsible for writing objects
      */
-    public PostManager(HashMap<UUID, Post> posts) {
-        this.posts = posts;
+    public PostManager(IReader reader, IWriter writer) {
+        this.reader = reader;
+        this.writer = writer;
+        posts = reader.read(posts.getClass());
     }
 
     /**
@@ -79,7 +92,7 @@ public class PostManager implements IPostManager{
      * @inheritDoc
      */
     @Override
-    public HashMap<UUID, Post> getMap() {
-        return posts;
+    public void save() {
+        writer.write(posts);
     }
 }

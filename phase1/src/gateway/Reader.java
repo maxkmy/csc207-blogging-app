@@ -11,18 +11,6 @@ public class Reader implements IReader {
      * a string representing the file path of the file
      */
     String filePath;
-    /**
-     * a file object to be instantiated based on the filePath
-     */
-    File file;
-    /**
-     * a file input stream object to be instantiated based on the file object
-     */
-    FileInputStream fileInputStream;
-    /**
-     * an object input stream object to be instantiated based on the file input stream
-     */
-    ObjectInputStream objectInputStream;
 
     /**
      * Constructor of an object that reads serialized data in a given file path.
@@ -31,15 +19,6 @@ public class Reader implements IReader {
      */
     public Reader(String filePath) {
         this.filePath = filePath;
-        file = new File(filePath);
-        try {
-            fileInputStream = new FileInputStream(file);
-            objectInputStream = new ObjectInputStream(fileInputStream);
-        } catch(FileNotFoundException e) {
-            System.out.println("The provided file path is invalid.");
-        } catch (IOException e) {
-            System.out.println("An error has occurred.");
-        }
     }
 
     /**
@@ -48,13 +27,18 @@ public class Reader implements IReader {
      * @return the object that is read from the file stored in the file given by filePath
      */
     @Override
-    public Object read() {
+    public <T> T read(Class<T> castClass) {
         try {
-            return objectInputStream.readObject();
-        } catch (IOException | ClassNotFoundException e) {
+            File file = new File(filePath);
+            FileInputStream fileInputStream = new FileInputStream(file);
+            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+            return castClass.cast(objectInputStream.readObject());
+        } catch (FileNotFoundException e) {
+            System.out.println("The provided file path is invalid.");
+        } catch (IOException | ClassNotFoundException e){
             System.out.println("An error has occurred.");
-            return null;
         }
+        return null;
     }
 }
 

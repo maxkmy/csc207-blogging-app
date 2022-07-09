@@ -46,11 +46,6 @@ public interface IAccountManager {
     HashSet<String> getFolloweesOf(String username);
 
     /**
-     * Returns the mapping of username of all accounts to all account entities
-     */
-    HashMap<String, Account> getMap();
-
-    /**
      * Checks if a username exists.
      *
      * @param username a string representing a username of a user.
@@ -163,4 +158,9 @@ public interface IAccountManager {
      * Deletes the account with the provided username.
      */
     void deleteSelf(String username);
+
+    /**
+     * Saves the current data.
+     */
+    void save();
 }

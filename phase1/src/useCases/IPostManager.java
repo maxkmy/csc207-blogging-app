@@ -41,7 +41,7 @@ public interface IPostManager {
     void deletePost(UUID id);
 
     /**
-     * Return a post based on the id of the post
+     * Return a post based on the id of the post.
      *
      * @param id the id of the post to be returned.
      * @return the post with an id that matches the provided id. .
@@ -49,9 +49,7 @@ public interface IPostManager {
     Post getPost(UUID id);
 
     /**
-     * Return a mapping of all posts' id to all post entities.
-     *
-     * @return a mapping of all posts' id to all post entities.
+     * Saves the current data.
      */
-    HashMap<UUID, Post> getMap();
+    void save();
 }
