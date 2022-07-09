@@ -56,9 +56,7 @@ public interface ICommentManager {
     Comment getComment(UUID id);
 
     /**
-     * Return a mapping of all comments' id to all comment entities.
-     *
-     * @return a mapping of all comments' id to all comment entities.
+     * Saves the current data.
      */
-    HashMap<UUID, Comment> getMap();
+    void save();
 }

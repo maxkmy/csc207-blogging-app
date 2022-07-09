@@ -13,6 +13,7 @@ import controllers.post.DeletePostController;
 import controllers.post.ViewPostPermissionController;
 import dataMapper.DataMapper;
 import useCases.IAccountManager;
+import useCases.ICommentManager;
 import useCases.IPostManager;
 
 public class RequestFacadeFactory {
@@ -25,9 +26,17 @@ public class RequestFacadeFactory {
      */
     IPostManager postManager;
     /**
+     * a use case responsible for managing comments
+     */
+    ICommentManager commentManager;
+    /**
      * a data mapper containing models
      */
     DataMapper postModel;
+    /**
+     * a data mapper containing comments
+     */
+    DataMapper commentModel;
 
     /**
      * Constructor responsible for setting up the use cases for managing accounts and post
@@ -57,7 +66,7 @@ public class RequestFacadeFactory {
                     new UnfollowController(accountManager),
                     new ViewFollowerController(accountManager),
                     new ViewFollowingController(accountManager),
-                    new ViewSelfProfileController(postManager),
+                    new ViewSelfProfileController(postManager, commentManager),
                     new LogoutController(),
                 });
             case "adminRequestFacade":
@@ -73,21 +82,21 @@ public class RequestFacadeFactory {
                     new UnfollowController(accountManager),
                     new ViewFollowerController(accountManager),
                     new ViewFollowingController(accountManager),
-                    new ViewSelfProfileController(postManager),
+                    new ViewSelfProfileController(postManager, commentManager),
                     new LogoutController(),
                 });
             // landing page facade
             case "landingPageFacade":
                 return new RequestFacade(new RequestController[]{
-                    new LoginController(accountManager, postManager),
-                    new SignUpController(accountManager, postManager),
-                    new QuitController(accountManager, postManager)
+                    new LoginController(accountManager, postManager, commentManager),
+                    new SignUpController(accountManager, postManager, commentManager),
+                    new QuitController(accountManager, postManager, commentManager)
                 });
             // post related facade
             case "profileFacade":
                 return new RequestFacade(new RequestController[]{
                     new AddPostController(postModel, postManager),
-                    new ViewPostPermissionController(postModel, postManager),
+                    new ViewPostPermissionController(postModel, postManager, commentModel, commentManager),
                     new ReturnController()
                 });
             case "postRequestNoPermissionFacade":

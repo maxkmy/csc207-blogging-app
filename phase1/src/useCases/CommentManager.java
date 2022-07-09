@@ -1,6 +1,8 @@
 package useCases;
 
 import entities.Comment;
+import gateway.IReader;
+import gateway.IWriter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,15 +12,26 @@ public class CommentManager implements  ICommentManager{
     /**
      * a mapping of id of the comment to the comment entity
      */
-    HashMap<UUID, Comment> comments;
+    HashMap<UUID, Comment> comments = new HashMap<>();
+    /**
+     * a gateway responsible for reading objects
+     */
+    IReader reader;
+    /**
+     * a gateway responsible for writing objects
+     */
+    IWriter writer;
 
     /**
-     * Constructor of a use case responsible for managing users.
+     * Constructor of a use case responsible for managing comments.
      *
-     * @param comments a mapping of username of the account to the account entity
+     * @param reader a gateway responsible for reading objects
+     * @param writer a gateway responsible for writing objects
      */
-    public CommentManager(HashMap<UUID, Comment> comments) {
-        this.comments = comments;
+    public CommentManager(IReader reader, IWriter writer) {
+        this.reader = reader;
+        this.writer = writer;
+        comments = reader.read(comments.getClass());
     }
 
     /**
@@ -95,7 +108,7 @@ public class CommentManager implements  ICommentManager{
      * @inheritDoc
      */
     @Override
-    public HashMap<UUID, Comment> getMap() {
-        return comments;
+    public void save() {
+        writer.write(comments);
     }
 }
