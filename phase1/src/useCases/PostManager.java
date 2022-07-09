@@ -4,25 +4,14 @@ import java.util.UUID;
 import java.util.HashMap;
 import java.util.ArrayList;
 import entities.Post;
+import gateway.SimilarityScore;
 
-public class PostManager implements IPostManager{
-    /**
-     * a mapping of id of the post to the post entity
-     */
+public class PostManager implements IPostManager, ISearchAlgorithm{
     HashMap<UUID, Post> posts;
-
-    /**
-     * Constructor of a use case responsible for managing posts.
-     *
-     * @param posts a mapping of id of the post to the post entities
-     */
     public PostManager(HashMap<UUID, Post> posts) {
         this.posts = posts;
     }
 
-    /**
-     * @inheritDoc
-     */
     @Override
     public ArrayList<Post> getPostsWrittenBy(String username) {
         ArrayList<Post> posts = new ArrayList<>();
@@ -35,9 +24,6 @@ public class PostManager implements IPostManager{
         return posts;
     }
 
-    /**
-     * @inheritDoc
-     */
     @Override
     public void deletePostsWrittenBy(String username) {
         for (Post post : getPostsWrittenBy(username)) {
@@ -49,9 +35,6 @@ public class PostManager implements IPostManager{
         return new Post(title, content, author);
     }
 
-    /**
-     * @inheritDoc
-     */
     @Override
     public UUID addPost(String title, String content, String author) {
         Post post = createPost(title, content, author);
@@ -59,27 +42,38 @@ public class PostManager implements IPostManager{
         return post.getId();
     }
 
-    /**
-     * @inheritDoc
-     */
     @Override
     public void deletePost(UUID id) {
         posts.remove(id);
     }
 
-    /**
-     * @inheritDoc
-     */
     @Override
     public Post getPost(UUID id) {
         return posts.get(id);
     }
 
-    /**
-     * @inheritDoc
-     */
     @Override
     public HashMap<UUID, Post> getMap() {
         return posts;
+    }
+
+    @Override
+    public HashMap<String, Double> doSearch(String stri, String Query) {
+        HashMap<String, Double> map = new HashMap<>();
+        if (Query.equals("Title")) {
+            for (UUID id : this.posts.keySet()) {
+                Post post = this.posts.get(id);
+                SimilarityScore curr = new SimilarityScore();
+                map.put(id.toString(), curr.getSimilarityScore(post.getTitle(),stri));
+            }
+
+        } else if (Query.equals("Content")) {
+            for (UUID id : this.posts.keySet()) {
+                Post post = this.posts.get(id);
+                SimilarityScore curr = new SimilarityScore();
+                map.put(id.toString(), curr.getSimilarityScore(post.getContent(),stri));
+            }
+        }
+        return map;
     }
 }

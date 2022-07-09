@@ -5,71 +5,50 @@ import gateway.*;
 
 import entities.Account;
 
-import java.sql.SQLOutput;
 import java.time.LocalDateTime;
 
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
-public class AccountManager implements IAccountManager {
-    /**
-     * a mapping of username of the account to the account entity
-     */
+public class AccountManager implements IAccountManager,ISearchAlgorithm {
     HashMap<String, Account> accountMap;
 
-    /**
-     * Constructor of a use case responsible for managing users.
-     *
-     * @param accountMap a mapping of username of the account to the account entity
-     */
+    // called in all controllers
     public AccountManager(HashMap<String, Account> accountMap) {
         this.accountMap = accountMap;
     }
 
-    /**
-     * @inheritDoc
-     */
     @Override
     public HashMap<String, Account> getMap(){
         return accountMap;
     }
 
-    /**
-     * @inheritDoc
-     */
+    // call in SignUpController
     @Override
     public boolean containsUser(String username) {
         return accountMap.containsKey(username);
     }
 
-    /**
-     * @inheritDoc
-     */
+    // call in LoginController
     @Override
     public boolean isAdmin(String username) {
         return accountMap.get(username).getIsAdmin();
     }
 
-    /**
-     * @inheritDoc
-     */
+    // call in DeleteUserController, PromoteUserController
     @Override
     public Account getUser(String username) {
         return accountMap.get(username);
     }
 
-    /**
-     * @inheritDoc
-     */
+    // call in SignUpController
     @Override
     public void addUser(String username, Account account) {
         accountMap.put(username, account);
     }
 
-    /**
-     * @inheritDoc
-     */
+    // call in DeleteUserController
     @Override
     public void deleteUser(String username) throws UsernameNotFoundException, UserIsAdminException {
         if (!containsUser(username)) {
@@ -81,9 +60,6 @@ public class AccountManager implements IAccountManager {
         }
     }
 
-    /**
-     * @inheritDoc
-     */
     @Override
     public void deleteSelf(String username){
         try {
@@ -100,9 +76,7 @@ public class AccountManager implements IAccountManager {
         accountMap.remove(username);
     }
 
-    /**
-     * @inheritDoc
-     */
+    // call in LoginController
     @Override
     public void login(String username, String password) throws
             IncorrectPasswordException,
@@ -125,9 +99,6 @@ public class AccountManager implements IAccountManager {
         }
     }
 
-    /**
-     * @inheritDoc
-     */
     @Override
     public boolean ban(String username) throws UsernameNotFoundException, UserIsAdminException {
         if (!containsUser(username)) {
@@ -139,9 +110,6 @@ public class AccountManager implements IAccountManager {
         }
     }
 
-    /**
-     * @inheritDoc
-     */
     @Override
     public boolean unban(String username) throws UsernameNotFoundException, UserIsAdminException {
         if (!containsUser(username)) {
@@ -153,9 +121,6 @@ public class AccountManager implements IAccountManager {
         }
     }
 
-    /**
-     * @inheritDoc
-     */
     @Override
     public void signUp(String username, String password) throws UsernameExistsException {
         if (containsUser(username)) {
@@ -169,9 +134,6 @@ public class AccountManager implements IAccountManager {
         }
     }
 
-    /**
-     * @inheritDoc
-     */
     @Override
     public void createAdmin(String username, String password) throws UsernameExistsException {
         if (containsUser(username)) {
@@ -185,9 +147,6 @@ public class AccountManager implements IAccountManager {
         }
     }
 
-    /**
-     * @inheritDoc
-     */
     @Override
     public void promoteToAdmin(String username) throws UsernameNotFoundException, UserIsAdminException {
         if (!(containsUser(username))) {
@@ -199,17 +158,11 @@ public class AccountManager implements IAccountManager {
         }
     }
 
-    /**
-     * @inheritDoc
-     */
     @Override
     public List<LocalDateTime> getUserHistory(String username) {
         return accountMap.get(username).getHistory();
     }
 
-    /**
-     * @inheritDoc
-     */
     @Override
     public void follow(String follower, String followee) throws UsernameNotFoundException, UserFollowedException {
         if (!containsUser(follower)) {
@@ -225,9 +178,6 @@ public class AccountManager implements IAccountManager {
         followeeAccount.addFollower(follower);
     }
 
-    /**
-     * @inheritDoc
-     */
     @Override
     public void unfollow(String follower, String followee) throws UsernameNotFoundException, UserNotFollowedException {
         if (!containsUser(follower)) {
@@ -243,20 +193,24 @@ public class AccountManager implements IAccountManager {
         followeeAccount.removeFollower(follower);
     }
 
-    /**
-     * @inheritDoc
-     */
     @Override
     public HashSet<String> getFollowersOf(String username) {
         return getUser(username).getFollowers();
     }
 
-    /**
-     * @inheritDoc
-     */
     @Override
     public HashSet<String> getFolloweesOf(String username) {
         return getUser(username).getFollowees();
     }
 
+    @Override
+    public HashMap<String, Double> doSearch(String stri, String Query) {
+        HashMap<String, Account> database = getMap();
+        HashMap<String, Double> map = new HashMap<>();
+        for (String key: database.keySet()) {
+            SimilarityScore curr = new SimilarityScore();
+            map.put(key,curr.getSimilarityScore(stri,key));
+        }
+        return map;
+    }
 }

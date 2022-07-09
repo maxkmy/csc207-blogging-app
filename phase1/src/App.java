@@ -4,9 +4,7 @@ import controllers.landing.LoginController;
 import controllers.landing.QuitController;
 import controllers.landing.SignUpController;
 import useCases.AccountManager;
-import useCases.IAccountManager;
 import useCases.PostManager;
-import useCases.IPostManager;
 import gateway.IReader;
 import gateway.Reader;
 
@@ -24,8 +22,8 @@ public class App {
         HashMap<String, Account> accountMap = (HashMap<String, Account>) reader1.read();
         IReader reader2 = new Reader(postDataFileDirectory);
         HashMap<UUID, Post> posts = (HashMap<UUID, Post>) reader2.read();
-        IAccountManager accountManager = new AccountManager(accountMap);
-        IPostManager postManager = new PostManager(posts);
+        AccountManager accountManager = new AccountManager(accountMap);
+        PostManager postManager = new PostManager(posts);
         RequestFacade landingPageFacade = new RequestFacade(new RequestController[]{
                 new LoginController(accountManager, postManager),
                 new SignUpController(accountManager, postManager),
