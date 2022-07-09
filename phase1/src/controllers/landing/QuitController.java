@@ -2,24 +2,22 @@ package controllers.landing;
 
 import controllers.appWide.RequestController;
 import useCases.IAccountManager;
+import useCases.ICommentManager;
 import useCases.IPostManager;
 
-import gateway.IWriter;
-import gateway.Writer;
-
 public class QuitController extends RequestController {
-    /**
-     * a string representing the directory where user data is stored
-     */
-    final String userDataFileDirectory = "data/userData.txt";
-    /**
-     * a string representing the directory where post data is stored
-     */
-    final String postDataFileDirectory = "data/postData.txt";
     /**
      * a use case responsible for managing accounts
      */
     IAccountManager accountManager;
+    /**
+     * a use case responsible for managing posts
+     */
+    IPostManager postManager;
+    /**
+     * a use case responsible for managing comments
+     */
+    ICommentManager commentManager;
 
     /**
      * Constructor for a controller responsible for reading input to log users out.
@@ -27,9 +25,10 @@ public class QuitController extends RequestController {
      * @param accountManager a use case responsible for managing accounts
      * @param postManager    a use case responsible for managing posts
      */
-    public QuitController(IAccountManager accountManager, IPostManager postManager) {
+    public QuitController(IAccountManager accountManager, IPostManager postManager, ICommentManager commentManager) {
         this.accountManager = accountManager;
         this.postManager = postManager;
+        this.commentManager = commentManager;
     }
 
     /**
@@ -47,6 +46,7 @@ public class QuitController extends RequestController {
     public boolean handleRequest(String requester) {
         accountManager.save();
         postManager.save();
+        commentManager.save();
         return true;
     }
 }

@@ -3,7 +3,9 @@ package controllers.post;
 import controllers.appWide.RequestController;
 import controllers.appWide.RequestFacade;
 import controllers.appWide.ReturnController;
+import controllers.comment.AddCommentController;
 import presenters.ProfilePresenter;
+import useCases.ICommentManager;
 import useCases.IPostManager;
 
 import java.util.ArrayList;
@@ -16,16 +18,23 @@ public class ViewPostPermissionController extends RequestController {
      * a use case responsible for managing posts
      */
     DataMapper postModel;
+    DataMapper commentModel;
+    ICommentManager commentManager;
 
     /**
      * Constructor for a controller responsible for reading input to view a post.
      *
-     * @param postModel    a data mapper that helps map posts into a data structure usable by presenters
-     * @param postManager  a use case responsible for managing posts
+     * @param postModel      a data mapper that helps map posts into a data structure usable by presenters
+     * @param postManager    a use case responsible for managing posts
+     * @param commentModel   a data mapper that helps map comments into a data structure usable by presenters
+     * @param commentManager a use case responsible for managing comments
      */
-    public ViewPostPermissionController(DataMapper postModel, IPostManager postManager) {
+    public ViewPostPermissionController(DataMapper postModel, IPostManager postManager, DataMapper commentModel,
+                                        ICommentManager commentManager) {
         this.postManager = postManager;
         this.postModel = postModel;
+        this.commentModel = commentModel;
+        this.commentManager = commentManager;
     }
 
     /**
@@ -59,6 +68,8 @@ public class ViewPostPermissionController extends RequestController {
                 System.out.println("Time posted: " + post.get("timePosted"));
                 RequestFacade postRequests = new RequestFacade(new RequestController[]{
                         new DeletePostController(postModel, postManager),
+                        // TODO: ensure that requester is correct author of the comment
+                        new AddCommentController(commentModel, commentManager, requester),
                         new ReturnController()
                 });
                 postRequests.setRequester(posts.get(postNumber).get("id"));

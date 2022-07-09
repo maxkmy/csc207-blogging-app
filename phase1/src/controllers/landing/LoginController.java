@@ -8,6 +8,7 @@ import exception.IncorrectPasswordException;
 import exception.UsernameNotFoundException;
 import exception.AccountBannedException;
 import useCases.IAccountManager;
+import useCases.ICommentManager;
 import useCases.IPostManager;
 
 import java.util.Scanner;
@@ -27,8 +28,9 @@ public class LoginController extends RequestController {
      *
      * @param accountManager a use case responsible for managing accounts
      * @param postManager    a use case responsible for managing posts
+     * @param commentManager a user case responsible for managing comments
      */
-    public LoginController(IAccountManager accountManager, IPostManager postManager){
+    public LoginController(IAccountManager accountManager, IPostManager postManager, ICommentManager commentManager){
         this.accountManager = accountManager;
         accountRequestFacade = new RequestFacade(new RequestController[]{
                 new ViewHistoryController(accountManager),
@@ -37,7 +39,7 @@ public class LoginController extends RequestController {
                 new UnfollowController(accountManager),
                 new ViewFollowerController(accountManager),
                 new ViewFollowingController(accountManager),
-                new ViewSelfProfileController(postManager),
+                new ViewSelfProfileController(postManager, commentManager),
                 new LogoutController(),
         });
         adminRequestFacade = new RequestFacade(new RequestController[]{
@@ -52,7 +54,7 @@ public class LoginController extends RequestController {
                 new UnfollowController(accountManager),
                 new ViewFollowerController(accountManager),
                 new ViewFollowingController(accountManager),
-                new ViewSelfProfileController(postManager),
+                new ViewSelfProfileController(postManager, commentManager),
                 new LogoutController(),
         });
     }
