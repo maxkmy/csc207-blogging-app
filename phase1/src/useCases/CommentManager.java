@@ -21,6 +21,9 @@ public class CommentManager implements  ICommentManager{
         this.comments = comments;
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public ArrayList<Comment> getCommentsWrittenBy(String username) {
         ArrayList<Comment> comments = new ArrayList<>();
@@ -33,6 +36,9 @@ public class CommentManager implements  ICommentManager{
         return comments;
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public ArrayList<Comment> getCommentsUnder(UUID postId) {
         ArrayList<Comment> comments = new ArrayList<>();
@@ -45,6 +51,9 @@ public class CommentManager implements  ICommentManager{
         return comments;
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public void deleteCommentsWrittenBy(String username) {
         for (Comment comment : getCommentsWrittenBy(username)) {
@@ -56,6 +65,9 @@ public class CommentManager implements  ICommentManager{
         return new Comment(postId, content, author);
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public UUID addComment(UUID postID, String content, String author) {
         Comment comment = createComment(postID, content, author);
@@ -63,16 +75,25 @@ public class CommentManager implements  ICommentManager{
         return comment.getId();
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public void deleteComment(UUID id) {
         comments.remove(id);
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public Comment getComment(UUID id) {
         return comments.get(id);
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public HashMap<UUID, Comment> getMap() {
         return comments;

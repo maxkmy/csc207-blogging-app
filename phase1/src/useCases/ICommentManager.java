@@ -61,6 +61,4 @@ public interface ICommentManager {
      * @return a mapping of all comments' id to all comment entities.
      */
     HashMap<UUID, Comment> getMap();
-
-
 }
