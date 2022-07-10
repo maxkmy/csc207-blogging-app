@@ -33,6 +33,10 @@ public class Post implements Serializable {
         id = UUID.randomUUID();
     }
 
+    public String getTitle() {
+        return title;
+    }
+
     public String getContent() {
         return content;
     }
@@ -45,11 +49,15 @@ public class Post implements Serializable {
         return id;
     }
 
-    public LocalDateTime getTimePosted() {
-        return timePosted;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getTitle() {
-        return title;
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public LocalDateTime getTimePosted() {
+        return timePosted;
     }
 }

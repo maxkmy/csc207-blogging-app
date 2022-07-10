@@ -1,12 +1,13 @@
 package exception;
 
 public class UserNotFollowedException extends Exception{
-
-    public UserNotFollowedException() {
-        super();
-    }
-
-    public UserNotFollowedException(String message) {
-        super(message);
+    /**
+     * Exception thrown when an action is requested yet
+     * invalid since a user is not being followed
+     *
+     * @param errorMessage Description of why error was thrown
+     */
+    public UserNotFollowedException(String errorMessage) {
+        super(errorMessage);
     }
 }
