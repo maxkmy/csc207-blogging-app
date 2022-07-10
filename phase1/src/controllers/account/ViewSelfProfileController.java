@@ -5,6 +5,7 @@ import controllers.appWide.RequestFacade;
 import controllers.appWide.ReturnController;
 import controllers.post.AddPostController;
 import controllers.post.ViewPostPermissionController;
+import gateway.PostTimeSorter;
 import useCases.ICommentManager;
 import useCases.IPostManager;
 import dataMapper.DataMapper;
@@ -33,7 +34,7 @@ public class ViewSelfProfileController extends RequestController {
     /**
      *  a sorter that sorts an arraylist of posts
      */
-    IPostSorter postSorter;
+    IPostSorter postSorter = new PostTimeSorter();
 
     /**
      * Constructor for a controller responsible for handling input related to viewing a user's own profile.
