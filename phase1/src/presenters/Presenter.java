@@ -11,8 +11,8 @@ public class Presenter {
 
     public void printMessages(Iterable<String> messages, String separator) {
         for (String message : messages) {
-            System.out.println(separator);
-            System.out.println(message);
+            System.out.print(separator);
+            System.out.print(message);
         }
     }
 }
