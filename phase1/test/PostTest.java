@@ -1,4 +1,3 @@
-import entities.Account;
 import entities.Post;
 import org.junit.Test;
 
