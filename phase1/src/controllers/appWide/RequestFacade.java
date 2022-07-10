@@ -1,8 +1,8 @@
 package controllers.appWide;
 
-import controllers.appWide.RequestController;
 import gateway.ISleeper;
 import gateway.Sleeper;
+import presenters.Presenter;
 
 import java.util.Scanner;
 
@@ -24,6 +24,10 @@ public class RequestFacade {
      */
     protected String requests;
     /**
+     * a presenter object responsible for printing messages to CLI
+     */
+    protected Presenter presenter = new Presenter();
+    /**
      * Constructor for a request facade responsible for reading user input for the request they would like to perform.
      *
      * @param requestControllers an array of RequestControllers that can be called by the request menu of the
@@ -42,12 +46,12 @@ public class RequestFacade {
         try {
             int requestNumber = Integer.parseInt(request);
             if (requestNumber < 0 || requestNumber >= requestControllers.length) {
-                System.out.println("The request entered is invalid");
+                presenter.blockPrint("The request entered is invalid. ");
             } else if (requestControllers[requestNumber].handleRequest(requester)) {
                 return;
             }
         } catch (NumberFormatException e) {
-            System.out.println("The request entered is invalid");
+            presenter.blockPrint("The request entered is invalid. ");
         }
         sleeper.sleep(200);
         presentRequest();
@@ -57,13 +61,13 @@ public class RequestFacade {
      * Presents a menu of requests where the user can pick a request by inputting a number.
      */
     public void presentRequest() {
-        System.out.println();
-        System.out.println(requests);
+        presenter.blockPrint("");
+        presenter.blockPrint(requests);
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Please enter your request: ");
+        presenter.inlinePrint("Please enter your request: ");
         String request = scanner.nextLine();
         sleeper.sleep(200);
-        System.out.println();
+        presenter.blockPrint("");
         handleRequest(request);
     }
 
