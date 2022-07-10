@@ -35,14 +35,13 @@ public class DeleteUserController extends RequestController {
     public boolean handleRequest(String requester) {
         try {
             Scanner scanner = new Scanner(System.in);
-            System.out.print("Enter the username of the account you wish to delete: ");
+            presenter.inlinePrint("Enter the username of the account you wish to delete: ");
             String target = scanner.nextLine();
-            sleeper.sleep(200);
             accountManager.deleteUser(target);
             postManager.deletePostsWrittenBy(target);
-            System.out.println("Successfully deleted user: " + target);
+            presenter.blockPrint("Successfully deleted user: " + target);
         } catch (UsernameNotFoundException | UserIsAdminException e) {
-            System.out.println(e.getMessage());
+           presenter.blockPrint(e.getMessage());
         }
         return false;
     }

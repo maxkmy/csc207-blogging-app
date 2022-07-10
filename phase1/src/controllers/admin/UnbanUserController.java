@@ -32,16 +32,16 @@ public class UnbanUserController extends RequestController {
     public boolean handleRequest(String requester) {
         try {
             Scanner scanner = new Scanner(System.in);
-            System.out.print("Enter the username of the account to unban: ");
+            presenter.inlinePrint("Enter the username of the account to unban: ");
             String target = scanner.nextLine();
             sleeper.sleep(200);
             if (accountManager.unban(target)) {
-                System.out.println("Successfully unbanned account " + target + ".");
+                presenter.blockPrint("Successfully unbanned account " + target + ".");
             } else {
-                System.out.println("Unsuccessful ban, account " + target + " was not banned.");
+                presenter.blockPrint("Unsuccessful ban, account " + target + " was not banned.");
             }
         } catch (UsernameNotFoundException | UserIsAdminException e) {
-            System.out.println(e.getMessage());
+            presenter.blockPrint(e.getMessage());
         }
         return false;
     }
