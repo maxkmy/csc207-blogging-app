@@ -45,6 +45,7 @@ public class SignUpController extends RequestController {
             new ViewFollowerController(accountManager),
             new ViewFollowingController(accountManager),
             new ViewSelfProfileController(postManager, commentManager),
+            new ViewFeedController(postManager, accountManager, commentManager),
             new LogoutController(),
         });
     }
