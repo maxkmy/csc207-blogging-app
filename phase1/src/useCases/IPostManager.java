@@ -52,4 +52,9 @@ public interface IPostManager {
      * Saves the current data.
      */
     void save();
+
+    /**
+     * Returns the Mapping of UUID and Post
+     */
+    HashMap<UUID,Post> getMap();
 }

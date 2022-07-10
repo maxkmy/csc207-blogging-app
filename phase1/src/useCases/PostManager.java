@@ -3,6 +3,8 @@ package useCases;
 import java.util.UUID;
 import java.util.HashMap;
 import java.util.ArrayList;
+
+import entities.Account;
 import entities.Post;
 import gateway.IReader;
 import gateway.IWriter;
@@ -95,4 +97,13 @@ public class PostManager implements IPostManager{
     public void save() {
         writer.write(posts);
     }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
+    public HashMap<UUID, Post> getMap(){
+        return posts;
+    }
+
 }

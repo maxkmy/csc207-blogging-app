@@ -163,4 +163,9 @@ public interface IAccountManager {
      * Saves the current data.
      */
     void save();
+
+    /**
+     * Returns the mapping of username of all accounts to all account entities
+     */
+    HashMap<String, Account> getMap();
 }

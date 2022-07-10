@@ -265,6 +265,14 @@ public class AccountManager implements IAccountManager {
      * @inheritDoc
      */
     @Override
+    public HashMap<String, Account> getMap(){
+        return accountMap;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
     public void save() {
         writer.write(accountMap);
     }
