@@ -31,15 +31,14 @@ public class CreateAdminController extends RequestController {
     public boolean handleRequest(String requester) {
         try {
             Scanner scanner = new Scanner(System.in);
-            System.out.print("Enter the username of the admin account to be created: ");
+            presenter.inlinePrint("Enter the username of the admin account to be created: ");
             String username = scanner.nextLine();
-            System.out.print("Enter the password of the admin account to be created: ");
+            presenter.inlinePrint("Enter the password of the admin account to be created: ");
             String password = scanner.nextLine();
-            sleeper.sleep(200);
             accountManager.createAdmin(username, password);
-            System.out.println("Successfully created admin " + username + ".");
+            presenter.blockPrint("Successfully created admin " + username + ".");
         } catch (UsernameExistsException e) {
-            System.out.println(e.getMessage());
+            presenter.blockPrint(e.getMessage());
         }
         return false;
     }

@@ -20,7 +20,9 @@ public class ViewHistoryController extends RequestController {
      * @inheritDoc
      */
     @Override
-    public String getRequestDescription() {return "View history of your logins";}
+    public String getRequestDescription() {
+        return "View history of your logins";
+    }
 
     /**
      * @inheritDoc
@@ -28,11 +30,10 @@ public class ViewHistoryController extends RequestController {
     @Override
     public boolean handleRequest(String requester) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-        System.out.println("Here is the login history formatted like \"day-month-year hour:minute:second\"");
+        presenter.blockPrint("Here is the login history formatted like \"day-month-year hour:minute:second\": ");
         for (LocalDateTime d : accountManager.getUserHistory(requester)) {
-            System.out.println(formatter.format(d));
+            presenter.blockPrint(formatter.format(d));
         }
-        sleeper.sleep(200);
         return false;
     }
 }

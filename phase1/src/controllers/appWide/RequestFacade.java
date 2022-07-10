@@ -1,16 +1,10 @@
 package controllers.appWide;
 
-import gateway.ISleeper;
-import gateway.Sleeper;
 import presenters.Presenter;
 
 import java.util.Scanner;
 
 public class RequestFacade {
-    /**
-     * a Sleeper object which helps the program pause for a specified period of time
-     */
-    private final ISleeper sleeper = new Sleeper();
     /**
      * an array of RequestControllers that can be called by the request menu of the request facade
      */
@@ -53,7 +47,6 @@ public class RequestFacade {
         } catch (NumberFormatException e) {
             presenter.blockPrint("The request entered is invalid. ");
         }
-        sleeper.sleep(200);
         presentRequest();
     }
 
@@ -66,7 +59,6 @@ public class RequestFacade {
         Scanner scanner = new Scanner(System.in);
         presenter.inlinePrint("Please enter your request: ");
         String request = scanner.nextLine();
-        sleeper.sleep(200);
         presenter.blockPrint("");
         handleRequest(request);
     }

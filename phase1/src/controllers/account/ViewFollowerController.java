@@ -26,13 +26,9 @@ public class ViewFollowerController extends RequestController {
      */
     @Override
     public boolean handleRequest(String requester) {
-        StringBuilder outBuilder = new StringBuilder();
-        for (String username : accountManager.getFollowersOf(requester)) {
-            outBuilder.append(username);
-            outBuilder.append("\n");
-        }
-        System.out.println("Here are your followers: ");
-        System.out.println(outBuilder);
+        presenter.inlinePrint("Here are your followers: ");
+        presenter.printMessages(accountManager.getFollowersOf(requester), "\n");
+        presenter.blockPrint("");
         return false;
     }
 }

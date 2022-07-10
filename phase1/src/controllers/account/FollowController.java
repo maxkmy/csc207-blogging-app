@@ -37,17 +37,17 @@ public class FollowController extends RequestController {
     public boolean handleRequest(String requester) {
         try {
             Scanner scanner = new Scanner(System.in);
-            System.out.print("Enter the username of the account you wish to follow: ");
+            presenter.inlinePrint("Enter the username of the account you wish to follow: ");
             String target = scanner.nextLine();
             sleeper.sleep(200);
             if (!requester.equals(target)) {
                 accountManager.follow(requester, target);
-                System.out.println("Successfully followed user: " + target);
+                presenter.blockPrint("Successfully followed user: " + target);
             } else {
-                System.out.println("Unsuccessful, you cannot follow yourself.");
+                presenter.blockPrint("Unsuccessful, you cannot follow yourself.");
             }
         } catch (UsernameNotFoundException | UserFollowedException e) {
-            System.out.println(e.getMessage());
+            presenter.blockPrint(e.getMessage());
         }
         return false;
     }
