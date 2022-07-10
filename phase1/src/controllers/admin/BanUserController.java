@@ -38,16 +38,16 @@ public class BanUserController extends RequestController {
     public boolean handleRequest(String requester) {
         try {
             Scanner scanner = new Scanner(System.in);
-            System.out.print("Enter the username of the account you wish to ban: ");
+            presenter.inlinePrint("Enter the username of the account you wish to ban: ");
             String target = scanner.nextLine();
             sleeper.sleep(200);
             if (accountManager.ban(target)) {
-                System.out.println("Successfully banned account: " + target + ".");
+                presenter.blockPrint("Successfully banned account: " + target + ".");
             } else {
-                System.out.println("Unsuccessful ban, account " + target + " was already banned.");
+                presenter.blockPrint("Unsuccessful ban, account " + target + " was already banned.");
             }
         } catch (UsernameNotFoundException |  UserIsAdminException e) {
-            System.out.println(e.getMessage());
+            presenter.blockPrint(e.getMessage());
         }
         return false;
     }

@@ -73,14 +73,14 @@ public class LoginController extends RequestController {
     @Override
     public boolean handleRequest(String requester) {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter your username: ");
+        presenter.inlinePrint("Enter your username: ");
         String username = scanner.nextLine();
-        System.out.print("Enter your password: ");
+        presenter.inlinePrint("Enter your password: ");
         String password = scanner.nextLine();
         sleeper.sleep(200);
         try {
             accountManager.login(username, password);
-            System.out.println("Successfully logged in.");
+            presenter.blockPrint("Successfully logged in.");
             if (accountManager.isAdmin(username)) {
                 adminRequestFacade.setRequester(username);
                 adminRequestFacade.presentRequest();
@@ -91,7 +91,7 @@ public class LoginController extends RequestController {
                 accountRequestFacade.setRequester(null);
             }
         } catch (IncorrectPasswordException | UsernameNotFoundException | AccountBannedException e) {
-            System.out.println(e.getMessage());
+            presenter.blockPrint(e.getMessage());
         }
         return false;
     }

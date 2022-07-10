@@ -41,17 +41,19 @@ public class ViewPostNoPermissionController extends RequestController {
     public boolean handleRequest(String requester) {
         try {
             Scanner scanner = new Scanner(System.in);
+            // TODO: allow input 0 to represent a return to previous page
             System.out.println("Enter the number of the post you wish to view: ");
             int postNumber = Integer.parseInt(scanner.nextLine());
             if (0 < postNumber || postNumber >= posts.size()) {
                 throw new NumberFormatException();
             }
             HashMap<String, String> post = posts.get(postNumber);
+            // TODO: refactor by adding a method in PostPresenter that presents a single post
             System.out.println("Written by: " + post.get("author"));
             System.out.println("Title: " + post.get("title"));
             System.out.println("Content: " + post.get("content"));
         } catch (NumberFormatException e) {
-            System.out.println("The number input is invalid.");
+            presenter.blockPrint("The number input is invalid.");
             handleRequest(requester);
         }
         RequestFacade postRequests = new RequestFacade(new RequestController[]{

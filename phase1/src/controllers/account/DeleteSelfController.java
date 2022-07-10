@@ -31,7 +31,7 @@ public class DeleteSelfController extends RequestController {
     public boolean handleRequest(String requester) {
         accountManager.deleteSelf(requester);
         postManager.deletePostsWrittenBy(requester);
-        System.out.println("Successfully deleted user " + requester);
+        presenter.inlinePrint("Successfully deleted user " + requester);
         return true;
     }
 }

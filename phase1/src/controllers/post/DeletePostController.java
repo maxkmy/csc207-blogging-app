@@ -38,7 +38,7 @@ public class DeletePostController  extends RequestController {
     public boolean handleRequest(String requester) {
         postManager.deletePost(UUID.fromString(requester));
         postModel.deleteItem("id", requester);
-        System.out.println("Successfully deleted post");
+        presenter.blockPrint("Successfully deleted post");
         return true;
     }
 }

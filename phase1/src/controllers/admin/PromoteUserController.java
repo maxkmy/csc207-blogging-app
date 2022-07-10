@@ -31,13 +31,13 @@ public class PromoteUserController extends RequestController {
     public boolean handleRequest(String requester) {
         try {
             Scanner scanner = new Scanner(System.in);
-            System.out.print("Enter username of account to promote: ");
+            presenter.inlinePrint("Enter username of account to promote: ");
             String target = scanner.nextLine();
             sleeper.sleep(200);
             accountManager.promoteToAdmin(target);
-            System.out.println("Successfully promoted user " + target + " to admin.");
+            presenter.blockPrint("Successfully promoted user " + target + " to admin.");
         } catch (UsernameNotFoundException | UserIsAdminException e) {
-            System.out.println(e.getMessage());
+            presenter.blockPrint(e.getMessage());
         }
         return false;
     }

@@ -16,8 +16,7 @@ public class LogoutController extends RequestController {
      */
     @Override
     public boolean handleRequest(String requester) {
-        sleeper.sleep(200);
-        System.out.println("Successfully logged out of " + requester + ".");
+        presenter.inlinePrint("Successfully logged out of " + requester + ".");
         return true;
     }
 }

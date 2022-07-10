@@ -55,31 +55,31 @@ public class ViewPostPermissionController extends RequestController {
             ProfilePresenter profilePresenter = new ProfilePresenter();
             profilePresenter.present(posts);
             Scanner scanner = new Scanner(System.in);
-            System.out.print("Enter the number of the post you wish to view or 0 to return to your profile: ");
+            presenter.inlinePrint("Enter the number of the post you wish to view or 0 to return to your profile: ");
             int request = Integer.parseInt(scanner.nextLine());
             if (request == 0) {
                 return false;
             } else if (request  <= posts.size()) {
                 int postNumber = request - 1;
                 HashMap<String, String> post = posts.get(postNumber);
+                // TODO: refactor by adding a method in PostPresenter that presents a single post
                 System.out.println("Written by: " + post.get("author"));
                 System.out.println("Title: " + post.get("title"));
                 System.out.println("Content: " + post.get("content"));
                 System.out.println("Time posted: " + post.get("timePosted"));
                 RequestFacade postRequests = new RequestFacade(new RequestController[]{
                         new DeletePostController(postModel, postManager),
-                        // TODO: ensure that requester is correct author of the comment
                         new AddCommentController(commentModel, commentManager, requester),
                         new ReturnController()
                 });
                 postRequests.setRequester(posts.get(postNumber).get("id"));
                 postRequests.presentRequest();
             } else {
-                System.out.println("The number input is invalid.");
+                presenter.blockPrint("The number input is invalid.");
                 handleRequest(requester);
             }
         } catch (NumberFormatException e) {
-            System.out.println("The number input is invalid.");
+            presenter.blockPrint("The number input is invalid.");
             handleRequest(requester);
         }
         return false;
