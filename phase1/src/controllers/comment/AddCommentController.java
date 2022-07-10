@@ -45,13 +45,13 @@ public class AddCommentController extends RequestController {
     @Override
     public boolean handleRequest(String requester) {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Comment: ");
+        presenter.inlinePrint("Comment: ");
         String content = scanner.nextLine();
         sleeper.sleep(200);
         UUID commentId = commentManager.addComment(UUID.fromString(requester), content, author);
         String[] attributes = new String[]{"postId", "content", "author", "id"};
         commentModel.addItem(commentManager.getComment(commentId), attributes);
-        System.out.println("Comment successfully posted");
+        presenter.blockPrint("Comment successfully posted");
         return false;
     }
 }

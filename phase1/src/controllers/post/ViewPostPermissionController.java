@@ -4,22 +4,32 @@ import controllers.appWide.RequestController;
 import controllers.appWide.RequestFacade;
 import controllers.appWide.ReturnController;
 import controllers.comment.AddCommentController;
-import presenters.ProfilePresenter;
+import dataMapper.DataMapper;
+import presenters.PostPresenter;
 import useCases.ICommentManager;
 import useCases.IPostManager;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
-import dataMapper.DataMapper;
 
 public class ViewPostPermissionController extends RequestController {
     /**
-     * a use case responsible for managing posts
+     * a data mapper to store posts
      */
     DataMapper postModel;
+    /**
+     * a data mapper to store comments
+     */
     DataMapper commentModel;
+    /**
+     * a use case responsible for managing comments
+     */
     ICommentManager commentManager;
+    /**
+     * a use case responsible for managing posts
+     */
+    IPostManager postManager;
 
     /**
      * Constructor for a controller responsible for reading input to view a post.
@@ -52,8 +62,8 @@ public class ViewPostPermissionController extends RequestController {
     protected boolean handleRequest(String requester) {
         try {
             ArrayList<HashMap<String, String>> posts = postModel.getModel();
-            ProfilePresenter profilePresenter = new ProfilePresenter();
-            profilePresenter.present(posts);
+            PostPresenter postPresenter = new PostPresenter();
+            postPresenter.printPosts(posts);
             Scanner scanner = new Scanner(System.in);
             presenter.inlinePrint("Enter the number of the post you wish to view or 0 to return to your profile: ");
             int request = Integer.parseInt(scanner.nextLine());
@@ -62,11 +72,7 @@ public class ViewPostPermissionController extends RequestController {
             } else if (request  <= posts.size()) {
                 int postNumber = request - 1;
                 HashMap<String, String> post = posts.get(postNumber);
-                // TODO: refactor by adding a method in PostPresenter that presents a single post
-                System.out.println("Written by: " + post.get("author"));
-                System.out.println("Title: " + post.get("title"));
-                System.out.println("Content: " + post.get("content"));
-                System.out.println("Time posted: " + post.get("timePosted"));
+                postPresenter.printPost(post);
                 RequestFacade postRequests = new RequestFacade(new RequestController[]{
                         new DeletePostController(postModel, postManager),
                         new AddCommentController(commentModel, commentManager, requester),

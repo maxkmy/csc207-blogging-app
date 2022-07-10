@@ -1,5 +1,6 @@
 package entities;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 public class Comment {
@@ -18,7 +19,7 @@ public class Comment {
     /**
      * the time in which the comment was created
      */
-    long timePosted;
+    LocalDateTime timePosted;
     /**
      * the id of the comment
      */
@@ -28,7 +29,7 @@ public class Comment {
         this.postId = postId;
         this.content = content;
         this.author = author;
-        this.timePosted = System.currentTimeMillis();
+        this.timePosted = LocalDateTime.now();
         id = UUID.randomUUID();
     }
 
@@ -43,6 +44,8 @@ public class Comment {
     public UUID getId() {
         return id;
     }
+
+    public LocalDateTime getTimePosted() { return timePosted; }
 
     public UUID getPostId() {
         return this.postId;
