@@ -2,6 +2,7 @@ package controllers.appWide;
 
 import gateway.ISleeper;
 import gateway.Sleeper;
+import presenters.Presenter;
 import useCases.IAccountManager;
 import useCases.IPostManager;
 
@@ -18,6 +19,10 @@ abstract public class RequestController {
      * a use case responsible for managing posts
      */
     protected IPostManager postManager;
+    /**
+     * a presenter object responsible for printing messages to CLI
+     */
+    protected Presenter presenter = new Presenter();
 
     /**
      * Returns a string describing what type of request is handled by the request controller
