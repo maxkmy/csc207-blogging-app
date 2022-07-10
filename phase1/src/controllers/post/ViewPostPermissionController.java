@@ -4,6 +4,7 @@ import controllers.appWide.RequestController;
 import controllers.appWide.RequestFacade;
 import controllers.appWide.ReturnController;
 import controllers.comment.AddCommentController;
+import controllers.comment.ViewCommentController;
 import dataMapper.DataMapper;
 import presenters.PostPresenter;
 import useCases.ICommentManager;
@@ -76,6 +77,7 @@ public class ViewPostPermissionController extends RequestController {
                 RequestFacade postRequests = new RequestFacade(new RequestController[]{
                         new DeletePostController(postModel, postManager),
                         new AddCommentController(commentModel, commentManager, requester),
+                        new ViewCommentController(commentManager),
                         new ReturnController()
                 });
                 postRequests.setRequester(posts.get(postNumber).get("id"));
