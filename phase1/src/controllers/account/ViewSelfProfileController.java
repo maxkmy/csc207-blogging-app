@@ -6,13 +6,12 @@ import controllers.appWide.ReturnController;
 import controllers.post.AddPostController;
 import controllers.post.ViewPostPermissionController;
 import gateway.PostTimeSorter;
+import presenters.PostPresenter;
 import useCases.ICommentManager;
 import useCases.IPostManager;
 import dataMapper.DataMapper;
 
 import gateway.IPostSorter;
-
-import presenters.ProfilePresenter;
 
 public class ViewSelfProfileController extends RequestController {
     /**
@@ -73,8 +72,8 @@ public class ViewSelfProfileController extends RequestController {
                 postSorter.sort(postManager.getPostsWrittenBy(requester)),
                 new String[]{ "title", "author", "content", "timePosted", "id"}
         );
-        ProfilePresenter profilePresenter = new ProfilePresenter();
-        profilePresenter.present(postModel.getModel());
+        PostPresenter postPresenter = new PostPresenter();
+        postPresenter.printPosts(postModel.getModel());
         RequestFacade profileFacade = new RequestFacade(
             new RequestController[] {
                     new AddPostController(postModel, postManager),
