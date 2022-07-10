@@ -35,8 +35,8 @@ public class ViewCommentController extends RequestController {
         this.commentManager.setCommentSorter(new CommentTimeSorter());
         ArrayList<Comment> comments = this.commentManager.getCommentsUnder(UUID.fromString(requester));
         for (Comment comment : comments) {
-            System.out.println("Comment: " + comment.getContent());
-            System.out.println("Written by: " + comment.getAuthor() + "\n\n");
+            presenter.blockPrint("Comment: " + comment.getContent());
+            presenter.blockPrint("Written by: " + comment.getAuthor() + "\n\n");
         }
         return false;
     }
