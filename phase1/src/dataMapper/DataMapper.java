@@ -70,10 +70,10 @@ public class DataMapper {
         }
     }
 
-    // TODO: refactor this method to use the strategy design pattern
-    public <T> void sortBy(String attribute) {
-        model.sort(Comparator.comparing(o -> o.get(attribute)));
-    }
+    // TODO: remove this commented method once the PostTimeSorter is done being tested
+//    public <T> void sortBy(String attribute) {
+//        model.sort(Comparator.comparing(o -> o.get(attribute)));
+//    }
 
     /**
      * Extract attributes from items and add them to the model
