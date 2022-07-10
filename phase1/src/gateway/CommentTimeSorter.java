@@ -20,6 +20,9 @@ public class CommentTimeSorter implements ICommentSorter {
         }
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public void sort(ArrayList<Comment> comments) {
         Collections.sort(comments, new CommentTimeComparator());

@@ -8,7 +8,7 @@ public interface ICommentSorter {
     /**
      * Sort the given ArrayList of comments by mutation
      *
-     * @param comments
+     * @param comments list of comments to be sorted
      */
-    public void sort(ArrayList<Comment> comments);
+     void sort(ArrayList<Comment> comments);
 }
