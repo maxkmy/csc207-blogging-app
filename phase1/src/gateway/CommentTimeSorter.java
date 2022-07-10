@@ -9,10 +9,14 @@ import java.util.Comparator;
 public class CommentTimeSorter implements ICommentSorter {
 
     private class CommentTimeComparator implements Comparator<Comment> {
-
         @Override
         public int compare(Comment c1, Comment c2) {
-            return (int) (c1.getTimePosted() - c2.getTimePosted());
+            if (c1.getTimePosted().isEqual(c2.getTimePosted())) {
+                return 0;
+            } else if (c1.getTimePosted().isAfter(c2.getTimePosted())) {
+                return -1;
+            }
+            return 1;
         }
     }
 
