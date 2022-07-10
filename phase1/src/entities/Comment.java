@@ -44,6 +44,8 @@ public class Comment {
         return id;
     }
 
+    public long getTimePosted() { return timePosted; }
+
     public UUID getPostId() {
         return this.postId;
     }

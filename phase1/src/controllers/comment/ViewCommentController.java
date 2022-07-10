@@ -2,6 +2,7 @@ package controllers.comment;
 
 import controllers.appWide.RequestController;
 import entities.Comment;
+import gateway.CommentTimeSorter;
 import useCases.ICommentManager;
 
 import java.util.ArrayList;
@@ -31,7 +32,12 @@ public class ViewCommentController extends RequestController {
      */
     @Override
     public boolean handleRequest(String requester) {
+        this.commentManager.setCommentSorter(new CommentTimeSorter());
         ArrayList<Comment> comments = this.commentManager.getCommentsUnder(UUID.fromString(requester));
+        for (Comment comment : comments) {
+            System.out.println("Comment: " + comment.getContent());
+            System.out.println("Written by: " + comment.getAuthor() + "\n\n");
+        }
         return false;
     }
 }
