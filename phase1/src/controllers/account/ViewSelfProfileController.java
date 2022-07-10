@@ -72,7 +72,6 @@ public class ViewSelfProfileController extends RequestController {
                 postSorter.sort(postManager.getPostsWrittenBy(requester)),
                 new String[]{ "title", "author", "content", "timePosted", "id"}
         );
-        postModel.sortBy("timePosted");
         ProfilePresenter profilePresenter = new ProfilePresenter();
         profilePresenter.present(postModel.getModel());
         RequestFacade profileFacade = new RequestFacade(
