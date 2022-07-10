@@ -4,6 +4,7 @@ import controllers.appWide.RequestController;
 import controllers.appWide.RequestFacade;
 import controllers.appWide.ReturnController;
 import controllers.comment.AddCommentController;
+import dataMapper.DataMapper;
 import presenters.PostPresenter;
 import useCases.ICommentManager;
 import useCases.IPostManager;
@@ -14,11 +15,21 @@ import java.util.Scanner;
 
 public class ViewPostPermissionController extends RequestController {
     /**
-     * a use case responsible for managing posts
+     * a data mapper to store posts
      */
     DataMapper postModel;
+    /**
+     * a data mapper to store comments
+     */
     DataMapper commentModel;
+    /**
+     * a use case responsible for managing comments
+     */
     ICommentManager commentManager;
+    /**
+     * a use case responsible for managing posts
+     */
+    IPostManager postManager;
 
     /**
      * Constructor for a controller responsible for reading input to view a post.
@@ -65,7 +76,6 @@ public class ViewPostPermissionController extends RequestController {
                 RequestFacade postRequests = new RequestFacade(new RequestController[]{
                         new DeletePostController(postModel, postManager),
                         new AddCommentController(commentModel, commentManager, requester),
-                        new ViewCommentController(commentManager),
                         new ReturnController()
                 });
                 postRequests.setRequester(posts.get(postNumber).get("id"));
