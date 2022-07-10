@@ -11,7 +11,6 @@ import useCases.IPostManager;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
-import dataMapper.DataMapper;
 
 public class ViewPostPermissionController extends RequestController {
     /**
@@ -66,6 +65,7 @@ public class ViewPostPermissionController extends RequestController {
                 RequestFacade postRequests = new RequestFacade(new RequestController[]{
                         new DeletePostController(postModel, postManager),
                         new AddCommentController(commentModel, commentManager, requester),
+                        new ViewCommentController(commentManager),
                         new ReturnController()
                 });
                 postRequests.setRequester(posts.get(postNumber).get("id"));

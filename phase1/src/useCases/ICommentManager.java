@@ -1,6 +1,7 @@
 package useCases;
 
 import entities.Comment;
+import gateway.ICommentSorter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -54,6 +55,13 @@ public interface ICommentManager {
      * @return the Comment entity with an id that matches the provided id
      */
     Comment getComment(UUID id);
+
+    /**
+     * Set the commentSorter to be used
+     *
+     * @param commentSorter an ICommentSorter strategy for sorting comments
+     */
+    void setCommentSorter(ICommentSorter commentSorter);
 
     /**
      * Saves the current data.
