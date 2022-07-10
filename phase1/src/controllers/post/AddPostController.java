@@ -35,16 +35,14 @@ public class AddPostController extends RequestController {
     @Override
     public boolean handleRequest(String requester) {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Title: ");
+        presenter.inlinePrint("Title: ");
         String title = scanner.nextLine();
-        sleeper.sleep(200);
-        System.out.print("Content: ");
+        presenter.inlinePrint("Content: ");
         String content = scanner.nextLine();
-        sleeper.sleep(200);
         UUID postId = postManager.addPost(title, content, requester);
         String[] attributes = new String[]{"author", "title", "content", "id"};
         postModel.addItem(postManager.getPost(postId), attributes);
-        System.out.println("Post successfully posted");
+        presenter.blockPrint("Post successfully posted");
         return false;
     }
 }
