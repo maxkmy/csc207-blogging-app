@@ -33,7 +33,6 @@ public class ViewCommentController extends RequestController {
     public ViewCommentController(DataMapper commentModel, ICommentManager commentManager) {
         this.commentModel = commentModel;
         this.commentManager = commentManager;
-        this.commentSorter = commentManager.getCommentSorter();
     }
 
     /**
@@ -47,6 +46,7 @@ public class ViewCommentController extends RequestController {
      */
     @Override
     public boolean handleRequest(String requester) {
+        this.commentSorter = commentManager.getCommentSorter();
         commentModel.reset();
         commentModel.addItems(
                 commentSorter.sort(commentManager.getCommentsUnder(UUID.fromString(requester))),
