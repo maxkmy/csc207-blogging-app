@@ -3,12 +3,11 @@ package gateway;
 import entities.Comment;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 
-public class CommentTimeSorter implements ICommentSorter {
+public class CommentOldestToNewestSorter implements ICommentSorter {
 
-    private class CommentTimeComparator implements Comparator<Comment> {
+    private class CommentOldestToNewestComparator implements Comparator<Comment> {
         @Override
         public int compare(Comment c1, Comment c2) {
             if (c1.getTimePosted().isEqual(c2.getTimePosted())) {
@@ -24,7 +23,16 @@ public class CommentTimeSorter implements ICommentSorter {
      * @inheritDoc
      */
     @Override
-    public void sort(ArrayList<Comment> comments) {
-        Collections.sort(comments, new CommentTimeComparator());
+    public ArrayList<Comment> sort(ArrayList<Comment> comments) {
+        comments.sort(new CommentOldestToNewestComparator());
+        return comments;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
+    public String printType() {
+        return "Oldest to newest";
     }
 }

@@ -10,5 +10,12 @@ public interface ICommentSorter {
      *
      * @param comments list of comments to be sorted
      */
-     void sort(ArrayList<Comment> comments);
+     ArrayList<Comment> sort(ArrayList<Comment> comments);
+
+    /**
+     *
+     * @return the method of the comment sorter
+     */
+
+    String printType();
 }

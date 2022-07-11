@@ -9,7 +9,7 @@ public class CommentPresenter {
      *
      * @param comment a comment to be displayed to the user
      */
-    public void printPost(HashMap<String, String> comment) {
+    public void printComment(HashMap<String, String> comment) {
         System.out.println("Comment: " + comment.get("content"));
         System.out.println("Written by: " + comment.get("author"));
         System.out.println("Time posted: " + comment.get("timePosted"));
@@ -21,9 +21,9 @@ public class CommentPresenter {
      *
      * @param comments comments that need to be displayed to users
      */
-    public void printPosts(ArrayList<HashMap<String, String>> comments) {
+    public void printComments(ArrayList<HashMap<String, String>> comments) {
         for (HashMap<String, String> comment : comments) {
-            printPost(comment);
+            printComment(comment);
         }
     }
 }

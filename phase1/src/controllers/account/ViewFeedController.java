@@ -8,7 +8,6 @@ import dataMapper.DataMapper;
 import entities.Post;
 import gateway.IPostSorter;
 import gateway.PostTimeSorter;
-import presenters.PostPresenter;
 import useCases.IAccountManager;
 import useCases.ICommentManager;
 import useCases.IPostManager;
@@ -18,11 +17,11 @@ import java.util.HashSet;
 
 public class ViewFeedController extends RequestController {
     /**
-     * a use case responsible for managing posts
+     * a use case responsible for managing comments
      */
     ICommentManager commentManager;
     /**
-     * a data mapper responsible for mapping posts into a data structure usable by the presenters
+     * a data mapper responsible for mapping comments into a data structure usable by the presenters
      */
     DataMapper postModel = new DataMapper();
     /**
@@ -30,7 +29,7 @@ public class ViewFeedController extends RequestController {
      */
     DataMapper commentModel = new DataMapper();
     /**
-     *  a sorter that sorts an arraylist of posts
+     *  a sorter that sorts an arraylist of posts, default is oldest to newest
      */
     IPostSorter postSorter = new PostTimeSorter();
 
@@ -76,8 +75,8 @@ public class ViewFeedController extends RequestController {
                 new String[]{ "title", "author", "content", "timePosted", "id"}
         );
 
-        PostPresenter postPresenter = new PostPresenter();
-        postPresenter.printPosts(postModel.getModel());
+//        PostPresenter postPresenter = new PostPresenter();
+//        postPresenter.printPosts(postModel.getModel());
         RequestFacade feedFacade = new RequestFacade(
                 new RequestController[] {
                         new ViewPostNoPermissionController(postModel, postManager, commentModel, commentManager),
