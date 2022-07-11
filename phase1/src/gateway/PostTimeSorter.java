@@ -4,7 +4,6 @@ import entities.Post;
 
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.Collections;
 
 public class PostTimeSorter implements IPostSorter {
     private class PostTimeComparator implements Comparator<Post> {
@@ -13,9 +12,9 @@ public class PostTimeSorter implements IPostSorter {
             if (p1.getTimePosted().isEqual(p2.getTimePosted())) {
                 return 0;
             } else if (p1.getTimePosted().isAfter(p2.getTimePosted())) {
-                return -1;
+                return 1;
             }
-            return 1;
+            return -1;
         }
     }
 
