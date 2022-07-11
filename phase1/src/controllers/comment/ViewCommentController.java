@@ -4,7 +4,6 @@ import controllers.appWide.RequestController;
 import controllers.appWide.RequestFacade;
 import controllers.appWide.ReturnController;
 import dataMapper.DataMapper;
-import gateway.CommentOldestToNewestSorter;
 import gateway.ICommentSorter;
 import presenters.CommentPresenter;
 import useCases.ICommentManager;
@@ -34,18 +33,7 @@ public class ViewCommentController extends RequestController {
     public ViewCommentController(DataMapper commentModel, ICommentManager commentManager) {
         this.commentModel = commentModel;
         this.commentManager = commentManager;
-        this.commentSorter = new CommentOldestToNewestSorter();
-    }
-    /**
-     * Constructor for a controller responsible for accessing comments.
-     *
-     * @param commentManager    use case responsible for managing comments
-     * @param commentSorter     the type of comment sorter to sort comments with
-     */
-    public ViewCommentController(DataMapper commentModel, ICommentManager commentManager, ICommentSorter commentSorter) {
-        this.commentModel = commentModel;
-        this.commentManager = commentManager;
-        this.commentSorter = commentSorter;
+        this.commentSorter = commentManager.getCommentSorter();
     }
 
     /**

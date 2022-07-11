@@ -1,11 +1,25 @@
 package useCases;
 
 import entities.Comment;
+import gateway.ICommentSorter;
 
 import java.util.ArrayList;
 import java.util.UUID;
 
 public interface ICommentManager {
+    /**
+     * Change the type of comment sorter that is currently used
+     *
+     * @param commentSorter a type of comment sorter
+     */
+
+    void changeCommentSorter(ICommentSorter commentSorter);
+
+    /**
+     * Return the type of sorter that is currently used
+     */
+    ICommentSorter getCommentSorter();
+
     /**
      * Return a list of comments written by the account with the provided username
      *

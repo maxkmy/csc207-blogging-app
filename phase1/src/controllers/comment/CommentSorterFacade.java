@@ -1,7 +1,5 @@
 package controllers.comment;
 
-import controllers.appWide.RequestController;
-import controllers.appWide.RequestFacade;
 import dataMapper.DataMapper;
 import gateway.ICommentSorter;
 import presenters.Presenter;
@@ -54,15 +52,17 @@ public class CommentSorterFacade {
             } else {
                 presenter.blockPrint("Successfully changed comment sorting method to: " +
                         commentSorters[requestNumber].printType());
-                RequestFacade viewCommentFacade = new RequestFacade(
-                        new RequestController[] {
-                                new ViewCommentController(commentModel, commentManager, commentSorters[requestNumber])
-                        }
-                );
-                // TODO: Right now, the comment sorter is working, but it is in an infinite loop after as the ReturnController
-                // goes back to previous page. See if there is any way to fix
-                viewCommentFacade.setRequester(requester);
-                viewCommentFacade.presentRequest();
+//                RequestFacade viewCommentFacade = new RequestFacade(
+//                        new RequestController[] {
+//                                new ViewCommentController(commentModel, commentManager, commentSorters[requestNumber])
+//                        }
+//                );
+//                // TODO: Right now, the comment sorter is working, but it is in an infinite loop after as the ReturnController
+//                // goes back to previous page. See if there is any way to fix
+//                viewCommentFacade.setRequester(requester);
+//                viewCommentFacade.presentRequest();
+                this.commentManager.changeCommentSorter(commentSorters[requestNumber]);
+                return;
             }
         } catch (NumberFormatException e) {
             presenter.blockPrint("The request entered is invalid. ");

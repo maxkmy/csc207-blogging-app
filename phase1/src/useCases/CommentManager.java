@@ -1,6 +1,7 @@
 package useCases;
 
 import entities.Comment;
+import gateway.ICommentSorter;
 import gateway.IReader;
 import gateway.IWriter;
 
@@ -23,15 +24,35 @@ public class CommentManager implements ICommentManager{
     IWriter writer;
 
     /**
+     * a type of comment sorter that the comment manager uses
+     */
+    ICommentSorter commentSorter;
+
+    /**
      * Constructor of a use case responsible for managing comments.
      *
      * @param reader a gateway responsible for reading objects
      * @param writer a gateway responsible for writing objects
      */
-    public CommentManager(IReader reader, IWriter writer) {
+    public CommentManager(IReader reader, IWriter writer, ICommentSorter commentSorter) {
         this.reader = reader;
         this.writer = writer;
+        this.commentSorter = commentSorter;
         comments = reader.read(comments.getClass());
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public void changeCommentSorter(ICommentSorter commentSorter) {
+        this.commentSorter = commentSorter;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public ICommentSorter getCommentSorter() {
+        return this.commentSorter;
     }
 
     /**
