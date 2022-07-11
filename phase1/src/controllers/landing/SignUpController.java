@@ -7,6 +7,7 @@ import controllers.appWide.RequestFacade;
 import controllers.account.UnfollowController;
 import controllers.account.ViewSelfProfileController;
 import controllers.account.*;
+import exception.InvalidUsernameException;
 import exception.UsernameExistsException;
 import useCases.ICommentManager;
 import useCases.IPostManager;
@@ -74,7 +75,7 @@ public class SignUpController extends RequestController {
             sleeper.sleep(200);
             accountRequestFacade.setRequester(username);
             accountRequestFacade.presentRequest();
-        } catch (UsernameExistsException e){
+        } catch (UsernameExistsException | InvalidUsernameException e){
             presenter.blockPrint(e.getMessage());
         }
         presenter.blockPrint("");
