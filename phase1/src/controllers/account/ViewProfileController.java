@@ -3,12 +3,8 @@ package controllers.account;
 import controllers.appWide.RequestController;
 import controllers.appWide.RequestFacade;
 import controllers.appWide.ReturnController;
-import controllers.post.AddPostController;
 import controllers.post.ViewPostNoPermissionController;
-import controllers.post.ViewPostPermissionController;
 import dataMapper.DataMapper;
-import entities.Post;
-import gateway.IPostSorter;
 import gateway.PostTimeSorter;
 import presenters.PostPresenter;
 import useCases.IAccountManager;
@@ -38,10 +34,6 @@ public class ViewProfileController extends RequestController {
      *  a data mapper responsible for mapping comments into a data structure usable by the presenters
      */
     DataMapper commentModel = new DataMapper();
-    /**
-     *  a sorter that sorts an arraylist of posts
-     */
-    IPostSorter postSorter = new PostTimeSorter();
 
     public ViewProfileController(IAccountManager accountManager,
                                  IPostManager postManager,
@@ -51,14 +43,6 @@ public class ViewProfileController extends RequestController {
         this.commentManager = commentManager;
     }
 
-    /**
-     * Sets a sorter that sorts an arraylist of posts
-     *
-     * @param postSorter a sorter that sorts an arraylist of posts
-     */
-    public void setSorter(IPostSorter postSorter) {
-        this.postSorter = postSorter;
-    }
 
     /**
      * @inheritDoc
@@ -69,9 +53,10 @@ public class ViewProfileController extends RequestController {
     }
 
     private void showProfile(String requester, String target) {
+        postManager.setPostSorter(new PostTimeSorter());
         postModel.reset();
         postModel.addItems(
-                postSorter.sort(postManager.getPostsWrittenBy(target)),
+                postManager.getPostsWrittenBy(target),
                 new String[]{ "title", "author", "content", "timePosted", "id"}
         );
         PostPresenter postPresenter = new PostPresenter();

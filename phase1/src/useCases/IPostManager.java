@@ -1,6 +1,8 @@
 package useCases;
 
 import entities.Post;
+import gateway.ICommentSorter;
+import gateway.IPostSorter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -52,4 +54,10 @@ public interface IPostManager {
      * Saves the current data.
      */
     void save();
+    /**
+     * Set the postSorter to be used
+     *
+     * @param postSorter an IPostSorter strategy for sorting comments
+     */
+    void setPostSorter(IPostSorter postSorter);
 }

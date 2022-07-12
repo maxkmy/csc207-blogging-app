@@ -40,7 +40,7 @@ public class AddPostController extends RequestController {
         presenter.inlinePrint("Content: ");
         String content = scanner.nextLine();
         UUID postId = postManager.addPost(title, content, requester);
-        String[] attributes = new String[]{"author", "title", "content", "id"};
+        String[] attributes = new String[]{"author", "title", "content", "id", "timePosted"};
         postModel.addItem(postManager.getPost(postId), attributes);
         presenter.blockPrint("Post successfully posted");
         return false;

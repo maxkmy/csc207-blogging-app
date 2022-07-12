@@ -30,10 +30,6 @@ public class ViewSelfProfileController extends RequestController {
      *  a data mapper responsible for mapping comments into a data structure usable by the presenters
      */
     DataMapper commentModel = new DataMapper();
-    /**
-     *  a sorter that sorts an arraylist of posts
-     */
-    IPostSorter postSorter = new PostTimeSorter();
 
     /**
      * Constructor for a controller responsible for handling input related to viewing a user's own profile.
@@ -43,15 +39,6 @@ public class ViewSelfProfileController extends RequestController {
     public ViewSelfProfileController(IPostManager postManager, ICommentManager commentManager) {
         this.postManager = postManager;
         this.commentManager = commentManager;
-    }
-
-    /**
-     * Sets a sorter that sorts an arraylist of posts
-     *
-     * @param postSorter a sorter that sorts an arraylist of posts
-     */
-    public void setSorter(IPostSorter postSorter) {
-        this.postSorter = postSorter;
     }
 
     /**
@@ -67,9 +54,10 @@ public class ViewSelfProfileController extends RequestController {
      */
     @Override
     public boolean handleRequest(String requester) {
+        postManager.setPostSorter(new PostTimeSorter());
         postModel.reset();
         postModel.addItems(
-                postSorter.sort(postManager.getPostsWrittenBy(requester)),
+                postManager.getPostsWrittenBy(requester),
                 new String[]{ "title", "author", "content", "timePosted", "id"}
         );
         PostPresenter postPresenter = new PostPresenter();
