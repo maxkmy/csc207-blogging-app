@@ -1,9 +1,10 @@
 package entities;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-public class Comment {
+public class Comment implements Serializable {
     /**
      * the id of the parent (which is either a Post or a Comment)
      */

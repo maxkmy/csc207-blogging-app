@@ -126,7 +126,7 @@ public interface IAccountManager {
      * @param password                  a string representing the password of a user.
      * @throws UsernameExistsException  if the username of is taken by some existing account.
      */
-    void signUp(String username, String password) throws UsernameExistsException;
+    void signUp(String username, String password) throws UsernameExistsException, InvalidUsernameException;
 
     /**
      * Promote a user to become an admin.
