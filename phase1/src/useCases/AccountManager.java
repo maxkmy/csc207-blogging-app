@@ -7,9 +7,7 @@ import entities.Account;
 
 import java.time.LocalDateTime;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 public class AccountManager implements IAccountManager {
     /**
@@ -159,9 +157,12 @@ public class AccountManager implements IAccountManager {
      * @inheritDoc
      */
     @Override
-    public void signUp(String username, String password) throws UsernameExistsException {
+    public void signUp(String username, String password) throws UsernameExistsException, InvalidUsernameException {
+        Set<String> invalidUsernames = new HashSet<>(List.of(""));
         if (containsUser(username)) {
             throw new UsernameExistsException("The provided username already exists. Please enter another username.");
+        } else if (invalidUsernames.contains(username)) {
+            throw new InvalidUsernameException("The provided username is invalid. Please enter another username.");
         } else {
             IHash hasher = new PasswordHash();
             String hashedPassword = hasher.hash(password);

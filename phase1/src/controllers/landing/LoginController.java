@@ -41,6 +41,7 @@ public class LoginController extends RequestController {
                 new ViewFollowingController(accountManager),
                 new ViewSelfProfileController(postManager, commentManager),
                 new ViewFeedController(postManager, accountManager, commentManager),
+                new ViewProfileController(accountManager, postManager, commentManager),
                 new LogoutController(),
         });
         adminRequestFacade = new RequestFacade(new RequestController[]{
@@ -57,6 +58,7 @@ public class LoginController extends RequestController {
                 new ViewFollowingController(accountManager),
                 new ViewSelfProfileController(postManager, commentManager),
                 new ViewFeedController(postManager, accountManager, commentManager),
+                new ViewProfileController(accountManager, postManager, commentManager),
                 new LogoutController(),
         });
     }
