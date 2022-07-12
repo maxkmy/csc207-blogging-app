@@ -1,7 +1,7 @@
 package gateway;
 
-import java.util.HashMap;
-
+import java.util.ArrayList;
+import exception.ResultNotFoundException;
 public interface ISearch {
-    HashMap<String, Double> doSearch(String query);
+    ArrayList<String> doSearch(String query) throws ResultNotFoundException;
 }

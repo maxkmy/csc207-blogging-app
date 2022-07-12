@@ -4,7 +4,7 @@ import java.util.UUID;
 import java.util.HashMap;
 import java.util.ArrayList;
 
-import entities.Account;
+
 import entities.Post;
 import gateway.IReader;
 import gateway.IWriter;
@@ -104,6 +104,19 @@ public class PostManager implements IPostManager{
     @Override
     public HashMap<UUID, Post> getMap(){
         return posts;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
+    public boolean containsPost(String title){
+        for (Post post : posts.values()){
+            if (post.getTitle().equals(title)){
+                return true;
+            }
+        }
+        return false;
     }
 
 }
