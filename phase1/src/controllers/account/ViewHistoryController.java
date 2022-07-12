@@ -29,8 +29,8 @@ public class ViewHistoryController extends RequestController {
      */
     @Override
     public boolean handleRequest(String requester) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-        presenter.blockPrint("Here is the login history formatted like \"day-month-year hour:minute:second\": ");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+        presenter.blockPrint("Here is the login history formatted like \"day-month-year hour:minute\": ");
         for (LocalDateTime d : accountManager.getUserHistory(requester)) {
             presenter.blockPrint(formatter.format(d));
         }
