@@ -68,26 +68,7 @@ public class ViewProfileController extends RequestController {
         return "View others profiles";
     }
 
-    @Override
-    protected boolean handleRequest(String requester) {
-        String target;
-        while (true) {
-            Scanner scanner = new Scanner(System.in);
-            presenter.inlinePrint("Enter the username of the profile you wish to view or nothing to exit: ");
-            target = scanner.nextLine();
-            sleeper.sleep(200);
-            if (target.equals(requester)) {
-                new ViewSelfProfileController(postManager, commentManager).handleRequest(requester);
-                return false;
-            } else if (accountManager.containsUser(target)) {
-                break;
-            } else if (target.equals("")) {
-                return false;
-            } else {
-                presenter.blockPrint("This username does not exist");
-            }
-        }
-
+    private void showProfile(String requester, String target) {
         postModel.reset();
         postModel.addItems(
                 postSorter.sort(postManager.getPostsWrittenBy(target)),
@@ -103,8 +84,22 @@ public class ViewProfileController extends RequestController {
         );
         profileFacade.setRequester(requester);
         profileFacade.presentRequest();
+    }
 
-
+    @Override
+    protected boolean handleRequest(String requester) {
+        Scanner scanner = new Scanner(System.in);
+        presenter.inlinePrint("Enter the username of the profile you wish to view or nothing to exit: ");
+        String target = scanner.nextLine();
+        sleeper.sleep(200);
+        if (target.equals(requester)) {
+            new ViewSelfProfileController(postManager, commentManager).handleRequest(requester);
+        } else if (accountManager.containsUser(target)) {
+            showProfile(requester, target);
+        } else if (!target.equals("")) {
+            presenter.blockPrint("This username does not exist");
+            handleRequest(requester);
+        }
         return false;
     }
 }
