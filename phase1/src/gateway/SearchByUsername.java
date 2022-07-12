@@ -8,11 +8,23 @@ import java.util.*;
 
 
 public class SearchByUsername implements ISearch{
+    /**
+     * a use case responsible for managing accounts.
+     */
     IAccountManager accountManager;
-
+    /**
+     * Constructor for a gateway responsible for performing Search using usernames.
+     *
+     * @param accountManager a use case responsible for managing.
+     */
     public SearchByUsername(IAccountManager accountManager) {
         this.accountManager = accountManager;
     }
+    /**
+     * Perform the search operation using the specified string.
+     *
+     * @param query a String containing the data to be searched for.
+     */
     @Override
     public ArrayList<String> doSearch(String query) throws ResultNotFoundException {
         if (!(accountManager.containsUser(query))){

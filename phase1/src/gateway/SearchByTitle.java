@@ -2,15 +2,28 @@ package gateway;
 
 import entities.Post;
 import useCases.IPostManager;
-import exception.ResultNotFoundException
+import exception.ResultNotFoundException;
 
 import java.util.*;
 
 public class SearchByTitle implements ISearch{
+    /**
+     * a use case responsible for managing posts.
+     */
     private IPostManager postManager;
+    /**
+     * Constructor for a gateway responsible for performing Search using titles.
+     *
+     * @param postManager a use case responsible for managing postss.
+     */
     public SearchByTitle(IPostManager postManager) {
         this.postManager = postManager;
     }
+    /**
+     * Perform the search operation using the specified string.
+     *
+     * @param query a String containing the data to be searched for.
+     */
     @Override
     public ArrayList<String> doSearch(String query) throws ResultNotFoundException {
         if (!(postManager.containsPost(query))){
