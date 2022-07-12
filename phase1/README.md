@@ -17,5 +17,5 @@
 - To check whether Java objects are preserved between different login session, please make sure to quit the App instead of rerunning the app without quitting.
 
 # Use of code from online 
-- the hashing method in the class `PasswordHash.java` and 'SimilarityScore.java' was not fully implemented on our own.
+- the hashing method in the class `PasswordHash.java` and `SimilarityScore.java` was not fully implemented on our own.
 - It was taken from an online source.
