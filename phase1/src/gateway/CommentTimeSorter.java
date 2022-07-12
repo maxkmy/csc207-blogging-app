@@ -14,9 +14,9 @@ public class CommentTimeSorter implements ICommentSorter {
             if (c1.getTimePosted().isEqual(c2.getTimePosted())) {
                 return 0;
             } else if (c1.getTimePosted().isAfter(c2.getTimePosted())) {
-                return -1;
+                return 1;
             }
-            return 1;
+            return -1;
         }
     }
 
