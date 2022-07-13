@@ -43,6 +43,7 @@ public class SearchUserByUsernameController extends RequestController{
         presenter.inlinePrint("Enter the username of the account you wish to search: ");
         String username = scanner.nextLine();
         sleeper.sleep(200);
+        presenter.inlinePrint("Here are the top search results:");
         ArrayList<String> result = searcher.doSearch(username);
         presenter.printMessages(result, "\n");
 

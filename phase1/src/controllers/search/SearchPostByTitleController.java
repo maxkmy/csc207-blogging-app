@@ -44,6 +44,7 @@ public class SearchPostByTitleController extends RequestController {
         String title = scanner.nextLine();
         sleeper.sleep(200);
         ArrayList<String> result = searcher.doSearch(title);
+        presenter.inlinePrint("Here are the top search results:");
         presenter.printMessages(result, "\n");
 
         return false;

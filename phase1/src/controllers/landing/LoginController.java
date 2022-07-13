@@ -4,6 +4,8 @@ import controllers.account.*;
 import controllers.admin.*;
 import controllers.appWide.RequestController;
 import controllers.appWide.RequestFacade;
+import controllers.search.SearchPostByTitleController;
+import controllers.search.SearchUserByUsernameController;
 import exception.IncorrectPasswordException;
 import exception.UsernameNotFoundException;
 import exception.AccountBannedException;
@@ -42,6 +44,8 @@ public class LoginController extends RequestController {
                 new ViewSelfProfileController(postManager, commentManager),
                 new ViewFeedController(postManager, accountManager, commentManager),
                 new ViewProfileController(accountManager, postManager, commentManager),
+                new SearchPostByTitleController(postManager),
+                new SearchUserByUsernameController(accountManager),
                 new LogoutController(),
         });
         adminRequestFacade = new RequestFacade(new RequestController[]{
@@ -59,6 +63,8 @@ public class LoginController extends RequestController {
                 new ViewSelfProfileController(postManager, commentManager),
                 new ViewFeedController(postManager, accountManager, commentManager),
                 new ViewProfileController(accountManager, postManager, commentManager),
+                new SearchPostByTitleController(postManager),
+                new SearchUserByUsernameController(accountManager),
                 new LogoutController(),
         });
     }

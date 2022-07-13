@@ -7,6 +7,8 @@ import controllers.appWide.RequestFacade;
 import controllers.account.UnfollowController;
 import controllers.account.ViewSelfProfileController;
 import controllers.account.*;
+import controllers.search.SearchPostByTitleController;
+import controllers.search.SearchUserByUsernameController;
 import exception.InvalidUsernameException;
 import exception.UsernameExistsException;
 import useCases.ICommentManager;
@@ -48,6 +50,8 @@ public class SignUpController extends RequestController {
             new ViewSelfProfileController(postManager, commentManager),
             new ViewFeedController(postManager, accountManager, commentManager),
                 new ViewProfileController(accountManager, postManager, commentManager),
+                new SearchPostByTitleController(postManager),
+                new SearchUserByUsernameController(accountManager),
             new LogoutController(),
         });
     }
