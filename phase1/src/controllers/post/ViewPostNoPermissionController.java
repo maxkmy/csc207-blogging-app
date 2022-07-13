@@ -76,7 +76,7 @@ public class ViewPostNoPermissionController extends RequestController {
                 postPresenter.printPost(post);
                 RequestFacade postRequests = new RequestFacade(new RequestController[]{
                         new AddCommentController(commentModel, commentManager, requester),
-                        new ViewCommentController(commentManager),
+                        new ViewCommentController(commentModel, commentManager),
                         new ReturnController()
                 });
                 postRequests.setRequester(posts.get(postNumber).get("id"));

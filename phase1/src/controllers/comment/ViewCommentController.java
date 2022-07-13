@@ -4,7 +4,7 @@ import controllers.appWide.RequestController;
 import controllers.appWide.RequestFacade;
 import controllers.appWide.ReturnController;
 import dataMapper.DataMapper;
-import gateway.ICommentSorter;
+import gateway.CommentTimeSorter;
 import presenters.CommentPresenter;
 import useCases.ICommentManager;
 
@@ -19,16 +19,12 @@ public class ViewCommentController extends RequestController {
      * a data mapper to store comments
      */
     DataMapper commentModel;
-    /**
-     *  a sorter that sorts an arraylist of posts
-     */
-    ICommentSorter commentSorter;
 
     /**
      * Constructor for a controller responsible for accessing comments.
-     * Default commentSorter is CommentNewestToOldestSorter.
+     * Default commentSorter is CommentTimeSorter.
      *
-     * @param commentManager    use case responsible for managing comments
+     * @param commentManager use case responsible for managing comments
      */
     public ViewCommentController(DataMapper commentModel, ICommentManager commentManager) {
         this.commentModel = commentModel;
@@ -46,10 +42,10 @@ public class ViewCommentController extends RequestController {
      */
     @Override
     public boolean handleRequest(String requester) {
-        this.commentSorter = commentManager.getCommentSorter();
+        commentManager.setCommentSorter(new CommentTimeSorter());
         commentModel.reset();
         commentModel.addItems(
-                commentSorter.sort(commentManager.getCommentsUnder(UUID.fromString(requester))),
+                commentManager.getCommentsUnder(UUID.fromString(requester)),
                 new String[]{ "content", "author", "timePosted"}
         );
 
