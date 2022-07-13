@@ -106,17 +106,4 @@ public class PostManager implements IPostManager{
         return posts;
     }
 
-    /**
-     * @inheritDoc
-     */
-    @Override
-    public boolean containsPost(String title){
-        for (Post post : posts.values()){
-            if (post.getTitle().equals(title)){
-                return true;
-            }
-        }
-        return false;
-    }
-
 }

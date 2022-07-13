@@ -58,11 +58,4 @@ public interface IPostManager {
      */
     HashMap<UUID,Post> getMap();
 
-    /**
-     * Checks if post exists.
-     *
-     * @param title a string representing the title of the post.
-     * @return whether the post exists.
-     */
-    boolean containsPost(String title);
 }
