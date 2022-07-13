@@ -2,6 +2,7 @@ package useCases;
 
 import entities.Comment;
 import gateway.ICommentSorter;
+import gateway.IPostSorter;
 import gateway.IReader;
 import gateway.IWriter;
 
