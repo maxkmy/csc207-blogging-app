@@ -39,16 +39,13 @@ public class SearchUserByUsernameController extends RequestController{
      */
     @Override
     public boolean handleRequest(String requester){
-        try {
-            Scanner scanner = new Scanner(System.in);
-            presenter.inlinePrint("Enter the username of the account you wish to search: ");
-            String username = scanner.nextLine();
-            sleeper.sleep(200);
-            ArrayList<String> result = searcher.doSearch(username);
-            presenter.printMessages(result, "\n");
-        } catch (ResultNotFoundException e) {
-            presenter.blockPrint(e.getMessage());
-        }
+        Scanner scanner = new Scanner(System.in);
+        presenter.inlinePrint("Enter the username of the account you wish to search: ");
+        String username = scanner.nextLine();
+        sleeper.sleep(200);
+        ArrayList<String> result = searcher.doSearch(username);
+        presenter.printMessages(result, "\n");
+
         return false;
     }
 

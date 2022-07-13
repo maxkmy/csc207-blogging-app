@@ -1,11 +1,11 @@
 package controllers.search;
 
 import gateway.ISearch;
-import useCases.IAccountManager;
+
 import useCases.IPostManager;
 import gateway.SearchByTitle;
 import controllers.appWide.RequestController;
-import exception.ResultNotFoundException;
+
 
 import java.util.*;
 
@@ -39,16 +39,13 @@ public class SearchPostByTitleController extends RequestController {
      */
     @Override
     public boolean handleRequest(String requester){
-        try {
-            Scanner scanner = new Scanner(System.in);
-            presenter.inlinePrint("Enter the title of the post you wish to search: ");
-            String title = scanner.nextLine();
-            sleeper.sleep(200);
-            ArrayList<String> result = searcher.doSearch(title);
-            presenter.printMessages(result, "\n");
-        } catch (ResultNotFoundException e){
-            presenter.blockPrint(e.getMessage());
-        }
+        Scanner scanner = new Scanner(System.in);
+        presenter.inlinePrint("Enter the title of the post you wish to search: ");
+        String title = scanner.nextLine();
+        sleeper.sleep(200);
+        ArrayList<String> result = searcher.doSearch(title);
+        presenter.printMessages(result, "\n");
+
         return false;
     }
 

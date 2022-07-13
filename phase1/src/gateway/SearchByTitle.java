@@ -2,7 +2,7 @@ package gateway;
 
 import entities.Post;
 import useCases.IPostManager;
-import exception.ResultNotFoundException;
+
 
 import java.util.*;
 
@@ -25,10 +25,7 @@ public class SearchByTitle implements ISearch{
      * @param query a String containing the data to be searched for.
      */
     @Override
-    public ArrayList<String> doSearch(String query) throws ResultNotFoundException {
-        if (!(postManager.containsPost(query))){
-            throw new ResultNotFoundException("Post not found");
-        }
+    public ArrayList<String> doSearch(String query){
         HashMap<UUID, Post> curr = postManager.getMap();
         HashMap<String, Double> map = new HashMap<>();
         for(Map.Entry<UUID, Post> entry : curr.entrySet()) {

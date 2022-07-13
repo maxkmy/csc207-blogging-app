@@ -1,7 +1,7 @@
 package gateway;
 
 import entities.Account;
-import exception.ResultNotFoundException;
+
 import useCases.IAccountManager;
 
 import java.util.*;
@@ -26,10 +26,7 @@ public class SearchByUsername implements ISearch{
      * @param query a String containing the data to be searched for.
      */
     @Override
-    public ArrayList<String> doSearch(String query) throws ResultNotFoundException {
-        if (!(accountManager.containsUser(query))){
-            throw new ResultNotFoundException("User not found");
-        }
+    public ArrayList<String> doSearch(String query){
         HashMap<String, Account> curr = accountManager.getMap();
         Map map = new HashMap<String, Double>();
         for (String key: curr.keySet()) {
