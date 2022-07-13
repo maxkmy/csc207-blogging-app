@@ -57,13 +57,15 @@ public class LikeManager implements ILikeManager {
 
 
     @Override
-    public boolean like(UUID postId, String user){
+    public UUID addLike(UUID postId, String user){
         if (canLike(postId, user)) {
             Like like = new Like(postId, user);
             likes.put(like.getId(), like);
-            return true;
+            return like.getId();
         }
-        return false;
+        else{
+            return new UUID(0,0);
+        }
     }
 
     @Override

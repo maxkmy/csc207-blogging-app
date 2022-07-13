@@ -10,7 +10,7 @@ public interface ILikeManager {
     ArrayList<Like> getLikesUnder(UUID postId);
 
     int totalLikesUnder(UUID postID);
-    boolean like(UUID postID, String user);
+    UUID addLike(UUID postID, String user);
 
     void unlike(UUID id);
 
