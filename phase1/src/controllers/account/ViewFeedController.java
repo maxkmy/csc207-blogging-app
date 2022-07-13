@@ -29,10 +29,6 @@ public class ViewFeedController extends RequestController {
      *  a data mapper responsible for mapping comments into a data structure usable by the presenters
      */
     DataMapper commentModel = new DataMapper();
-    /**
-     *  a sorter that sorts an arraylist of posts
-     */
-    IPostSorter postSorter = new PostTimeSorter();
 
     /**
      * Constructor for a controller responsible for retrieving the post feed
@@ -47,15 +43,6 @@ public class ViewFeedController extends RequestController {
     }
 
     /**
-     * Sets a sorter that sorts an arraylist of posts
-     *
-     * @param postSorter a sorter that sorts an arraylist of posts
-     */
-    public void setSorter(IPostSorter postSorter) {
-        this.postSorter = postSorter;
-    }
-
-    /**
      * @inheritDoc
      */
     @Override
@@ -66,6 +53,8 @@ public class ViewFeedController extends RequestController {
      */
     @Override
     public boolean handleRequest(String requester) {
+        IPostSorter postSorter = new PostTimeSorter();
+        postManager.setPostSorter(postSorter);
         HashSet<String> followees = accountManager.getFolloweesOf(requester);
         ArrayList<Post> postsList = new ArrayList<>();
         for (String followee : followees) { postsList.addAll(postManager.getPostsWrittenBy(followee)); }

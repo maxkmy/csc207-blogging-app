@@ -2,8 +2,14 @@ package presenters;
 
 import java.util.HashMap;
 import java.util.ArrayList;
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
 
 public class PostPresenter {
+    /**
+     * a formatter to format LocalDateTime
+     */
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
     /**
      * Displays a post to user.
      *
@@ -12,7 +18,8 @@ public class PostPresenter {
     public void printPost(HashMap<String, String> post) {
         System.out.println("Title: " + post.get("title"));
         System.out.println("Written by: " + post.get("author"));
-        System.out.println("Time posted: " + post.get("timePosted"));
+        LocalDateTime newDate = LocalDateTime.parse(post.get("timePosted"));
+        System.out.println("Time posted: " + formatter.format(newDate));
         System.out.println("Content: " + post.get("content"));
         System.out.println();
     }

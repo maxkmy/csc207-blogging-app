@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 
 import entities.Post;
+import gateway.IPostSorter;
 import gateway.IReader;
 import gateway.IWriter;
 
@@ -22,6 +23,10 @@ public class PostManager implements IPostManager{
      * a gateway responsible for writing objects
      */
     IWriter writer;
+    /**
+     *  a sorter that sorts an arraylist of posts
+     */
+    IPostSorter postSorter;
 
     /**
      * Constructor of a use case responsible for managing posts.
@@ -47,6 +52,7 @@ public class PostManager implements IPostManager{
                 posts.add(post);
             }
         }
+        this.postSorter.sort(posts);
         return posts;
     }
 
@@ -98,12 +104,19 @@ public class PostManager implements IPostManager{
         writer.write(posts);
     }
 
+
     /**
      * @inheritDoc
      */
     @Override
     public HashMap<UUID, Post> getMap(){
         return posts;
+    }
+
+
+    @Override
+    public void setPostSorter(IPostSorter postSorter) {
+        this.postSorter = postSorter;
     }
 
 }
