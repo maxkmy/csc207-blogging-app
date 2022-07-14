@@ -9,6 +9,9 @@ import controllers.search.SearchUserByUsernameController;
 import exception.IncorrectPasswordException;
 import exception.UsernameNotFoundException;
 import exception.AccountBannedException;
+import gateway.ISearch;
+import gateway.SearchByUsernameAdmin;
+import gateway.SearchByUsernameRegular;
 import useCases.IAccountManager;
 import useCases.ICommentManager;
 import useCases.IPostManager;
@@ -34,6 +37,8 @@ public class LoginController extends RequestController {
      */
     public LoginController(IAccountManager accountManager, IPostManager postManager, ICommentManager commentManager){
         this.accountManager = accountManager;
+        ISearch searchForRegularUsers = new SearchByUsernameRegular(accountManager);
+        ISearch searchForAdmin = new SearchByUsernameAdmin(accountManager);
         accountRequestFacade = new RequestFacade(new RequestController[]{
                 new ViewHistoryController(accountManager),
                 new DeleteSelfController(accountManager, postManager),
@@ -45,7 +50,7 @@ public class LoginController extends RequestController {
                 new ViewFeedController(postManager, accountManager, commentManager),
                 new ViewProfileController(accountManager, postManager, commentManager),
                 new SearchPostByTitleController(postManager),
-                new SearchUserByUsernameController(accountManager),
+                new SearchUserByUsernameController(accountManager,searchForRegularUsers),
                 new LogoutController(),
         });
         adminRequestFacade = new RequestFacade(new RequestController[]{
@@ -64,7 +69,7 @@ public class LoginController extends RequestController {
                 new ViewFeedController(postManager, accountManager, commentManager),
                 new ViewProfileController(accountManager, postManager, commentManager),
                 new SearchPostByTitleController(postManager),
-                new SearchUserByUsernameController(accountManager),
+                new SearchUserByUsernameController(accountManager, searchForAdmin),
                 new LogoutController(),
         });
     }

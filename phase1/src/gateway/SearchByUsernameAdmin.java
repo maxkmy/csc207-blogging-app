@@ -1,23 +1,22 @@
 package gateway;
 
-import entities.Post;
-import useCases.IPostManager;
-
+import entities.Account;
+import useCases.IAccountManager;
 
 import java.util.*;
 
-public class SearchByTitle implements ISearch{
+public class SearchByUsernameAdmin implements ISearch{
     /**
-     * a use case responsible for managing posts.
+     * a use case responsible for managing accounts.
      */
-    private IPostManager postManager;
+    IAccountManager accountManager;
     /**
-     * Constructor for a gateway responsible for performing Search using titles.
+     * Constructor for a gateway responsible for performing Search using usernames.
      *
-     * @param postManager a use case responsible for managing postss.
+     * @param accountManager a use case responsible for managing.
      */
-    public SearchByTitle(IPostManager postManager) {
-        this.postManager = postManager;
+    public SearchByUsernameAdmin(IAccountManager accountManager) {
+        this.accountManager = accountManager;
     }
     /**
      * Perform the search operation using the specified string.
@@ -26,13 +25,11 @@ public class SearchByTitle implements ISearch{
      */
     @Override
     public ArrayList<String> doSearch(String query){
-        HashMap<UUID, Post> curr = postManager.getMap();
-        HashMap<String, Double> map = new HashMap<>();
-        for(Map.Entry<UUID, Post> entry : curr.entrySet()) {
-            String key = entry.getKey().toString();
-            String value = entry.getValue().getTitle();
-            SimilarityScoreLevenshtein score = new SimilarityScoreLevenshtein();
-            map.put(key,score.getSimilarityScore(value,query));
+        HashMap<String, Account> curr = accountManager.getMap();
+        Map<String, Double> map = new HashMap<>();
+        for (String key: curr.keySet()) {
+            SimilarityScoreJaroWrinkler score = new SimilarityScoreJaroWrinkler();
+            map.put(key,score.getSimilarityScore(key,query));
         }
         ArrayList<Map.Entry> sorted = sortMap(map);
         ArrayList<String> results = new ArrayList<>();
@@ -60,6 +57,4 @@ public class SearchByTitle implements ISearch{
         Collections.sort(result, new CompareResults());
         return result;
     }
-
-
 }

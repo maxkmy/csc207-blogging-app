@@ -2,9 +2,8 @@ package controllers.search;
 
 import gateway.ISearch;
 import useCases.IAccountManager;
-import gateway.SearchByUsername;
+import gateway.SearchByUsernameRegular;
 import controllers.appWide.RequestController;
-import exception.ResultNotFoundException;
 
 import java.util.*;
 
@@ -22,20 +21,17 @@ public class SearchUserByUsernameController extends RequestController{
      *
      * @param accountManager a use case responsible for managing accounts.
      */
-
-    public SearchUserByUsernameController(IAccountManager accountManager){
+    public SearchUserByUsernameController(IAccountManager accountManager, ISearch searcher){
         this.accountManager = accountManager;
-        searcher = new SearchByUsername(accountManager);
+        this.searcher = searcher;
     }
-
     /**
      * @inheritDoc
      */
     @Override
     public String getRequestDescription() { return "Search for a user by their username"; }
-
     /**
-     * @inheritDOc
+     * @inheritDoc
      */
     @Override
     public boolean handleRequest(String requester){
@@ -46,7 +42,6 @@ public class SearchUserByUsernameController extends RequestController{
         presenter.inlinePrint("Here are the top search results:");
         ArrayList<String> result = searcher.doSearch(username);
         presenter.printMessages(result, "\n");
-
         return false;
     }
 

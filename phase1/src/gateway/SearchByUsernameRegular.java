@@ -7,7 +7,7 @@ import useCases.IAccountManager;
 import java.util.*;
 
 
-public class SearchByUsername implements ISearch{
+public class SearchByUsernameRegular implements ISearch{
     /**
      * a use case responsible for managing accounts.
      */
@@ -17,7 +17,7 @@ public class SearchByUsername implements ISearch{
      *
      * @param accountManager a use case responsible for managing.
      */
-    public SearchByUsername(IAccountManager accountManager) {
+    public SearchByUsernameRegular(IAccountManager accountManager) {
         this.accountManager = accountManager;
     }
     /**
@@ -28,10 +28,12 @@ public class SearchByUsername implements ISearch{
     @Override
     public ArrayList<String> doSearch(String query){
         HashMap<String, Account> curr = accountManager.getMap();
-        Map map = new HashMap<String, Double>();
+        Map<String, Double> map = new HashMap<>();
         for (String key: curr.keySet()) {
-            SimilarityScore score = new SimilarityScore();
-            map.put(key,score.getSimilarityScore(key,query));
+            if(!accountManager.getUser(key).getIsBanned()) {
+                SimilarityScoreJaroWrinkler score = new SimilarityScoreJaroWrinkler();
+                map.put(key, score.getSimilarityScore(key, query));
+            }
         }
         ArrayList<Map.Entry> sorted = sortMap(map);
         ArrayList<String> results = new ArrayList<>();

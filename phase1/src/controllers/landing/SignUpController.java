@@ -11,6 +11,8 @@ import controllers.search.SearchPostByTitleController;
 import controllers.search.SearchUserByUsernameController;
 import exception.InvalidUsernameException;
 import exception.UsernameExistsException;
+import gateway.ISearch;
+import gateway.SearchByUsernameRegular;
 import useCases.ICommentManager;
 import useCases.IPostManager;
 import useCases.IAccountManager;
@@ -40,6 +42,7 @@ public class SignUpController extends RequestController {
     public SignUpController(IAccountManager accountManager, IPostManager postManager, ICommentManager commentManager) {
         this.accountManager = accountManager;
         this.commentManager = commentManager;
+        ISearch searchForRegularUsers = new SearchByUsernameRegular(accountManager);
         accountRequestFacade = new RequestFacade(new RequestController[]{
             new ViewHistoryController(accountManager),
             new DeleteSelfController(accountManager, postManager),
@@ -51,7 +54,7 @@ public class SignUpController extends RequestController {
             new ViewFeedController(postManager, accountManager, commentManager),
                 new ViewProfileController(accountManager, postManager, commentManager),
                 new SearchPostByTitleController(postManager),
-                new SearchUserByUsernameController(accountManager),
+                new SearchUserByUsernameController(accountManager, searchForRegularUsers),
             new LogoutController(),
         });
     }

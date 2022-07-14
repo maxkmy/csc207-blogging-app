@@ -3,7 +3,7 @@ package gateway;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class SimilarityScore implements ISimilarityScore{
+public class SimilarityScoreLevenshtein implements ISimilarityScore{
 
     /** @return an array of adjacent letter pairs contained in the input string */
     private String[] letterPairs(String str) {
