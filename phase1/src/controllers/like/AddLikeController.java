@@ -42,7 +42,7 @@ public class AddLikeController extends RequestController{
             UUID likeID = likeManager.addLike(UUID.fromString(requester), liker);
             UUID nullUUID = new UUID(0, 0);
             if (!(likeID.equals(nullUUID))) {
-                String[] attributes = new String[]{"postId", "user liking the post", "id"};
+                String[] attributes = new String[]{"postID", "liker", "id"};
                 likeModel.addItem(likeManager.getLike(likeID), attributes);
                 presenter.blockPrint("Like successfully created");
                 return false;

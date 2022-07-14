@@ -1,7 +1,8 @@
 package entities;
+import java.io.Serializable;
 import java.util.UUID;
 
-public class Like {
+public class Like implements Serializable {
     /**
      * the id of the parent entity being liked (either a Post or Comment)
      */
