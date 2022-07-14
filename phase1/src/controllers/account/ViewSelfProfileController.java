@@ -8,6 +8,7 @@ import controllers.post.ViewPostPermissionController;
 import gateway.PostTimeSorter;
 import presenters.PostPresenter;
 import useCases.ICommentManager;
+import useCases.ILikeManager;
 import useCases.IPostManager;
 import dataMapper.DataMapper;
 
@@ -30,15 +31,24 @@ public class ViewSelfProfileController extends RequestController {
      *  a data mapper responsible for mapping comments into a data structure usable by the presenters
      */
     DataMapper commentModel = new DataMapper();
+    /**
+     * a dataMapper to Store likes
+     */
+    DataMapper likeModel = new DataMapper();
+    /**
+     * a use case responsible for managing likes
+     */
+    ILikeManager likeManager;
 
     /**
      * Constructor for a controller responsible for handling input related to viewing a user's own profile.
      *
      * @param postManager  a use case responsible for managing posts
      */
-    public ViewSelfProfileController(IPostManager postManager, ICommentManager commentManager) {
+    public ViewSelfProfileController(IPostManager postManager, ICommentManager commentManager, ILikeManager likeManager) {
         this.postManager = postManager;
         this.commentManager = commentManager;
+        this.likeManager = likeManager;
     }
 
     /**
@@ -65,7 +75,7 @@ public class ViewSelfProfileController extends RequestController {
         RequestFacade profileFacade = new RequestFacade(
             new RequestController[] {
                     new AddPostController(postModel, postManager),
-                    new ViewPostPermissionController(postModel, postManager, commentModel, commentManager),
+                    new ViewPostPermissionController(postModel, postManager, commentModel, commentManager,likeManager, likeModel),
                     new ReturnController()
             }
         );

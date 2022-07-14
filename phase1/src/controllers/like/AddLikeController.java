@@ -7,7 +7,6 @@ import useCases.ILikeManager;
 import java.util.*;
 
 public class AddLikeController extends RequestController{
-
     /**
      * a data mapper responsible for mapping likes into a data structure usable by the presenters
      */
@@ -20,19 +19,16 @@ public class AddLikeController extends RequestController{
      * a string representing the user liking the post
      */
     String liker;
-
     public AddLikeController(DataMapper likeModel, ILikeManager likeManager, String liker) {
         this.likeModel = likeModel;
         this.likeManager = likeManager;
         this.liker = liker;
     }
-
     /**
      * @inheritDoc
      */
     @Override
     public String getRequestDescription() { return "Create a new like"; }
-
     /**
      * @inheritDoc
      */
@@ -60,5 +56,4 @@ public class AddLikeController extends RequestController{
             return false;
         }
     }
-
 }

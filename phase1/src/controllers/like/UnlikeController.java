@@ -8,7 +8,6 @@ import java.util.*;
 
 
 public class UnlikeController extends RequestController{
-
     /**
      * a data mapper responsible for mapping likes into a data structure usable by the presenters
      */
@@ -21,19 +20,16 @@ public class UnlikeController extends RequestController{
      * a string representing the user liking the post
      */
     String liker;
-
     public UnlikeController(DataMapper likeModel, ILikeManager likeManager, String liker) {
         this.likeModel = likeModel;
         this.likeManager = likeManager;
         this.liker = liker;
     }
-
     /**
      * @inheritDoc
      */
     @Override
     public String getRequestDescription() { return "Unlike a liked post"; }
-
     /**
      * @inheritDoc
      */
@@ -52,7 +48,6 @@ public class UnlikeController extends RequestController{
             }
             else {
                 presenter.blockPrint("Error: like was not created so cannot be unliked");
-
             }
             return false;
         }
@@ -60,6 +55,4 @@ public class UnlikeController extends RequestController{
             return false;
         }
     }
-
-
 }

@@ -14,6 +14,7 @@ import exception.UsernameExistsException;
 import gateway.ISearch;
 import gateway.SearchByUsernameRegular;
 import useCases.ICommentManager;
+import useCases.ILikeManager;
 import useCases.IPostManager;
 import useCases.IAccountManager;
 
@@ -23,6 +24,10 @@ public class SignUpController extends RequestController {
      * a use case responsible for managing accounts
      */
     private IAccountManager accountManager;
+    /**
+     * a request facade containing request controllers for likes
+     */
+    ILikeManager likeManager;
     /**
      * a request facade containing request controllers for regular accounts
      */
@@ -39,9 +44,10 @@ public class SignUpController extends RequestController {
      * @param postManager    a use case responsible for managing posts
      * @param commentManager a use case responsible for managing comments
      */
-    public SignUpController(IAccountManager accountManager, IPostManager postManager, ICommentManager commentManager) {
+    public SignUpController(IAccountManager accountManager, IPostManager postManager, ICommentManager commentManager, ILikeManager likeManager) {
         this.accountManager = accountManager;
         this.commentManager = commentManager;
+
         ISearch searchForRegularUsers = new SearchByUsernameRegular(accountManager);
         accountRequestFacade = new RequestFacade(new RequestController[]{
             new ViewHistoryController(accountManager),
@@ -50,9 +56,9 @@ public class SignUpController extends RequestController {
             new UnfollowController(accountManager),
             new ViewFollowerController(accountManager),
             new ViewFollowingController(accountManager),
-            new ViewSelfProfileController(postManager, commentManager),
-            new ViewFeedController(postManager, accountManager, commentManager),
-                new ViewProfileController(accountManager, postManager, commentManager),
+            new ViewSelfProfileController(postManager, commentManager, likeManager),
+            new ViewFeedController(postManager, accountManager, commentManager, likeManager),
+                new ViewProfileController(accountManager, postManager, commentManager, likeManager),
                 new SearchPostByTitleController(postManager),
                 new SearchUserByUsernameController(accountManager, searchForRegularUsers),
             new LogoutController(),

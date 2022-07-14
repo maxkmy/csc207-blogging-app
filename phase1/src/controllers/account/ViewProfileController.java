@@ -9,6 +9,7 @@ import gateway.PostTimeSorter;
 import presenters.PostPresenter;
 import useCases.IAccountManager;
 import useCases.ICommentManager;
+import useCases.ILikeManager;
 import useCases.IPostManager;
 
 import java.util.Scanner;
@@ -31,16 +32,26 @@ public class ViewProfileController extends RequestController {
      */
     DataMapper postModel = new DataMapper();
     /**
+     * a dataMapper to Store likes
+     */
+    DataMapper likeModel = new DataMapper();
+    /**
+     * a use case responsible for managing likes
+     */
+    ILikeManager likeManager;
+    /**
      *  a data mapper responsible for mapping comments into a data structure usable by the presenters
      */
     DataMapper commentModel = new DataMapper();
 
     public ViewProfileController(IAccountManager accountManager,
                                  IPostManager postManager,
-                                 ICommentManager commentManager) {
+                                 ICommentManager commentManager,
+                                 ILikeManager likeManager) {
         this.accountManager = accountManager;
         this.postManager = postManager;
         this.commentManager = commentManager;
+        this.likeManager = likeManager;
     }
 
 
@@ -63,7 +74,7 @@ public class ViewProfileController extends RequestController {
         postPresenter.printPosts(postModel.getModel());
         RequestFacade profileFacade = new RequestFacade(
                 new RequestController[] {
-                        new ViewPostNoPermissionController(postModel, postManager, commentModel, commentManager),
+                        new ViewPostNoPermissionController(postModel, postManager, commentModel, commentManager,likeManager,likeModel),
                         new ReturnController()
                 }
         );
@@ -78,7 +89,7 @@ public class ViewProfileController extends RequestController {
         String target = scanner.nextLine();
         sleeper.sleep(200);
         if (target.equals(requester)) {
-            new ViewSelfProfileController(postManager, commentManager).handleRequest(requester);
+            new ViewSelfProfileController(postManager, commentManager,likeManager).handleRequest(requester);
         } else if (accountManager.containsUser(target)) {
             showProfile(requester, target);
         } else if (!target.equals("")) {

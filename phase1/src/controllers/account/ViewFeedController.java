@@ -11,6 +11,7 @@ import gateway.PostTimeSorter;
 import presenters.PostPresenter;
 import useCases.IAccountManager;
 import useCases.ICommentManager;
+import useCases.ILikeManager;
 import useCases.IPostManager;
 
 import java.util.ArrayList;
@@ -29,17 +30,27 @@ public class ViewFeedController extends RequestController {
      *  a data mapper responsible for mapping comments into a data structure usable by the presenters
      */
     DataMapper commentModel = new DataMapper();
+    /**
+     * a dataMapper to Store likes
+     */
+    DataMapper likeModel = new DataMapper();
+    /**
+     * a use case responsible for managing likes
+     */
+    ILikeManager likeManager;
 
     /**
      * Constructor for a controller responsible for retrieving the post feed
      *
      * @param postManager    use case responsible for managing posts
      * @param accountManager use case responsible for managing accounts
+     * @param likeManager    a use case responsible for managing likes
      */
-    public ViewFeedController(IPostManager postManager, IAccountManager accountManager, ICommentManager commentManager) {
+    public ViewFeedController(IPostManager postManager, IAccountManager accountManager, ICommentManager commentManager, ILikeManager likeManager) {
         this.postManager = postManager;
         this.accountManager = accountManager;
         this.commentManager = commentManager;
+        this.likeManager = likeManager;
     }
 
     /**
@@ -69,7 +80,7 @@ public class ViewFeedController extends RequestController {
         postPresenter.printPosts(postModel.getModel());
         RequestFacade feedFacade = new RequestFacade(
                 new RequestController[] {
-                        new ViewPostNoPermissionController(postModel, postManager, commentModel, commentManager),
+                        new ViewPostNoPermissionController(postModel, postManager, commentModel, commentManager, likeManager, likeModel),
                         new ReturnController()
                 }
         );

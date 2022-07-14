@@ -14,6 +14,7 @@ import gateway.SearchByUsernameAdmin;
 import gateway.SearchByUsernameRegular;
 import useCases.IAccountManager;
 import useCases.ICommentManager;
+import useCases.ILikeManager;
 import useCases.IPostManager;
 
 import java.util.Scanner;
@@ -34,8 +35,9 @@ public class LoginController extends RequestController {
      * @param accountManager a use case responsible for managing accounts
      * @param postManager    a use case responsible for managing posts
      * @param commentManager a user case responsible for managing comments
+     * @param likeManager    a use case responsible for managing likes
      */
-    public LoginController(IAccountManager accountManager, IPostManager postManager, ICommentManager commentManager){
+    public LoginController(IAccountManager accountManager, IPostManager postManager, ICommentManager commentManager, ILikeManager likeManager){
         this.accountManager = accountManager;
         ISearch searchForRegularUsers = new SearchByUsernameRegular(accountManager);
         ISearch searchForAdmin = new SearchByUsernameAdmin(accountManager);
@@ -46,9 +48,9 @@ public class LoginController extends RequestController {
                 new UnfollowController(accountManager),
                 new ViewFollowerController(accountManager),
                 new ViewFollowingController(accountManager),
-                new ViewSelfProfileController(postManager, commentManager),
-                new ViewFeedController(postManager, accountManager, commentManager),
-                new ViewProfileController(accountManager, postManager, commentManager),
+                new ViewSelfProfileController(postManager, commentManager, likeManager),
+                new ViewFeedController(postManager, accountManager, commentManager, likeManager),
+                new ViewProfileController(accountManager, postManager, commentManager, likeManager),
                 new SearchPostByTitleController(postManager),
                 new SearchUserByUsernameController(accountManager,searchForRegularUsers),
                 new LogoutController(),
@@ -65,9 +67,9 @@ public class LoginController extends RequestController {
                 new UnfollowController(accountManager),
                 new ViewFollowerController(accountManager),
                 new ViewFollowingController(accountManager),
-                new ViewSelfProfileController(postManager, commentManager),
-                new ViewFeedController(postManager, accountManager, commentManager),
-                new ViewProfileController(accountManager, postManager, commentManager),
+                new ViewSelfProfileController(postManager, commentManager, likeManager),
+                new ViewFeedController(postManager, accountManager, commentManager, likeManager),
+                new ViewProfileController(accountManager, postManager, commentManager, likeManager),
                 new SearchPostByTitleController(postManager),
                 new SearchUserByUsernameController(accountManager, searchForAdmin),
                 new LogoutController(),
