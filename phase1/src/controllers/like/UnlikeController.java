@@ -6,7 +6,8 @@ import useCases.ILikeManager;
 
 import java.util.*;
 
-public class AddLikeController extends RequestController{
+
+public class UnlikeController extends RequestController{
 
     /**
      * a data mapper responsible for mapping likes into a data structure usable by the presenters
@@ -21,7 +22,7 @@ public class AddLikeController extends RequestController{
      */
     String liker;
 
-    public AddLikeController(DataMapper likeModel, ILikeManager likeManager, String liker) {
+    public UnlikeController(DataMapper likeModel, ILikeManager likeManager, String liker) {
         this.likeModel = likeModel;
         this.likeManager = likeManager;
         this.liker = liker;
@@ -31,7 +32,7 @@ public class AddLikeController extends RequestController{
      * @inheritDoc
      */
     @Override
-    public String getRequestDescription() { return "Create a new like"; }
+    public String getRequestDescription() { return "Unlike a liked post"; }
 
     /**
      * @inheritDoc
@@ -39,26 +40,26 @@ public class AddLikeController extends RequestController{
     @Override
     public boolean handleRequest(String requester){
         Scanner scanner = new Scanner(System.in);
-        presenter.inlinePrint("Like?: ");
+        presenter.inlinePrint("Unlike?: ");
         String response = scanner.nextLine();
         if ((response.equals("yes") || response.equals("Yes") || response.equals("YES"))) {
             sleeper.sleep(200);
-            UUID likeID = likeManager.addLike(UUID.fromString(requester), liker);
-            UUID nullUUID = new UUID(0, 0);
-            if (!(likeID.equals(nullUUID))) {
-                String[] attributes = new String[]{"postId", "user liking the post", "id"};
-                likeModel.addItem(likeManager.getLike(likeID), attributes);
-                presenter.blockPrint("Like successfully created");
-                return false;
-            } else {
-                presenter.blockPrint("You cannot like a post twice");
-                return false;
+            UUID likeId = likeManager.getIdFromPostId(UUID.fromString(requester), liker);
+            UUID nullId = new UUID(0, 0);
+            if (!(likeId.equals(nullId))){
+                likeManager.unlike(likeId);
+                presenter.blockPrint("Successfully unliked");
             }
+            else {
+                presenter.blockPrint("Error: like was not created so cannot be unliked");
+
+            }
+            return false;
         }
         else {
-            sleeper.sleep(200);
             return false;
         }
     }
+
 
 }
