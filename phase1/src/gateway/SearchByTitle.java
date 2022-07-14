@@ -32,7 +32,7 @@ public class SearchByTitle implements ISearch{
             String key = entry.getKey().toString();
             String value = entry.getValue().getTitle();
             SimilarityScoreLevenshtein score = new SimilarityScoreLevenshtein();
-            map.put(key,score.getSimilarityScore(value,query));
+            map.put(postManager.getPost(entry.getKey()).getTitle(),score.getSimilarityScore(value,query));
         }
         ArrayList<Map.Entry> sorted = sortMap(map);
         ArrayList<String> results = new ArrayList<>();
@@ -60,6 +60,4 @@ public class SearchByTitle implements ISearch{
         Collections.sort(result, new CompareResults());
         return result;
     }
-
-
 }
