@@ -32,7 +32,7 @@ public class UnfollowController extends RequestController {
     public boolean handleRequest(String requester) {
         try {
             Scanner scanner = new Scanner(System.in);
-            presenter.blockPrint("Enter the username of the account you wish to unfollow: ");
+            presenter.inlinePrint("Enter the username of the account you wish to unfollow: ");
             String target = scanner.nextLine();
             sleeper.sleep(200);
             accountManager.unfollow(requester, target);
