@@ -9,7 +9,7 @@ public class DataMapper {
     /**
      * A data structure usable by presenters
      */
-    ArrayList<HashMap<String, String>> model = new ArrayList<>();
+    private ArrayList<HashMap<String, String>> model = new ArrayList<>();
 
     /**
      * Return a string representing the value for the attribute of the object.
