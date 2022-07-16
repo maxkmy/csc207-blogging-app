@@ -11,31 +11,31 @@ public class Account implements Serializable {
     /**
      * the username of the account
      */
-    public String username;
+    private String username;
     /**
      * the hashed password of the account
      */
-    public String hashedPassword;
+    private String hashedPassword;
     /**
      * the login history of the account
      */
-    public List<LocalDateTime> history = new ArrayList<>();
+    private List<LocalDateTime> history = new ArrayList<>();
     /**
      * a boolean flag checking whether the account is currently banned
      */
-    boolean isBanned;
+    private boolean isBanned;
     /**
      * a boolean flag checking whether the account is an admin
      */
-    boolean isAdmin;
+    private boolean isAdmin;
     /**
      * a set of usernames of the account's followers
      */
-    HashSet<String> followers = new HashSet<>();
+    private HashSet<String> followers = new HashSet<>();
     /**
      * a set of usernames of the account's followees
      */
-    HashSet<String> followees = new HashSet<>();
+    private HashSet<String> followees = new HashSet<>();
 
     public Account(String username, String hashedPassword) {
         this.username = username;
