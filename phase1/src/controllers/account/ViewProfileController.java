@@ -15,18 +15,6 @@ import java.util.Scanner;
 
 public class ViewProfileController extends RequestController {
     /**
-     * a use case responsible for managing posts
-     */
-    IPostManager postManager;
-    /**
-     * a use case responsible for managing posts
-     */
-    ICommentManager commentManager;
-    /**
-     * a use case responsible for managing accounts
-     */
-    IAccountManager accountManager;
-    /**
      * a data mapper responsible for mapping posts into a data structure usable by the presenters
      */
     DataMapper postModel = new DataMapper();

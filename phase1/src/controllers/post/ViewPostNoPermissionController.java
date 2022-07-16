@@ -24,10 +24,6 @@ public class ViewPostNoPermissionController extends RequestController {
      */
     DataMapper commentModel;
     /**
-     * a use case responsible for managing comments
-     */
-    ICommentManager commentManager;
-    /**
      * a use case responsible for managing posts
      */
     IPostManager postManager;

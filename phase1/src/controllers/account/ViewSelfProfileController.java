@@ -11,17 +11,7 @@ import useCases.ICommentManager;
 import useCases.IPostManager;
 import dataMapper.DataMapper;
 
-import gateway.IPostSorter;
-
 public class ViewSelfProfileController extends RequestController {
-    /**
-     * a use case responsible for managing posts
-     */
-    IPostManager postManager;
-    /**
-     * a use case responsible for managing posts
-     */
-    ICommentManager commentManager;
     /**
      * a data mapper responsible for mapping posts into a data structure usable by the presenters
      */

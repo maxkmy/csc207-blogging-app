@@ -16,17 +16,9 @@ import useCases.IAccountManager;
 
 public class SignUpController extends RequestController {
     /**
-     * a use case responsible for managing accounts
-     */
-    private IAccountManager accountManager;
-    /**
      * a request facade containing request controllers for regular accounts
      */
     private RequestFacade accountRequestFacade;
-    /**
-     * a request facade containing request controllers for comments
-     */
-    private ICommentManager commentManager;
 
     /**
      * Constructor for a controller responsible for reading input to sign users up.

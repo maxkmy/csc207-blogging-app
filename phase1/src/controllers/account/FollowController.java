@@ -9,11 +9,6 @@ import java.util.Scanner;
 
 public class FollowController extends RequestController {
     /**
-     * a use case responsible for managing accounts
-     */
-    IAccountManager accountManager;
-
-    /**
      * Constructor for a controller responsible for handling input related to following a user.
      *
      * @param accountManager  a use case responsible for managing accounts

@@ -23,14 +23,6 @@ public class ViewPostPermissionController extends RequestController {
      * a data mapper to store comments
      */
     DataMapper commentModel;
-    /**
-     * a use case responsible for managing comments
-     */
-    ICommentManager commentManager;
-    /**
-     * a use case responsible for managing posts
-     */
-    IPostManager postManager;
 
     /**
      * Constructor for a controller responsible for reading input to view a post.

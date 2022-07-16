@@ -7,19 +7,6 @@ import useCases.IPostManager;
 
 public class QuitController extends RequestController {
     /**
-     * a use case responsible for managing accounts
-     */
-    IAccountManager accountManager;
-    /**
-     * a use case responsible for managing posts
-     */
-    IPostManager postManager;
-    /**
-     * a use case responsible for managing comments
-     */
-    ICommentManager commentManager;
-
-    /**
      * Constructor for a controller responsible for reading input to log users out.
      *
      * @param accountManager a use case responsible for managing accounts

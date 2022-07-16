@@ -17,13 +17,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 public class ViewFeedController extends RequestController {
-    /**
-     * a use case responsible for managing posts
-     */
-    ICommentManager commentManager;
-    /**
-     * a data mapper responsible for mapping posts into a data structure usable by the presenters
-     */
     DataMapper postModel = new DataMapper();
     /**
      *  a data mapper responsible for mapping comments into a data structure usable by the presenters

@@ -12,10 +12,6 @@ import java.util.UUID;
 
 public class ViewCommentController extends RequestController {
     /**
-     * a use case responsible for managing comments
-     */
-    ICommentManager commentManager;
-    /**
      * a data mapper to store comments
      */
     DataMapper commentModel;

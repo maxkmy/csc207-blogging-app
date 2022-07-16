@@ -10,11 +10,6 @@ import java.util.Scanner;
 
 public class BanUserController extends RequestController {
     /**
-     * a use case responsible for managing accounts
-     */
-    final private IAccountManager accountManager;
-
-    /**
      * Constructor for a controller responsible for handling input related to account banning.
      *
      * @param accountManager  a use case responsible for managing accounts

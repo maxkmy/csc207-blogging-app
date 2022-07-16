@@ -14,10 +14,6 @@ public class AddCommentController extends RequestController {
      */
     DataMapper commentModel;
     /**
-     * a use case responsible for managing comments
-     */
-    ICommentManager commentManager;
-    /**
      * a string representing the author of the comment
      */
     String author;
