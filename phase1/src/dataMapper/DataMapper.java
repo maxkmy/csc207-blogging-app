@@ -70,15 +70,10 @@ public class DataMapper {
         }
     }
 
-    // TODO: remove this commented method once the PostTimeSorter is done being tested
-//    public <T> void sortBy(String attribute) {
-//        model.sort(Comparator.comparing(o -> o.get(attribute)));
-//    }
-
     /**
      * Extract attributes from items and add them to the model
      *
-     * @param items       an interable of objects to be added to the model
+     * @param items       an iterable of objects to be added to the model
      * @param attributes  a list of attributes to be extracted from each item in the iterable of object
      */
     public <T> void addItems(Iterable<T> items, String[] attributes) {
