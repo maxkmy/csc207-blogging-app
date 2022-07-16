@@ -12,19 +12,19 @@ public class PostManager implements IPostManager{
     /**
      * a mapping of id of the post to the post entity
      */
-    HashMap<UUID, Post> posts = new HashMap<>();
+    private HashMap<UUID, Post> posts = new HashMap<>();
     /**
      * a gateway responsible for reading objects
      */
-    IReader reader;
+    private IReader reader;
     /**
      * a gateway responsible for writing objects
      */
-    IWriter writer;
+    private IWriter writer;
     /**
      *  a sorter that sorts an arraylist of posts
      */
-    IPostSorter postSorter;
+    private IPostSorter postSorter;
 
     /**
      * Constructor of a use case responsible for managing posts.

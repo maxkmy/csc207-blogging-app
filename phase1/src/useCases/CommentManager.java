@@ -14,19 +14,19 @@ public class CommentManager implements ICommentManager{
     /**
      * a mapping of id of the comment to the comment entity
      */
-    HashMap<UUID, Comment> comments = new HashMap<>();
+    private HashMap<UUID, Comment> comments = new HashMap<>();
     /**
      * a gateway responsible for reading objects
      */
-    IReader reader;
+    private IReader reader;
     /**
      * a gateway responsible for writing objects
      */
-    IWriter writer;
+    private IWriter writer;
     /**
      * a strategy for sorting comments by a particular criterion
      */
-    ICommentSorter commentSorter;
+    private ICommentSorter commentSorter;
 
     /**
      * Constructor of a use case responsible for managing comments.

@@ -13,15 +13,15 @@ public class AccountManager implements IAccountManager {
     /**
      * a mapping of username of the account to the account entity
      */
-    HashMap<String, Account> accountMap = new HashMap<>();
+    private HashMap<String, Account> accountMap = new HashMap<>();
     /**
      * a gateway responsible for reading objects
      */
-    IReader reader;
+    private IReader reader;
     /**
      * a gateway responsible for writing objects
      */
-    IWriter writer;
+    private IWriter writer;
 
     /**
      * Constructor of a use case responsible for managing accounts.
