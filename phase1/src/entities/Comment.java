@@ -8,23 +8,23 @@ public class Comment implements Serializable {
     /**
      * the id of the parent (which is either a Post or a Comment)
      */
-    UUID postId;
+    private UUID postId;
     /**
      * the content of the comment
      */
-    String content;
+    private String content;
     /**
      * the username of the user that wrote the comment
      */
-    String author;
+    private String author;
     /**
      * the time in which the comment was created
      */
-    LocalDateTime timePosted;
+    private LocalDateTime timePosted;
     /**
      * the id of the comment
      */
-    UUID id;
+    private UUID id;
 
     public Comment(UUID postId, String content, String author) {
         this.postId = postId;

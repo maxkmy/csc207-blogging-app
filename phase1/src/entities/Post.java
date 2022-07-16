@@ -7,23 +7,23 @@ public class Post implements Serializable {
     /**
      * the title of a post
      */
-    String title;
+    private String title;
     /**
      * the content of a post
      */
-    String content;
+    private String content;
     /**
      * the username of the user that wrote the post
      */
-    String author;
+    private String author;
     /**
      * the time in which the post was created
      */
-    LocalDateTime timePosted;
+    private LocalDateTime timePosted;
     /**
      * the id of the post
      */
-    UUID id;
+    private UUID id;
 
     public Post(String title, String content, String author) {
         this.title = title;
