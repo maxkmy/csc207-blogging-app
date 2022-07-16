@@ -34,7 +34,7 @@ public class LoginController extends RequestController {
         this.accountManager = accountManager;
         accountRequestFacade = new RequestFacade(new RequestController[]{
                 new ViewHistoryController(accountManager),
-                new DeleteSelfController(accountManager, postManager),
+                new DeleteSelfController(accountManager, postManager, commentManager),
                 new FollowController(accountManager),
                 new UnfollowController(accountManager),
                 new ViewFollowerController(accountManager),
@@ -49,8 +49,8 @@ public class LoginController extends RequestController {
                 new UnbanUserController(accountManager),
                 new PromoteUserController(accountManager),
                 new CreateAdminController(accountManager),
-                new DeleteUserController(accountManager, postManager),
-                new DeleteSelfController(accountManager, postManager),
+                new DeleteUserController(accountManager, postManager, commentManager),
+                new DeleteSelfController(accountManager, postManager, commentManager),
                 new ViewHistoryController(accountManager),
                 new FollowController(accountManager),
                 new UnfollowController(accountManager),

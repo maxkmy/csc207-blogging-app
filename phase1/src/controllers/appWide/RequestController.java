@@ -4,6 +4,7 @@ import gateway.ISleeper;
 import gateway.Sleeper;
 import presenters.Presenter;
 import useCases.IAccountManager;
+import useCases.ICommentManager;
 import useCases.IPostManager;
 
 abstract public class RequestController {
@@ -19,6 +20,10 @@ abstract public class RequestController {
      * a use case responsible for managing posts
      */
     protected IPostManager postManager;
+    /**
+     * a use case responsible for managing comments
+     */
+    protected ICommentManager commentManager;
     /**
      * a presenter object responsible for printing messages to CLI
      */

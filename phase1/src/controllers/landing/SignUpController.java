@@ -40,7 +40,7 @@ public class SignUpController extends RequestController {
         this.commentManager = commentManager;
         accountRequestFacade = new RequestFacade(new RequestController[]{
             new ViewHistoryController(accountManager),
-            new DeleteSelfController(accountManager, postManager),
+            new DeleteSelfController(accountManager, postManager, commentManager),
             new FollowController(accountManager),
             new UnfollowController(accountManager),
             new ViewFollowerController(accountManager),

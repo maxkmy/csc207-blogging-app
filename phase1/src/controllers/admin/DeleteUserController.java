@@ -4,6 +4,7 @@ import controllers.appWide.RequestController;
 import exception.UserIsAdminException;
 import exception.UsernameNotFoundException;
 import useCases.IAccountManager;
+import useCases.ICommentManager;
 import useCases.IPostManager;
 
 import java.util.Scanner;
@@ -15,9 +16,12 @@ public class DeleteUserController extends RequestController {
      * @param accountManager  a use case responsible for managing accounts
      * @param postManager     a use case responsible for managing posts
      */
-    public DeleteUserController(IAccountManager accountManager, IPostManager postManager) {
+    public DeleteUserController(IAccountManager accountManager,
+                                IPostManager postManager,
+                                ICommentManager commentManager) {
         this.accountManager = accountManager;
         this.postManager = postManager;
+        this.commentManager = commentManager;
     }
 
     /**
@@ -39,6 +43,7 @@ public class DeleteUserController extends RequestController {
             String target = scanner.nextLine();
             accountManager.deleteUser(target);
             postManager.deletePostsWrittenBy(target);
+            commentManager.deleteCommentsWrittenBy(target);
             presenter.blockPrint("Successfully deleted user: " + target);
         } catch (UsernameNotFoundException | UserIsAdminException e) {
            presenter.blockPrint(e.getMessage());
