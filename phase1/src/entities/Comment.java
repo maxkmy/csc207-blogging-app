@@ -34,20 +34,48 @@ public class Comment implements Serializable {
         id = UUID.randomUUID();
     }
 
+    /**
+     * returns the content of this comment
+     *
+     * @return String of the content of this comment
+     */
     public String getContent() {
         return content;
     }
 
+    /**
+     * returns the author of this comment as a String of a username
+     *
+     * @return String of username of the author of this comment
+     */
     public String getAuthor() {
         return author;
     }
 
+    /**
+     * returns unique identifier of this comment as UUID object
+     *
+     * @return UUID object identifying this comment
+     */
     public UUID getId() {
         return id;
     }
 
-    public LocalDateTime getTimePosted() { return timePosted; }
+    /**
+     * returns LocalDateTime object representing when this comment
+     * was posted
+     *
+     * @return LocalDateTime object signifying when comment was posted
+     */
+    public LocalDateTime getTimePosted() {
+        return timePosted;
+    }
 
+    /**
+     * returns a unique identifier of this initialization as UUID
+     *
+     * @return UUID object uniquely identifying this comment instance
+     */
     public UUID getPostId() {
         return this.postId;
     }
