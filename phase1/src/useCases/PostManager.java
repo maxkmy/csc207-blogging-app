@@ -102,6 +102,9 @@ public class PostManager implements IPostManager{
         writer.write(posts);
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public void setPostSorter(IPostSorter postSorter) {
         this.postSorter = postSorter;
