@@ -5,7 +5,7 @@ import gateway.PasswordHash;
 
 import java.util.HashMap;
 
-public class userDataGenerator {
+public class UserDataGenerator {
     public static void main(String[] args) {
         IWriter writer = new Writer("data/userData.txt");
         Account admin = new Account("admin", new PasswordHash().hash("password"));

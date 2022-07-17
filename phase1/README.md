@@ -12,7 +12,7 @@
     - username: admin
     - password: password
 - Please make sure that you do not run the account self deletion command on the "starting admin" without having created other admins. If you do so, there will be no way to test any more admin features since the one and only admin account has been deleted. And, admins can only be created from an admin. 
-- However, in the case all admins accounts are accidentally deleted, you may run the main method in `userDataGenerator.java` which generates the starting admin account.
+- However, in the case all admins accounts are accidentally deleted, you may run the main method in `UserDataGenerator.java` which generates the starting admin account.
 - Note that inputs from users are based on numbers. The numbers should be input without trailing or leading spaces unless you would like to test whether the controllers can validate inputs correctly. 
 - To check whether Java objects are preserved between different login session, please make sure to quit the App instead of rerunning the app without quitting.
 

@@ -1,14 +1,16 @@
-import entities.Comment;
+import entities.Post;
 import gateway.IWriter;
 import gateway.Writer;
 
 import java.util.HashMap;
+
 import java.util.UUID;
 
-public class commentDataGenerator {
+
+public class PostDataGenerator {
     public static void main(String[] args) {
-        IWriter writer = new Writer("data/commentData.txt");
-        HashMap<UUID, Comment> map = new HashMap<>();
+        IWriter writer = new Writer("data/postData.txt");
+        HashMap<UUID, Post> map = new HashMap<>();
         writer.write(map);
     }
 }
