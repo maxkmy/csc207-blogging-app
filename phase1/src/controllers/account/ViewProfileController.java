@@ -40,6 +40,13 @@ public class ViewProfileController extends RequestController {
         return "View others profiles";
     }
 
+    /**
+     * Displays the profile of target for requester
+     * Gives request options that do not require permissions
+     *
+     * @param requester the current user logged in
+     * @param target    the target profile to open
+     */
     private void showProfile(String requester, String target) {
         postManager.setPostSorter(new PostTimeSorter());
         postModel.reset();
@@ -59,6 +66,9 @@ public class ViewProfileController extends RequestController {
         profileFacade.presentRequest();
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     protected boolean handleRequest(String requester) {
         Scanner scanner = new Scanner(System.in);
