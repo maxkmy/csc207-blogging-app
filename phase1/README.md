@@ -1,21 +1,41 @@
-# Cloning the repository
-- Run `git clone https://github.com/maxkmy/CSC207-app.git` in a directory where you would like to store this repository.
+# Cloning the repository 
+- Run `git clone https://github.com/maxkmy/csc207-blogging-app.git` in a directory where you would like to store this repository. 
 
-# Opening the project in Intellij
-- Due to the use of file paths in this project (to read from txt files), it is important that the project is opened in the right directory. Otherwise, some portions of code will fail to run.
-- Please open the `phase0` folder which is found within the `group_0245` folder.
+# Opening the project in Intellij 
+- Due to use of file paths in this project, please be sure to open the project in the `phase1` folder. 
+- The `phase1` folder is found within `csc207-blogging-app`.
 
-# Notes about testing the application
-- The "main app" is found in the file `App.java`. Run that file and the app should be running in the console in Intellij.
-- By default, there is already an admin user stored in `data/userData.txt` (it is the only account in that file when you first run `App.java`). This is mainly because admins can only be created from other admins. Thus, we need some "starting admin" account.
-- The login information for the "starting admin" is as follows:
-    - username: admin
-    - password: password
-- Please make sure that you do not run the account self deletion command on the "starting admin" without having created other admins. If you do so, there will be no way to test any more admin features since the one and only admin account has been deleted. And, admins can only be created from an admin. 
-- However, in the case all admins accounts are accidentally deleted, you may run the main method in `UserDataGenerator.java` which generates the starting admin account.
-- Note that inputs from users are based on numbers. The numbers should be input without trailing or leading spaces unless you would like to test whether the controllers can validate inputs correctly. 
-- To check whether Java objects are preserved between different login session, please make sure to quit the App instead of rerunning the app without quitting.
+# Generating data to test the program
+- Run the main methods within `CommentDataGenerator.java`, `PostDataGenerator.java` and `UserDataGenerator.java`.
+- `UserDataGenerator.java`'s main method creates an admin (which can later be used to login to the app). The credentials of the admin are as follows: 
+  - username: admin
+  - password: password 
 
-# Use of code from online 
-- the hashing method in the class `PasswordHash.java` was not fully implemented on our own.
-- It was taken from an online source.
+# Data persistence 
+- For the changes to data during a session to be stored, be sure to quit the app (by using the quit option) instead of closing the CLI.
+
+# Functionalities of the program 
+- The program contains the same functionalities as phase 0. 
+  - Users can sign up, login, view login history, quit the app and delete their accounts. 
+  - In addition, admins can ban users, unban users, delete other accounts, promote users and create new admins. 
+- Additionally, some new features were added in phase 1. We split these changes into 4 categories. 
+
+## User features 
+- Users can unfollow and follow other users by searching for other users' usernames. Please note the username searched has to be a perfect match. A search algorithm will be implemented as a part of phase 2. 
+- Users can view their own profiles. 
+- Users can view others' profiles by searching for other users' usernames. Again, the username searched has to be a perfect match. 
+
+## Post features 
+- Upon viewing their own profile, users can create a new post. Data such as post title and content will be read by a controller. 
+- Users can view posts (displayed through profiles or a feed) by providing a post number. 
+- Upon viewing a post, a user can delete the post (if it is their own post). 
+
+## Feed feature 
+- Users can request to view their feed which results in display of posts written by users they follow (sorted by recency). 
+
+## Comment features 
+- Upon viewing a post, a user can add a comment to any post. 
+- Upon viewing a post, a user can view the comments written under the post (sorted by recency). 
+
+# Use of code from online
+- The hashing method implemented in `PasswordHash.java` is not fully implemented by ourselves.
