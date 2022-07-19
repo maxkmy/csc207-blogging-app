@@ -6,7 +6,6 @@ import controllers.appWide.ReturnController;
 import controllers.post.ViewPostNoPermissionController;
 import dataMapper.DataMapper;
 import gateway.PostTimeSorter;
-import presenters.PostPresenter;
 import useCases.IAccountManager;
 import useCases.ICommentManager;
 import useCases.IPostManager;

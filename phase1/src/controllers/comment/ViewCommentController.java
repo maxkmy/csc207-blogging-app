@@ -5,7 +5,6 @@ import controllers.appWide.RequestFacade;
 import controllers.appWide.ReturnController;
 import dataMapper.DataMapper;
 import gateway.CommentTimeSorter;
-import presenters.CommentPresenter;
 import useCases.ICommentManager;
 
 import java.util.UUID;

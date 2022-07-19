@@ -6,7 +6,6 @@ import controllers.appWide.ReturnController;
 import controllers.comment.AddCommentController;
 import controllers.comment.ViewCommentController;
 import dataMapper.DataMapper;
-import presenters.PostPresenter;
 import useCases.ICommentManager;
 import useCases.IPostManager;
 

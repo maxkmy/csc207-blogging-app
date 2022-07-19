@@ -8,7 +8,6 @@ import dataMapper.DataMapper;
 import entities.Post;
 import gateway.IPostSorter;
 import gateway.PostTimeSorter;
-import presenters.PostPresenter;
 import useCases.IAccountManager;
 import useCases.ICommentManager;
 import useCases.IPostManager;
