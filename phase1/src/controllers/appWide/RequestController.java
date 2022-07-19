@@ -2,6 +2,8 @@ package controllers.appWide;
 
 import gateway.ISleeper;
 import gateway.Sleeper;
+import presenters.CommentPresenter;
+import presenters.PostPresenter;
 import presenters.Presenter;
 import useCases.IAccountManager;
 import useCases.ICommentManager;
@@ -28,6 +30,14 @@ abstract public class RequestController {
      * a presenter object responsible for printing messages to CLI
      */
     protected Presenter presenter = new Presenter();
+    /**
+     * a presenter object responsible for printing comments to CLI
+     */
+    protected CommentPresenter commentPresenter = new CommentPresenter();
+    /**
+     * a presenter object responsible for printing posts to CLI
+     */
+    protected PostPresenter postPresenter = new PostPresenter();
 
     /**
      * Returns a string describing what type of request is handled by the request controller

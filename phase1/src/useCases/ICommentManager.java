@@ -4,7 +4,6 @@ import entities.Comment;
 import gateway.ICommentSorter;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.UUID;
 
 public interface ICommentManager {

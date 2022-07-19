@@ -1,11 +1,9 @@
 package useCases;
 
 import entities.Post;
-import gateway.ICommentSorter;
 import gateway.IPostSorter;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.UUID;
 
 
