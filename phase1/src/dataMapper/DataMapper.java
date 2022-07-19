@@ -2,7 +2,6 @@ package dataMapper;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.HashMap;
 
 public class DataMapper {

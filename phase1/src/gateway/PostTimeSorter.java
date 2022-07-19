@@ -4,7 +4,6 @@ import entities.Post;
 
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.Collections;
 
 public class PostTimeSorter implements IPostSorter {
     private class PostTimeComparator implements Comparator<Post> {

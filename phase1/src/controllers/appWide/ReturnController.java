@@ -1,7 +1,5 @@
 package controllers.appWide;
 
-import controllers.appWide.RequestController;
-
 public class ReturnController extends RequestController {
     /**
      * @inheritDoc
