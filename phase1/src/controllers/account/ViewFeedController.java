@@ -57,8 +57,6 @@ public class ViewFeedController extends RequestController {
                 postSorter.sort(postsList),
                 new String[]{ "title", "author", "content", "timePosted", "id"}
         );
-
-        PostPresenter postPresenter = new PostPresenter();
         postPresenter.printPosts(postModel.getModel());
         RequestFacade feedFacade = new RequestFacade(
                 new RequestController[] {

@@ -59,7 +59,6 @@ public class ViewPostNoPermissionController extends RequestController {
     protected boolean handleRequest(String requester) {
         try {
             ArrayList<HashMap<String, String>> posts = postModel.getModel();
-            PostPresenter postPresenter = new PostPresenter();
             postPresenter.printPosts(posts);
             Scanner scanner = new Scanner(System.in);
             presenter.inlinePrint("Enter the number of the post you wish to view or 0 to return to your profile: ");

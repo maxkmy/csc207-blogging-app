@@ -50,7 +50,6 @@ public class ViewSelfProfileController extends RequestController {
                 postManager.getPostsWrittenBy(requester),
                 new String[]{ "title", "author", "content", "timePosted", "id"}
         );
-        PostPresenter postPresenter = new PostPresenter();
         postPresenter.printPosts(postModel.getModel());
         RequestFacade profileFacade = new RequestFacade(
             new RequestController[] {
