@@ -39,7 +39,7 @@ public class SignUpController extends RequestController {
             new ViewFollowingController(accountManager),
             new ViewSelfProfileController(postManager, commentManager),
             new ViewFeedController(postManager, accountManager, commentManager),
-                new ViewProfileController(accountManager, postManager, commentManager),
+            new ViewProfileController(accountManager, postManager, commentManager),
             new LogoutController(),
         });
     }
