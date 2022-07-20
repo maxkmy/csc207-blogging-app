@@ -4,6 +4,7 @@
 # Opening the project in Intellij 
 - Due to use of file paths in this project, please be sure to open the project in the `phase1` folder. 
 - The `phase1` folder is found within `csc207-blogging-app`.
+- Select Amazon Corretto 11 as your SDK. 
 
 # Generating data to test the program
 - Run the main methods within `CommentDataGenerator.java`, `PostDataGenerator.java` and `UserDataGenerator.java`.
