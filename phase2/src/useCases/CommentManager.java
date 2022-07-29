@@ -53,7 +53,9 @@ public class CommentManager {
                 comments.add(comment);
             }
         }
-        this.commentSorter.sort(comments);
+        if (!comments.isEmpty()) {
+            this.commentSorter.sort(comments);
+        }
         return comments;
     }
 

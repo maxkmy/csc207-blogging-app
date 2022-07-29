@@ -52,7 +52,9 @@ public class PostManager {
                 posts.add(post);
             }
         }
-        this.postSorter.sort(posts);
+        if (!posts.isEmpty()) {
+            this.postSorter.sort(posts);
+        }
         return posts;
     }
 
