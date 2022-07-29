@@ -5,9 +5,9 @@ import gateway.Sleeper;
 import presenters.CommentPresenter;
 import presenters.PostPresenter;
 import presenters.Presenter;
-import useCases.IAccountManager;
-import useCases.ICommentManager;
-import useCases.IPostManager;
+import useCases.AccountManager;
+import useCases.CommentManager;
+import useCases.PostManager;
 
 abstract public class RequestController {
     /**
@@ -17,15 +17,15 @@ abstract public class RequestController {
     /**
      * a use case responsible for managing accounts
      */
-    protected IAccountManager accountManager;
+    protected AccountManager accountManager;
     /**
      * a use case responsible for managing posts
      */
-    protected IPostManager postManager;
+    protected PostManager postManager;
     /**
      * a use case responsible for managing comments
      */
-    protected ICommentManager commentManager;
+    protected CommentManager commentManager;
     /**
      * a presenter object responsible for printing messages to CLI
      */

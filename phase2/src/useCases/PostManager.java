@@ -8,7 +8,7 @@ import gateway.IPostSorter;
 import gateway.IReader;
 import gateway.IWriter;
 
-public class PostManager implements IPostManager{
+public class PostManager {
     /**
      * a mapping of id of the post to the post entity
      */
@@ -41,7 +41,6 @@ public class PostManager implements IPostManager{
     /**
      * @inheritDoc
      */
-    @Override
     public ArrayList<Post> getPostsWrittenBy(String username) {
         ArrayList<Post> posts = new ArrayList<>();
         for (UUID id : this.posts.keySet()) {
@@ -57,7 +56,6 @@ public class PostManager implements IPostManager{
     /**
      * @inheritDoc
      */
-    @Override
     public void deletePostsWrittenBy(String username) {
         for (Post post : getPostsWrittenBy(username)) {
             deletePost(post.getId());
@@ -71,7 +69,6 @@ public class PostManager implements IPostManager{
     /**
      * @inheritDoc
      */
-    @Override
     public UUID addPost(String title, String content, String author) {
         Post post = createPost(title, content, author);
         posts.put(post.getId(), post);
@@ -81,7 +78,6 @@ public class PostManager implements IPostManager{
     /**
      * @inheritDoc
      */
-    @Override
     public void deletePost(UUID id) {
         posts.remove(id);
     }
@@ -89,7 +85,6 @@ public class PostManager implements IPostManager{
     /**
      * @inheritDoc
      */
-    @Override
     public Post getPost(UUID id) {
         return posts.get(id);
     }
@@ -97,7 +92,6 @@ public class PostManager implements IPostManager{
     /**
      * @inheritDoc
      */
-    @Override
     public void save() {
         writer.write(posts);
     }
@@ -105,7 +99,6 @@ public class PostManager implements IPostManager{
     /**
      * @inheritDoc
      */
-    @Override
     public void setPostSorter(IPostSorter postSorter) {
         this.postSorter = postSorter;
     }

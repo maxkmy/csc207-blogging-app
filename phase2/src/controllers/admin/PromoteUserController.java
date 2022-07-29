@@ -2,7 +2,7 @@ package controllers.admin;
 
 import controllers.appWide.RequestController;
 import exception.*;
-import useCases.IAccountManager;
+import useCases.AccountManager;
 
 import java.util.Scanner;
 
@@ -12,7 +12,7 @@ public class PromoteUserController extends RequestController {
      *
      * @param accountManager  a use case responsible for managing accounts
      */
-    public PromoteUserController(IAccountManager accountManager) {
+    public PromoteUserController(AccountManager accountManager) {
         this.accountManager = accountManager;
     }
 

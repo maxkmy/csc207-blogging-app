@@ -1,7 +1,7 @@
 package controllers.account;
 
 import controllers.appWide.RequestController;
-import useCases.IAccountManager;
+import useCases.AccountManager;
 
 public class ViewFollowingController extends RequestController {
     /**
@@ -9,7 +9,7 @@ public class ViewFollowingController extends RequestController {
      *
      * @param accountManager  a use case responsible for managing accounts
      */
-    public ViewFollowingController(IAccountManager accountManager) {
+    public ViewFollowingController(AccountManager accountManager) {
         this.accountManager = accountManager;
     }
 

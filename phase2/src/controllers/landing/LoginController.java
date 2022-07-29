@@ -7,9 +7,9 @@ import controllers.appWide.RequestFacade;
 import exception.IncorrectPasswordException;
 import exception.UsernameNotFoundException;
 import exception.AccountBannedException;
-import useCases.IAccountManager;
-import useCases.ICommentManager;
-import useCases.IPostManager;
+import useCases.AccountManager;
+import useCases.CommentManager;
+import useCases.PostManager;
 
 import java.util.Scanner;
 
@@ -30,7 +30,7 @@ public class LoginController extends RequestController {
      * @param postManager    a use case responsible for managing posts
      * @param commentManager a user case responsible for managing comments
      */
-    public LoginController(IAccountManager accountManager, IPostManager postManager, ICommentManager commentManager){
+    public LoginController(AccountManager accountManager, PostManager postManager, CommentManager commentManager){
         this.accountManager = accountManager;
         accountRequestFacade = new RequestFacade(new RequestController[]{
                 new ViewHistoryController(accountManager),

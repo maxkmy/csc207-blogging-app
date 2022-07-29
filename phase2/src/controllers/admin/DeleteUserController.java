@@ -3,9 +3,9 @@ package controllers.admin;
 import controllers.appWide.RequestController;
 import exception.UserIsAdminException;
 import exception.UsernameNotFoundException;
-import useCases.IAccountManager;
-import useCases.ICommentManager;
-import useCases.IPostManager;
+import useCases.AccountManager;
+import useCases.CommentManager;
+import useCases.PostManager;
 
 import java.util.Scanner;
 
@@ -16,9 +16,9 @@ public class DeleteUserController extends RequestController {
      * @param accountManager  a use case responsible for managing accounts
      * @param postManager     a use case responsible for managing posts
      */
-    public DeleteUserController(IAccountManager accountManager,
-                                IPostManager postManager,
-                                ICommentManager commentManager) {
+    public DeleteUserController(AccountManager accountManager,
+                                PostManager postManager,
+                                CommentManager commentManager) {
         this.accountManager = accountManager;
         this.postManager = postManager;
         this.commentManager = commentManager;

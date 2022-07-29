@@ -2,7 +2,7 @@ package controllers.admin;
 
 import controllers.appWide.RequestController;
 import exception.UsernameExistsException;
-import useCases.IAccountManager;
+import useCases.AccountManager;
 
 import java.util.Scanner;
 
@@ -12,7 +12,7 @@ public class CreateAdminController extends RequestController {
      *
      * @param accountManager  a use case responsible for managing accounts
      */
-    public CreateAdminController(IAccountManager accountManager) {
+    public CreateAdminController(AccountManager accountManager) {
         this.accountManager = accountManager;
     }
 

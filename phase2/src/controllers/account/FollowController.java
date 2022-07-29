@@ -3,7 +3,7 @@ package controllers.account;
 import controllers.appWide.RequestController;
 import exception.UserFollowedException;
 import exception.UsernameNotFoundException;
-import useCases.IAccountManager;
+import useCases.AccountManager;
 
 import java.util.Scanner;
 
@@ -13,7 +13,7 @@ public class FollowController extends RequestController {
      *
      * @param accountManager  a use case responsible for managing accounts
      */
-    public FollowController(IAccountManager accountManager) {
+    public FollowController(AccountManager accountManager) {
         this.accountManager = accountManager;
     }
 

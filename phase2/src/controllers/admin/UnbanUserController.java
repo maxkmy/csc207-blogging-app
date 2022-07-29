@@ -3,7 +3,7 @@ package controllers.admin;
 import controllers.appWide.RequestController;
 import exception.UserIsAdminException;
 import exception.UsernameNotFoundException;
-import useCases.IAccountManager;
+import useCases.AccountManager;
 
 import java.util.Scanner;
 
@@ -13,7 +13,7 @@ public class UnbanUserController extends RequestController {
      *
      * @param accountManager  a use case responsible for managing accounts
      */
-    public UnbanUserController(IAccountManager accountManager) {
+    public UnbanUserController(AccountManager accountManager) {
         this.accountManager = accountManager;
     }
 

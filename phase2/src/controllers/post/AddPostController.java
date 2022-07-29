@@ -1,7 +1,7 @@
 package controllers.post;
 
 import controllers.appWide.RequestController;
-import useCases.IPostManager;
+import useCases.PostManager;
 import dataMapper.DataMapper;
 
 import java.util.Scanner;
@@ -16,7 +16,7 @@ public class AddPostController extends RequestController {
      * @param postModel    a data mapper that helps map posts into a data structure usable by presenters
      * @param postManager  a use case responsible for managing posts
      */
-    public AddPostController(DataMapper postModel, IPostManager postManager) {
+    public AddPostController(DataMapper postModel, PostManager postManager) {
         this.postModel = postModel;
         this.postManager = postManager;
     }

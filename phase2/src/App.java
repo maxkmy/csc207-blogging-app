@@ -20,9 +20,9 @@ public class App {
         IWriter writer1 = new Writer(userDataFileDirectory);
         IWriter writer2 = new Writer(postDataFileDirectory);
         IWriter writer3 = new Writer(commentDataFileDirectory);
-        IAccountManager accountManager = new AccountManager(reader1, writer1);
-        IPostManager postManager = new PostManager(reader2, writer2);
-        ICommentManager commentManager = new CommentManager(reader3, writer3);
+        AccountManager accountManager = new AccountManager(reader1, writer1);
+        PostManager postManager = new PostManager(reader2, writer2);
+        CommentManager commentManager = new CommentManager(reader3, writer3);
         RequestFacade landingPageFacade = new RequestFacade(new RequestController[]{
                 new LoginController(accountManager, postManager, commentManager),
                 new SignUpController(accountManager, postManager, commentManager),

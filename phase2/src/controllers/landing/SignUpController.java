@@ -9,9 +9,9 @@ import controllers.account.ViewSelfProfileController;
 import controllers.account.*;
 import exception.InvalidUsernameException;
 import exception.UsernameExistsException;
-import useCases.ICommentManager;
-import useCases.IPostManager;
-import useCases.IAccountManager;
+import useCases.CommentManager;
+import useCases.PostManager;
+import useCases.AccountManager;
 
 
 public class SignUpController extends RequestController {
@@ -27,7 +27,7 @@ public class SignUpController extends RequestController {
      * @param postManager    a use case responsible for managing posts
      * @param commentManager a use case responsible for managing comments
      */
-    public SignUpController(IAccountManager accountManager, IPostManager postManager, ICommentManager commentManager) {
+    public SignUpController(AccountManager accountManager, PostManager postManager, CommentManager commentManager) {
         this.accountManager = accountManager;
         this.commentManager = commentManager;
         accountRequestFacade = new RequestFacade(new RequestController[]{

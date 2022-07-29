@@ -6,8 +6,8 @@ import controllers.appWide.ReturnController;
 import controllers.post.AddPostController;
 import controllers.post.ViewPostPermissionController;
 import gateway.PostTimeSorter;
-import useCases.ICommentManager;
-import useCases.IPostManager;
+import useCases.CommentManager;
+import useCases.PostManager;
 import dataMapper.DataMapper;
 
 public class ViewSelfProfileController extends RequestController {
@@ -25,7 +25,7 @@ public class ViewSelfProfileController extends RequestController {
      *
      * @param postManager  a use case responsible for managing posts
      */
-    public ViewSelfProfileController(IPostManager postManager, ICommentManager commentManager) {
+    public ViewSelfProfileController(PostManager postManager, CommentManager commentManager) {
         this.postManager = postManager;
         this.commentManager = commentManager;
     }

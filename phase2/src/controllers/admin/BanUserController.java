@@ -4,7 +4,7 @@ import controllers.appWide.RequestController;
 import exception.UserIsAdminException;
 import exception.UsernameNotFoundException;
 
-import useCases.IAccountManager;
+import useCases.AccountManager;
 
 import java.util.Scanner;
 
@@ -14,7 +14,7 @@ public class BanUserController extends RequestController {
      *
      * @param accountManager  a use case responsible for managing accounts
      */
-    public BanUserController(IAccountManager accountManager) {
+    public BanUserController(AccountManager accountManager) {
         this.accountManager = accountManager;
     }
 

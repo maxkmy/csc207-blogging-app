@@ -1,7 +1,7 @@
 package controllers.account;
 
 import controllers.appWide.RequestController;
-import useCases.IAccountManager;
+import useCases.AccountManager;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -12,7 +12,7 @@ public class ViewHistoryController extends RequestController {
      *
      * @param accountManager  a use case responsible for managing accounts
      */
-    public ViewHistoryController(IAccountManager accountManager){
+    public ViewHistoryController(AccountManager accountManager){
         this.accountManager = accountManager;
     }
 

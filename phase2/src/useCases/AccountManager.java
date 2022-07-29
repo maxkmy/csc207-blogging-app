@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 
 import java.util.*;
 
-public class AccountManager implements IAccountManager {
+public class AccountManager {
     /**
      * a mapping of username of the account to the account entity
      */
@@ -38,7 +38,6 @@ public class AccountManager implements IAccountManager {
     /**
      * @inheritDoc
      */
-    @Override
     public boolean containsUser(String username) {
         return accountMap.containsKey(username);
     }
@@ -46,7 +45,6 @@ public class AccountManager implements IAccountManager {
     /**
      * @inheritDoc
      */
-    @Override
     public boolean isAdmin(String username) {
         return accountMap.get(username).getIsAdmin();
     }
@@ -54,7 +52,6 @@ public class AccountManager implements IAccountManager {
     /**
      * @inheritDoc
      */
-    @Override
     public Account getUser(String username) {
         return accountMap.get(username);
     }
@@ -62,7 +59,6 @@ public class AccountManager implements IAccountManager {
     /**
      * @inheritDoc
      */
-    @Override
     public void addUser(String username, Account account) {
         accountMap.put(username, account);
     }
@@ -70,7 +66,6 @@ public class AccountManager implements IAccountManager {
     /**
      * @inheritDoc
      */
-    @Override
     public void deleteUser(String username) throws UsernameNotFoundException, UserIsAdminException {
         if (!containsUser(username)) {
             throw new UsernameNotFoundException("Unsuccessful deletion, target user does not exist");
@@ -84,7 +79,6 @@ public class AccountManager implements IAccountManager {
     /**
      * @inheritDoc
      */
-    @Override
     public void deleteSelf(String username){
         try {
             for (String followee : getUser(username).getFollowees()) {
@@ -103,7 +97,6 @@ public class AccountManager implements IAccountManager {
     /**
      * @inheritDoc
      */
-    @Override
     public void login(String username, String password) throws
             IncorrectPasswordException,
             UsernameNotFoundException,
@@ -128,7 +121,6 @@ public class AccountManager implements IAccountManager {
     /**
      * @inheritDoc
      */
-    @Override
     public boolean ban(String username) throws UsernameNotFoundException, UserIsAdminException {
         if (!containsUser(username)) {
             throw new UsernameNotFoundException("Unsuccessful ban, target user does not exist.");
@@ -142,7 +134,6 @@ public class AccountManager implements IAccountManager {
     /**
      * @inheritDoc
      */
-    @Override
     public boolean unban(String username) throws UsernameNotFoundException, UserIsAdminException {
         if (!containsUser(username)) {
             throw new UsernameNotFoundException("Unsuccessful unban, target account does not exist.");
@@ -156,7 +147,6 @@ public class AccountManager implements IAccountManager {
     /**
      * @inheritDoc
      */
-    @Override
     public void signUp(String username, String password) throws UsernameExistsException, InvalidUsernameException {
         Set<String> invalidUsernames = new HashSet<>(List.of(""));
         if (containsUser(username)) {
@@ -175,7 +165,6 @@ public class AccountManager implements IAccountManager {
     /**
      * @inheritDoc
      */
-    @Override
     public void createAdmin(String username, String password) throws UsernameExistsException {
         if (containsUser(username)) {
             throw new UsernameExistsException("The provided username already exists. Please enter another username.");
@@ -191,7 +180,6 @@ public class AccountManager implements IAccountManager {
     /**
      * @inheritDoc
      */
-    @Override
     public void promoteToAdmin(String username) throws UsernameNotFoundException, UserIsAdminException {
         if (!(containsUser(username))) {
             throw new UsernameNotFoundException("Unsuccessful, the target user does not exist.");
@@ -205,7 +193,6 @@ public class AccountManager implements IAccountManager {
     /**
      * @inheritDoc
      */
-    @Override
     public List<LocalDateTime> getUserHistory(String username) {
         return accountMap.get(username).getHistory();
     }
@@ -213,7 +200,6 @@ public class AccountManager implements IAccountManager {
     /**
      * @inheritDoc
      */
-    @Override
     public void follow(String follower, String followee) throws UsernameNotFoundException, UserFollowedException {
         if (!containsUser(follower)) {
             throw new UsernameNotFoundException("Unsuccessful, " + follower + " does not exist.");
@@ -231,7 +217,6 @@ public class AccountManager implements IAccountManager {
     /**
      * @inheritDoc
      */
-    @Override
     public void unfollow(String follower, String followee) throws UsernameNotFoundException, UserNotFollowedException {
         if (!containsUser(follower)) {
             throw new UsernameNotFoundException("Unsuccessful, " + follower + " does not exist.");
@@ -249,7 +234,6 @@ public class AccountManager implements IAccountManager {
     /**
      * @inheritDoc
      */
-    @Override
     public HashSet<String> getFollowersOf(String username) {
         return getUser(username).getFollowers();
     }
@@ -257,7 +241,6 @@ public class AccountManager implements IAccountManager {
     /**
      * @inheritDoc
      */
-    @Override
     public HashSet<String> getFolloweesOf(String username) {
         return getUser(username).getFollowees();
     }
@@ -265,7 +248,6 @@ public class AccountManager implements IAccountManager {
     /**
      * @inheritDoc
      */
-    @Override
     public void save() {
         writer.write(accountMap);
     }

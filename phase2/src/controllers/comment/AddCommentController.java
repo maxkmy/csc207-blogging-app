@@ -2,7 +2,7 @@ package controllers.comment;
 
 import controllers.appWide.RequestController;
 import dataMapper.DataMapper;
-import useCases.ICommentManager;
+import useCases.CommentManager;
 
 import java.util.Scanner;
 import java.util.UUID;
@@ -23,7 +23,7 @@ public class AddCommentController extends RequestController {
      *
      * @param commentManager    use case responsible for managing comments
      */
-    public AddCommentController(DataMapper commentModel, ICommentManager commentManager, String author) {
+    public AddCommentController(DataMapper commentModel, CommentManager commentManager, String author) {
         this.commentModel = commentModel;
         this.commentManager = commentManager;
         this.author = author;

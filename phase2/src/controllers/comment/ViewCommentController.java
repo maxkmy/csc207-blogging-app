@@ -5,7 +5,7 @@ import controllers.appWide.RequestFacade;
 import controllers.appWide.ReturnController;
 import dataMapper.DataMapper;
 import gateway.CommentTimeSorter;
-import useCases.ICommentManager;
+import useCases.CommentManager;
 
 import java.util.UUID;
 
@@ -21,7 +21,7 @@ public class ViewCommentController extends RequestController {
      *
      * @param commentManager use case responsible for managing comments
      */
-    public ViewCommentController(DataMapper commentModel, ICommentManager commentManager) {
+    public ViewCommentController(DataMapper commentModel, CommentManager commentManager) {
         this.commentModel = commentModel;
         this.commentManager = commentManager;
     }

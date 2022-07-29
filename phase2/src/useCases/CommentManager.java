@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 
-public class CommentManager implements ICommentManager{
+public class CommentManager {
     /**
      * a mapping of id of the comment to the comment entity
      */
@@ -42,7 +42,6 @@ public class CommentManager implements ICommentManager{
     /**
      * @inheritDoc
      */
-    @Override
     public ArrayList<Comment> getCommentsWrittenBy(String username) {
         ArrayList<Comment> comments = new ArrayList<>();
         for (UUID id : this.comments.keySet()) {
@@ -58,7 +57,6 @@ public class CommentManager implements ICommentManager{
     /**
      * @inheritDoc
      */
-    @Override
     public ArrayList<Comment> getCommentsUnder(UUID postId) {
         ArrayList<Comment> comments = new ArrayList<>();
         for (UUID id : this.comments.keySet()) {
@@ -74,7 +72,6 @@ public class CommentManager implements ICommentManager{
     /**
      * @inheritDoc
      */
-    @Override
     public void deleteCommentsWrittenBy(String username) {
         for (Comment comment : getCommentsWrittenBy(username)) {
             deleteComment(comment.getId());
@@ -88,7 +85,6 @@ public class CommentManager implements ICommentManager{
     /**
      * @inheritDoc
      */
-    @Override
     public UUID addComment(UUID postID, String content, String author) {
         Comment comment = createComment(postID, content, author);
         comments.put(comment.getId(), comment);
@@ -98,7 +94,6 @@ public class CommentManager implements ICommentManager{
     /**
      * @inheritDoc
      */
-    @Override
     public void deleteComment(UUID id) {
         comments.remove(id);
     }
@@ -106,7 +101,6 @@ public class CommentManager implements ICommentManager{
     /**
      * @inheritDoc
      */
-    @Override
     public Comment getComment(UUID id) {
         return comments.get(id);
     }
@@ -114,13 +108,11 @@ public class CommentManager implements ICommentManager{
     /**
      * @inheritDoc
      */
-    @Override
     public void setCommentSorter(ICommentSorter commentSorter) { this.commentSorter = commentSorter; }
 
     /**
      * @inheritDoc
      */
-    @Override
     public void save() {
         writer.write(comments);
     }

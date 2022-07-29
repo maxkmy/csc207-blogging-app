@@ -6,8 +6,8 @@ import controllers.appWide.ReturnController;
 import controllers.comment.AddCommentController;
 import controllers.comment.ViewCommentController;
 import dataMapper.DataMapper;
-import useCases.ICommentManager;
-import useCases.IPostManager;
+import useCases.CommentManager;
+import useCases.PostManager;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,8 +31,8 @@ public class ViewPostPermissionController extends RequestController {
      * @param commentModel   a data mapper that helps map comments into a data structure usable by presenters
      * @param commentManager a use case responsible for managing comments
      */
-    public ViewPostPermissionController(DataMapper postModel, IPostManager postManager, DataMapper commentModel,
-                                        ICommentManager commentManager) {
+    public ViewPostPermissionController(DataMapper postModel, PostManager postManager, DataMapper commentModel,
+                                        CommentManager commentManager) {
         this.postManager = postManager;
         this.postModel = postModel;
         this.commentModel = commentModel;

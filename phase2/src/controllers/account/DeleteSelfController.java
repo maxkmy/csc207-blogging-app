@@ -1,9 +1,9 @@
 package controllers.account;
 
 import controllers.appWide.RequestController;
-import useCases.IAccountManager;
-import useCases.ICommentManager;
-import useCases.IPostManager;
+import useCases.AccountManager;
+import useCases.CommentManager;
+import useCases.PostManager;
 
 public class DeleteSelfController extends RequestController {
     /**
@@ -12,7 +12,7 @@ public class DeleteSelfController extends RequestController {
      * @param accountManager  a use case responsible for managing accounts
      * @param postManager     a use case responsible for managing posts
      */
-    public DeleteSelfController(IAccountManager accountManager, IPostManager postManager, ICommentManager commentManager) {
+    public DeleteSelfController(AccountManager accountManager, PostManager postManager, CommentManager commentManager) {
         this.accountManager = accountManager;
         this.postManager = postManager;
         this.commentManager = commentManager;

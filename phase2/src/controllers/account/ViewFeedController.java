@@ -8,9 +8,9 @@ import dataMapper.DataMapper;
 import entities.Post;
 import gateway.IPostSorter;
 import gateway.PostTimeSorter;
-import useCases.IAccountManager;
-import useCases.ICommentManager;
-import useCases.IPostManager;
+import useCases.AccountManager;
+import useCases.CommentManager;
+import useCases.PostManager;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -28,7 +28,7 @@ public class ViewFeedController extends RequestController {
      * @param postManager    use case responsible for managing posts
      * @param accountManager use case responsible for managing accounts
      */
-    public ViewFeedController(IPostManager postManager, IAccountManager accountManager, ICommentManager commentManager) {
+    public ViewFeedController(PostManager postManager, AccountManager accountManager, CommentManager commentManager) {
         this.postManager = postManager;
         this.accountManager = accountManager;
         this.commentManager = commentManager;

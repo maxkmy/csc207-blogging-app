@@ -6,9 +6,9 @@ import controllers.appWide.ReturnController;
 import controllers.post.ViewPostNoPermissionController;
 import dataMapper.DataMapper;
 import gateway.PostTimeSorter;
-import useCases.IAccountManager;
-import useCases.ICommentManager;
-import useCases.IPostManager;
+import useCases.AccountManager;
+import useCases.CommentManager;
+import useCases.PostManager;
 
 import java.util.Scanner;
 
@@ -22,9 +22,9 @@ public class ViewProfileController extends RequestController {
      */
     DataMapper commentModel = new DataMapper();
 
-    public ViewProfileController(IAccountManager accountManager,
-                                 IPostManager postManager,
-                                 ICommentManager commentManager) {
+    public ViewProfileController(AccountManager accountManager,
+                                 PostManager postManager,
+                                 CommentManager commentManager) {
         this.accountManager = accountManager;
         this.postManager = postManager;
         this.commentManager = commentManager;
