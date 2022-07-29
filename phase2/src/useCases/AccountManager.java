@@ -36,35 +36,51 @@ public class AccountManager {
     }
 
     /**
-     * @inheritDoc
+     * Checks if a username exists.
+     *
+     * @param username a string representing a username of a user.
+     * @return whether a username is already taken by another user.
      */
     public boolean containsUser(String username) {
         return accountMap.containsKey(username);
     }
 
     /**
-     * @inheritDoc
+     * Checks if a user is an admin.
+     *
+     * @param username a string representing a username of a user.
+     * @return whether an account with a given username is an admin.
      */
     public boolean isAdmin(String username) {
         return accountMap.get(username).getIsAdmin();
     }
 
     /**
-     * @inheritDoc
+     * Return the account entity with a given username.
+     *
+     * @param username a string representing a username of a user.
+     * @return the account of the user with a given username.
      */
     public Account getUser(String username) {
         return accountMap.get(username);
     }
 
     /**
-     * @inheritDoc
+     * Add a user into the mapping of all accounts' username to account entity.
+     *
+     * @param username a string representing a username of a user.
+     * @param account  an account associated with username.
      */
     public void addUser(String username, Account account) {
         accountMap.put(username, account);
     }
 
     /**
-     * @inheritDoc
+     * Deletes a user with the provided username.
+     *
+     * @param username                   a string representing a username of a user.
+     * @throws UsernameNotFoundException if the provided username is not taken by any user.
+     * @throws UserIsAdminException      if the user associated with the provided username is an admin.
      */
     public void deleteUser(String username) throws UsernameNotFoundException, UserIsAdminException {
         if (!containsUser(username)) {
@@ -77,7 +93,7 @@ public class AccountManager {
     }
 
     /**
-     * @inheritDoc
+     * Deletes the account with the provided username.
      */
     public void deleteSelf(String username){
         try {
@@ -95,7 +111,14 @@ public class AccountManager {
     }
 
     /**
-     * @inheritDoc
+     * Checks whether the login credentials provided are valid.
+     *
+     * @param username                    a string representing a username of a user.
+     * @param password                    a string representing the password of a user.
+     * @throws IncorrectPasswordException if the provided password does not match the password of the account
+     *                                    with the given username
+     * @throws UsernameNotFoundException  if the provided username does not exist.
+     * @throws AccountBannedException     if the account is currently being banned
      */
     public void login(String username, String password) throws
             IncorrectPasswordException,
@@ -119,7 +142,11 @@ public class AccountManager {
     }
 
     /**
-     * @inheritDoc
+     * Ban an account based on a username
+     *
+     * @param username                    a string representing a username of a user.
+     * @throws UsernameNotFoundException  if the provided username does not exist.
+     * @throws UserIsAdminException       if the account with the provided username is an admin.
      */
     public boolean ban(String username) throws UsernameNotFoundException, UserIsAdminException {
         if (!containsUser(username)) {
@@ -132,7 +159,11 @@ public class AccountManager {
     }
 
     /**
-     * @inheritDoc
+     * Unban an account based on a username
+     *
+     * @param username                    a string representing a username of a user.
+     * @throws UsernameNotFoundException  if the provided username does not exist.
+     * @throws UserIsAdminException       if the account with the provided username is an admin.
      */
     public boolean unban(String username) throws UsernameNotFoundException, UserIsAdminException {
         if (!containsUser(username)) {
@@ -145,7 +176,11 @@ public class AccountManager {
     }
 
     /**
-     * @inheritDoc
+     * Creates a new account based on sign up credentials.
+     *
+     * @param username                  a string representing a username of a user.
+     * @param password                  a string representing the password of a user.
+     * @throws UsernameExistsException  if the username of is taken by some existing account.
      */
     public void signUp(String username, String password) throws UsernameExistsException, InvalidUsernameException {
         Set<String> invalidUsernames = new HashSet<>(List.of(""));
@@ -163,7 +198,11 @@ public class AccountManager {
     }
 
     /**
-     * @inheritDoc
+     * Creates a new admin based on provided credentials
+     *
+     * @param username                  a string representing a username of the new admin.
+     * @param password                  a string representing the password of the new admin.
+     * @throws UsernameExistsException  if the username of is taken by some existing account.
      */
     public void createAdmin(String username, String password) throws UsernameExistsException {
         if (containsUser(username)) {
@@ -178,7 +217,11 @@ public class AccountManager {
     }
 
     /**
-     * @inheritDoc
+     * Promote a user to become an admin.
+     *
+     * @param username                    a string representing a username of a user.
+     * @throws UsernameNotFoundException  if the provided username does not exist.
+     * @throws UserIsAdminException       if the account with the provided username is an admin.
      */
     public void promoteToAdmin(String username) throws UsernameNotFoundException, UserIsAdminException {
         if (!(containsUser(username))) {
@@ -191,14 +234,22 @@ public class AccountManager {
     }
 
     /**
-     * @inheritDoc
+     * Return the login and sign up history of the user.
+     *
+     * @param username a string representing a username of a user.
+     * @return a list of dates where the user logged in or signed up.
      */
     public List<LocalDateTime> getUserHistory(String username) {
         return accountMap.get(username).getHistory();
     }
 
     /**
-     * @inheritDoc
+     * Make the follower follow the followee.
+     *
+     * @param follower the username of the follower
+     * @param followee the username of the followee
+     * @throws UsernameNotFoundException if the username of the follower or followee does not exist
+     * @throws UserFollowedException     if the follower already follows the followee
      */
     public void follow(String follower, String followee) throws UsernameNotFoundException, UserFollowedException {
         if (!containsUser(follower)) {
@@ -215,7 +266,12 @@ public class AccountManager {
     }
 
     /**
-     * @inheritDoc
+     * Make the follower unfollow the followee.
+     *
+     * @param follower                   the username of the follower
+     * @param followee                   the username of the followee
+     * @throws UsernameNotFoundException if the username of the follower or followee does not exist
+     * @throws UserNotFollowedException  if the follower does not follow the followee
      */
     public void unfollow(String follower, String followee) throws UsernameNotFoundException, UserNotFollowedException {
         if (!containsUser(follower)) {
@@ -232,21 +288,27 @@ public class AccountManager {
     }
 
     /**
-     * @inheritDoc
+     * Returns a set of followers of an account
+     *
+     * @param username the username of the account whose follower list will be returned
+     * @return         a set of followers of the account with the provided username
      */
     public HashSet<String> getFollowersOf(String username) {
         return getUser(username).getFollowers();
     }
 
     /**
-     * @inheritDoc
+     * Returns a set of followees of an account
+     *
+     * @param username the username of the account whose followee list will be returned
+     * @return         a set of followees of the account with the provided username
      */
     public HashSet<String> getFolloweesOf(String username) {
         return getUser(username).getFollowees();
     }
 
     /**
-     * @inheritDoc
+     * Saves the current data.
      */
     public void save() {
         writer.write(accountMap);
