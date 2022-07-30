@@ -15,12 +15,12 @@ public class NewApp {
         IWriter writer1 = new Writer(userDataFileDirectory);
         IWriter writer2 = new Writer(postDataFileDirectory);
         IWriter writer3 = new Writer(commentDataFileDirectory);
-        AccountManager accountManager = new AccountManager(reader1, writer1);
-        PostManager postManager = new PostManager(reader2, writer2);
-        CommentManager commentManager = new CommentManager(reader3, writer3);
 
 
-        Server server = new Server();
+        Server server = new Server(new ManagerData(
+                new AccountManager(reader1, writer1),
+                new PostManager(reader2, writer2),
+                new CommentManager(reader3, writer3)));
         server.start();
     }
 }
