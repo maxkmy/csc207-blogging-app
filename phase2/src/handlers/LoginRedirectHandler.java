@@ -14,10 +14,13 @@ import java.util.Map;
 public class LoginRedirectHandler implements HttpHandler {
 
     ManagerData managerData;
+    LandingController landingController;
 
     public LoginRedirectHandler(ManagerData managerData) {
         this.managerData = managerData;
+        landingController = new LandingController(managerData);
     }
+
 
     @Override
     public void handleRequest(HttpServerExchange exchange) {
@@ -27,24 +30,23 @@ public class LoginRedirectHandler implements HttpHandler {
             @Override
             public void handle(HttpServerExchange exchange, String message) {
                 Map<String, Deque<String>> props = QueryParameterUtils.parseQueryString(message, "UTF_8");
+                // note "username" and "password" are labels in HTML forms
+                String username = props.get("username").getFirst();
+                String password = props.get("password").getFirst();
 
-                LandingController landingController = new LandingController(managerData);
-                String result = landingController.login(props.get("username").getFirst(), props.get("password").getFirst());
+                String result = landingController.login(username, password);
 
                 if (result.equals("Success")) {
-                    managerData.setCurrentUser(props.get("username").getFirst());
+                    managerData.setCurrentUser(username);
                     exchange.getResponseSender().send("<meta " +
                             "http-equiv=\"refresh\" " +
                             "content=\"0.05; " +
                             "url =\n /\" />\n");
                 }
                 else {
-                    exchange.getResponseSender().send("<html><form action='login' " + "method='post'>" +
-                            "<input type=\"text\" id=\"username\" name=\"username\"><br><br> " +
-                            "<input type=\"text\" id=\"password\" name=\"password\"><br><br>" +
-                            "<input type=\"submit\" value=\"Log in\">" +
-                            "</form></html>" + "<p style=\"color:red\">" + result + "</p>" +
-                            "Don't have an account? <a href=\"signUp\">Sign Up</a>");
+                    // TODO: SignUpHandler's constructor should be changed to take in a base context mapping
+                    // TODO: this way we can pass in {"errorMessage": result}
+                    new LoginHandler().handleRequest(exchange);
                 }
             }
         });
