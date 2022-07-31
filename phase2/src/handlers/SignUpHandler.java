@@ -39,7 +39,7 @@ public class SignUpHandler implements HttpHandler {
         fields.add(password);
         context.put("fields", fields);
 
-        context.put("action", "signUp");
+        context.put("action", "/signUp");
         context.put("method", "post");
 
         // get response from Jinja and send response back to client

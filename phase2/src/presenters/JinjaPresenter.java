@@ -21,8 +21,6 @@ public class JinjaPresenter {
     }
 
     public String present() {
-        String res = jinja.render(template, context);
-        System.out.println(res);
-        return res;
+        return jinja.render(template, context);
     }
 }
