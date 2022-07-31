@@ -3,7 +3,14 @@ package handlers;
 import io.undertow.server.HttpHandler;
 import io.undertow.server.HttpServerExchange;
 import io.undertow.util.Headers;
+import presenters.JinjaPresenter;
 import useCases.ManagerData;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class HomeHandler implements HttpHandler {
 
@@ -17,16 +24,31 @@ public class HomeHandler implements HttpHandler {
     public void handleRequest(HttpServerExchange exchange) {
         exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/html");
 
-        if(managerData.getCurrentUser() == null) {
+        if (managerData.getCurrentUser() == null) {
             exchange.getResponseSender().send("<meta " +
                     "http-equiv=\"refresh\" " +
                     "content=\"0.05; " +
                     "url =\n /login\" />\n");
         } else {
-            exchange.getResponseSender().send("Hello " + managerData.getCurrentUser() + "<br><br>" +
-                    "<form action=\"\" method=\"post\">\n" +
-                    "    <input type=\"submit\" name=\"SignOut\" value=\"Sign Out\" />\n" +
-                    "</form>");
+            // TODO: have multiple buttons that allow users to delete self, logout and view history
+            List<Map<String, String>> requests = new ArrayList<>();
+            Map<String, String> viewHistory = new HashMap<>();
+            viewHistory.put("endpoint", "/history");
+            viewHistory.put("description", "view login history");
+            requests.add(viewHistory);
+
+            Map<String, Object> context = new HashMap<>();
+            context.put("requests", requests);
+
+            String templatePath = "src/templates/menu.jinja";
+            try {
+                JinjaPresenter presenter = new JinjaPresenter(context, templatePath);
+                String htmlOutput = presenter.present();
+                exchange.getResponseSender().send(htmlOutput);
+            } catch (IOException e) {
+                // TODO: redirect to appropriate status code
+                System.out.println(e.getMessage());
+            }
         }
     }
 }
