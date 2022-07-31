@@ -14,9 +14,11 @@ import java.util.Map;
 public class SignUpRedirectHandler implements HttpHandler {
 
     ManagerData managerData;
+    LandingController landingController;
 
     public SignUpRedirectHandler(ManagerData managerData) {
         this.managerData = managerData;
+        landingController = new LandingController(managerData);
     }
 
 
@@ -28,28 +30,23 @@ public class SignUpRedirectHandler implements HttpHandler {
             @Override
             public void handle(HttpServerExchange exchange, String message) {
                 Map<String, Deque<String>> props = QueryParameterUtils.parseQueryString(message, "UTF_8");
-                // VERY IMPORTANT: "username" and "password" are based on labels of the form.
-                // If the label changed to "username: " for example, props.get(...) should be changed too
-                // otherwise, there will be null ptr errors.
-                System.out.println(props.get("username").getFirst());
-                System.out.println(props.get("password").getFirst());
+                // note "username" and "password" are labels in HTML forms
+                String username = props.get("username").getFirst();
+                String password = props.get("password").getFirst();
 
-                LandingController landingController = new LandingController(managerData);
-                String result = landingController.signUp(props.get("username").getFirst(), props.get("password").getFirst());
+                String result = landingController.signUp(username, password);
 
                 if (result.equals("Success")) {
-                    managerData.setCurrentUser(props.get("username").getFirst());
+                    managerData.setCurrentUser(username);
                     exchange.getResponseSender().send("<meta " +
                             "http-equiv=\"refresh\" " +
                             "content=\"0.05; " +
                             "url =\n /\" />\n");
                 }
                 else {
-                    exchange.getResponseSender().send("<html><form action='signUp' " + "method='post'>" +
-                            "<input type=\"text\" id=\"username\" name=\"username\"><br><br> " +
-                            "<input type=\"text\" id=\"password\" name=\"password\"><br><br>" +
-                            "<input type=\"submit\" value=\"SignUp\">" +
-                            "</form></html>" + "<p style=\"color:red\">" + result + "</p>");
+                    // TODO: SignUpHandler's constructor should be changed to take in a base context mapping
+                    // TODO: this way we can pass in {"errorMessage": result}
+                    new SignUpHandler().handleRequest(exchange);
                 }
             }
         });
