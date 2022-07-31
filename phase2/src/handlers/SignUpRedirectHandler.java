@@ -28,6 +28,11 @@ public class SignUpRedirectHandler implements HttpHandler {
             @Override
             public void handle(HttpServerExchange exchange, String message) {
                 Map<String, Deque<String>> props = QueryParameterUtils.parseQueryString(message, "UTF_8");
+                // VERY IMPORTANT: "username" and "password" are based on labels of the form.
+                // If the label changed to "username: " for example, props.get(...) should be changed too
+                // otherwise, there will be null ptr errors.
+                System.out.println(props.get("username").getFirst());
+                System.out.println(props.get("password").getFirst());
 
                 LandingController landingController = new LandingController(managerData);
                 String result = landingController.signUp(props.get("username").getFirst(), props.get("password").getFirst());

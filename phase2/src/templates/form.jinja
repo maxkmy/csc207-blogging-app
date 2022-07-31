@@ -1,0 +1,11 @@
+<html>
+    <form action="/{{ action }}" method="{{ method }}">
+        {% for field in fields %}
+            <label for="{{ field.id }}"> {{ field.label }} </label>
+            <input type="{{ field.type }}" id="{{ field.id }}" name="{{ field.label }}">
+            <br>
+        {% endfor %}
+        <input type="submit" value="{{ submitBtnName }}">
+        <br>
+    </form>
+</html>
