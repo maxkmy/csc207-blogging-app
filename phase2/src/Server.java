@@ -20,6 +20,7 @@ public class Server {
                 .post("/", routingHandlerFactory.getHandler("homeRedirect", managerData))
                 .get("/signUp", routingHandlerFactory.getHandler("signUp", managerData))
                 .post("/signUp", routingHandlerFactory.getHandler("signUpRedirect", managerData))
+                .get("/history", routingHandlerFactory.getHandler("viewHistory", managerData))
                 .setFallbackHandler(exchange -> {
                     exchange.setStatusCode(404);
                     exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/plain");

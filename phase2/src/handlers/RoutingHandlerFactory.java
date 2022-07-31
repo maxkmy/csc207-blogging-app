@@ -20,6 +20,8 @@ public class RoutingHandlerFactory {
                 return new SignUpHandler();
             case "signUpRedirect":
                 return new SignUpRedirectHandler(managerData);
+            case "viewHistory":
+                return new ViewHistoryHandler(managerData);
         }
         return new ErrorMessageHandler("No handler exists in RoutingHandlers factory named: " + request);
     }

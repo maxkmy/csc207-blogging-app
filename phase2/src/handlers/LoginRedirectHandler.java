@@ -38,6 +38,7 @@ public class LoginRedirectHandler implements HttpHandler {
 
                 if (result.equals("Success")) {
                     managerData.setCurrentUser(username);
+                    System.out.println(username);
                     exchange.getResponseSender().send("<meta " +
                             "http-equiv=\"refresh\" " +
                             "content=\"0.05; " +
