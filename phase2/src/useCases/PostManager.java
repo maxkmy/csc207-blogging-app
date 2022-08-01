@@ -1,5 +1,6 @@
 package useCases;
 
+import java.util.List;
 import java.util.UUID;
 import java.util.HashMap;
 import java.util.ArrayList;
@@ -44,7 +45,7 @@ public class PostManager {
      * @param username a string representing a username of a user.
      * @return a list of posts written by an account with the provided username
      */
-    public ArrayList<Post> getPostsWrittenBy(String username) {
+    public List<Post> getPostsWrittenBy(String username) {
         ArrayList<Post> posts = new ArrayList<>();
         for (UUID id : this.posts.keySet()) {
             Post post = this.posts.get(id);
