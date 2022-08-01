@@ -22,9 +22,9 @@ public class ViewHistoryHandler implements HttpHandler {
 
     @Override
     public void handleRequest(HttpServerExchange exchange) {
-        System.out.println("current uesr: " + managerData.getCurrentUser());
         String templatePath = "src/templates/history.jinja";
         Map<String, Object> context = new HashMap<>();
+        context.put("returnEndpoint", "/");
 
         List<String> dates = accountController.viewHistory();
 

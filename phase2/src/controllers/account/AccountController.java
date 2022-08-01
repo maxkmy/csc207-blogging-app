@@ -15,7 +15,6 @@ public class AccountController {
     private ManagerData managerData;
 
     public AccountController(ManagerData managerData) {
-
         accountManager = managerData.getAccountManager();
         this.managerData = managerData;
     }
@@ -27,5 +26,10 @@ public class AccountController {
             dates.add(formatter.format(date));
         }
         return dates;
+    }
+
+    public void logout() {
+        managerData.setCurrentUser(null);
+        return;
     }
 }

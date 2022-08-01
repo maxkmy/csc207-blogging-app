@@ -37,6 +37,11 @@ public class HomeHandler implements HttpHandler {
             viewHistory.put("description", "view login history");
             requests.add(viewHistory);
 
+            Map<String, String> logout = new HashMap<>();
+            logout.put("endpoint", "/logout");
+            logout.put("description", "logout");
+            requests.add(logout);
+
             Map<String, Object> context = new HashMap<>();
             context.put("requests", requests);
 
