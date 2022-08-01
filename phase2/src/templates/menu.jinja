@@ -2,5 +2,6 @@
 {% block content %}
     {% for request in requests %}
         <a href="{{ request.endpoint }}"> {{ request.description }} </a>
+        <br>
     {% endfor %}
 {% endblock content %}
