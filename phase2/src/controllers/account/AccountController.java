@@ -30,6 +30,10 @@ public class AccountController {
 
     public void logout() {
         managerData.setCurrentUser(null);
-        return;
+    }
+
+    public void deleteSelf() {
+        accountManager.deleteSelf(managerData.getCurrentUser());
+        managerData.setCurrentUser(null);
     }
 }

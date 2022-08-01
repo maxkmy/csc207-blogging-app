@@ -16,7 +16,6 @@ public class NewApp {
         IWriter writer2 = new Writer(postDataFileDirectory);
         IWriter writer3 = new Writer(commentDataFileDirectory);
 
-
         Server server = new Server(new ManagerData(
                 new AccountManager(reader1, writer1),
                 new PostManager(reader2, writer2),

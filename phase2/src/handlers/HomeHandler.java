@@ -42,6 +42,11 @@ public class HomeHandler implements HttpHandler {
             logout.put("description", "logout");
             requests.add(logout);
 
+            Map<String, String> deleteSelf = new HashMap<>();
+            deleteSelf.put("endpoint", "/deleteSelf");
+            deleteSelf.put("description", "delete account");
+            requests.add(deleteSelf);
+
             Map<String, Object> context = new HashMap<>();
             context.put("requests", requests);
 
