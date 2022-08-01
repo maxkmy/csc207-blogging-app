@@ -24,18 +24,8 @@ public class DeletePostHandler implements HttpHandler {
     @Override
     public void handleRequest(HttpServerExchange exchange) {
         exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/html");
-
-        System.out.println("delete endpoint reached");
-
-        exchange.getRequestReceiver().receiveFullString(new Receiver.FullStringCallback() {
-            @Override
-            public void handle(HttpServerExchange exchange, String message) {
-                Map<String, Deque<String>> props = QueryParameterUtils.parseQueryString(message, "UTF_8");
-                System.out.println(props.toString());
-                String postIdString = props.get("postId").getFirst();
-                UUID postId = UUID.fromString(postIdString);
-                postController.deletePost(postId);
-            }
-        });
+        String postIdString = exchange.getQueryParameters().get("postId").getFirst();
+        UUID postId = UUID.fromString(postIdString);
+        postController.deletePost(postId);
     }
 }
