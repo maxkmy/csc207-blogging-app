@@ -1,4 +1,17 @@
 {% extends "templates/base.jinja" %}
+
+{% block head %}
+    <script>
+        function deletePost(postId) {
+            endpoint = `http://localhost:8080/deletePost/${postId}`;
+            console.log(endpoint);
+            fetch(endpoint, {
+                method: "DELETE"
+            });
+            // location.reload();
+        }
+    </script>
+{% endblock %}
 {% block content %}
     {% for post in posts %}
         <div class="post">
@@ -6,6 +19,7 @@
             <p> author: {{ post.author }} </p>
             <p> title: {{ post.title }} </p>
             <p> content: {{ post.content }} </p>
+            <button onclick="deletePost('{{ post.id }}')"> delete post</button>
         </div>
     {% endfor %}
 {% endblock content %}

@@ -32,6 +32,8 @@ public class RoutingHandlerFactory {
                 return new AddPostRedirectHandler(managerData);
             case "viewSelfProfile":
                 return new ViewSelfProfileHandler(managerData);
+            case "deletePost":
+                return new DeletePostHandler(managerData);
         }
         return new ErrorMessageHandler("No handler exists in RoutingHandlers factory named: " + request);
     }

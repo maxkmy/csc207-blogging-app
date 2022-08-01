@@ -36,4 +36,8 @@ public class ManagerData {
     public void setCurrentUser(String currentUser) {
         this.currentUser = currentUser;
     }
+
+    public boolean getCurrentUserRole() {
+        return currentUser != null && accountManager.isAdmin(currentUser);
+    }
 }

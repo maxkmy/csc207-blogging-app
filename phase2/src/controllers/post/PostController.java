@@ -34,4 +34,8 @@ public class PostController {
         );
         return postModel.getModel();
     }
+
+    public void deletePost(UUID postId) {
+        postManager.deletePost(postId);
+    }
 }

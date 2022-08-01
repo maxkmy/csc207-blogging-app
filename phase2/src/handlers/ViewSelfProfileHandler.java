@@ -36,6 +36,9 @@ public class ViewSelfProfileHandler implements HttpHandler {
         context.put("posts", posts);
         context.put("returnEndpoint", "/");
 
+        context.put("username", managerData.getCurrentUser());
+        context.put("isAdmin", managerData.getCurrentUserRole());
+
         // get response from Jinja and send response back to client
         try {
             JinjaPresenter presenter = new JinjaPresenter(context, templatePath);
