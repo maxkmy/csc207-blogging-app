@@ -47,6 +47,11 @@ public class HomeHandler implements HttpHandler {
             deleteSelf.put("description", "delete account");
             requests.add(deleteSelf);
 
+            Map<String, String> addPost = new HashMap<>();
+            addPost.put("endpoint", "/addPost");
+            addPost.put("description", "add post");
+            requests.add(addPost);
+
             Map<String, Object> context = new HashMap<>();
             context.put("requests", requests);
 

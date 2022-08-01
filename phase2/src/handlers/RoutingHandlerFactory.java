@@ -26,6 +26,8 @@ public class RoutingHandlerFactory {
                 return new LogoutHandler(managerData);
             case "deleteSelf":
                 return new DeleteSelfHandler(managerData);
+            case "addPost":
+                return new AddPostHandler(managerData);
         }
         return new ErrorMessageHandler("No handler exists in RoutingHandlers factory named: " + request);
     }

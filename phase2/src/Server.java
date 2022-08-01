@@ -23,6 +23,7 @@ public class Server {
                 .get("/history", routingHandlerFactory.getHandler("viewHistory", managerData))
                 .get("/logout", routingHandlerFactory.getHandler("logout", managerData))
                 .get("/deleteSelf", routingHandlerFactory.getHandler("deleteSelf", managerData))
+                .get("/addPost", routingHandlerFactory.getHandler("addPost", managerData))
                 .setFallbackHandler(exchange -> {
                     exchange.setStatusCode(404);
                     exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/plain");
