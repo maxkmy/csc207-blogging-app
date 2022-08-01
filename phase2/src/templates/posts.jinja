@@ -12,6 +12,7 @@
         }
     </script>
 {% endblock %}
+
 {% block content %}
     {% for post in posts %}
         <div class="post">
@@ -20,6 +21,13 @@
             <p> title: {{ post.title }} </p>
             <p> content: {{ post.content }} </p>
             <button onclick="deletePost('{{ post.id }}')"> delete post</button>
+            <form action="/addComment/{{ post.id }}" method="post">
+                <div class="form-group">
+                    <label for="{{ post.id }}"> comment </label>
+                    <input type="text" id="{{ post.id }}" name="comment">
+                </div>
+                <button type="submit" class="btn btn-primary"> add comment </button>
+            </form>
         </div>
     {% endfor %}
 {% endblock content %}

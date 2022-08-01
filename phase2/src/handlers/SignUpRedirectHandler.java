@@ -27,28 +27,29 @@ public class SignUpRedirectHandler implements HttpHandler {
         exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/html");
 
         exchange.getRequestReceiver().receiveFullString(new Receiver.FullStringCallback() {
-            @Override
-            public void handle(HttpServerExchange exchange, String message) {
-                Map<String, Deque<String>> props = QueryParameterUtils.parseQueryString(message, "UTF_8");
-                // note "username" and "password" are labels in HTML forms
-                String username = props.get("username").getFirst();
-                String password = props.get("password").getFirst();
+                @Override
+                public void handle(HttpServerExchange exchange, String message) {
+                    Map<String, Deque<String>> props = QueryParameterUtils.parseQueryString(message, "UTF_8");
+                    // note "username" and "password" are labels in HTML forms
+                    String username = props.get("username").getFirst();
+                    String password = props.get("password").getFirst();
 
-                String result = landingController.signUp(username, password);
+                    String result = landingController.signUp(username, password);
 
-                if (result.equals("Success")) {
-                    managerData.setCurrentUser(username);
-                    exchange.getResponseSender().send("<meta " +
-                            "http-equiv=\"refresh\" " +
-                            "content=\"0.05; " +
-                            "url =\n /\" />\n");
-                }
-                else {
-                    // TODO: SignUpHandler's constructor should be changed to take in a base context mapping
-                    // TODO: this way we can pass in {"errorMessage": result}
-                    new SignUpHandler().handleRequest(exchange);
+                    if (result.equals("Success")) {
+                        managerData.setCurrentUser(username);
+                        exchange.getResponseSender().send("<meta " +
+                                "http-equiv=\"refresh\" " +
+                                "content=\"0.05; " +
+                                "url =\n /\" />\n");
+                    }
+                    else {
+                        // TODO: SignUpHandler's constructor should be changed to take in a base context mapping
+                        // TODO: this way we can pass in {"errorMessage": result}
+                        new SignUpHandler().handleRequest(exchange);
+                    }
                 }
             }
-        });
+        );
     }
 }

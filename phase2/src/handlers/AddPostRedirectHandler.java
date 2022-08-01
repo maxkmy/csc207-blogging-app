@@ -28,19 +28,20 @@ public class AddPostRedirectHandler implements HttpHandler {
         exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/html");
 
         exchange.getRequestReceiver().receiveFullString(new Receiver.FullStringCallback() {
-            @Override
-            public void handle(HttpServerExchange exchange, String message) {
-                Map<String, Deque<String>> props = QueryParameterUtils.parseQueryString(message, "UTF_8");
-                String author = managerData.getCurrentUser();
-                // note "username" and "password" are labels in HTML forms
-                String title = props.get("title").getFirst();
-                String content = props.get("content").getFirst();
-                title = title.replace('+', ' ');
-                content = content.replace('+', ' ');
+                @Override
+                public void handle(HttpServerExchange exchange, String message) {
+                    Map<String, Deque<String>> props = QueryParameterUtils.parseQueryString(message, "UTF_8");
+                    String author = managerData.getCurrentUser();
+                    // note "username" and "password" are labels in HTML forms
+                    String title = props.get("title").getFirst();
+                    String content = props.get("content").getFirst();
+                    title = title.replace('+', ' ');
+                    content = content.replace('+', ' ');
 
-                postController.addPost(title, content, author);
-                new HomeHandler(managerData).handleRequest(exchange);
+                    postController.addPost(title, content, author);
+                    new HomeHandler(managerData).handleRequest(exchange);
+                }
             }
-        });
+        );
     }
 }

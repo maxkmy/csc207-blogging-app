@@ -27,6 +27,7 @@ public class Server {
                 .post("/addPost", routingHandlerFactory.getHandler("addPostRedirect", managerData))
                 .get("/viewSelfProfile", routingHandlerFactory.getHandler("viewSelfProfile", managerData))
                 .delete("/deletePost/{postId}", routingHandlerFactory.getHandler("deletePost", managerData))
+                .post("/addComment/{postId}", routingHandlerFactory.getHandler("addComment", managerData))
                 .setFallbackHandler(exchange -> {
                     exchange.setStatusCode(404);
                     exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/plain");
