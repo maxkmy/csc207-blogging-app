@@ -25,6 +25,7 @@ public class Server {
                 .get("/deleteSelf", routingHandlerFactory.getHandler("deleteSelf", managerData))
                 .get("/addPost", routingHandlerFactory.getHandler("addPost", managerData))
                 .post("/addPost", routingHandlerFactory.getHandler("addPostRedirect", managerData))
+                .get("/viewSelfProfile", routingHandlerFactory.getHandler("viewSelfProfile", managerData))
                 .setFallbackHandler(exchange -> {
                     exchange.setStatusCode(404);
                     exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/plain");
