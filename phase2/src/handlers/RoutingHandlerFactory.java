@@ -28,6 +28,8 @@ public class RoutingHandlerFactory {
                 return new DeleteSelfHandler(managerData);
             case "addPost":
                 return new AddPostHandler(managerData);
+            case "addPostRedirect":
+                return new AddPostRedirectHandler(managerData);
         }
         return new ErrorMessageHandler("No handler exists in RoutingHandlers factory named: " + request);
     }
