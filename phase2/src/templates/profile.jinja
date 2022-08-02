@@ -2,11 +2,12 @@
 {% include "templates/posts.jinja" %}
 
 {% block head %}
-
 {% block Posthead %}{% endblock %}
 {% endblock %}
 
 {% block content %}
+{% if followStatus is defined%}
+{% endif %}
 {{username}}
 {% block Postcontent %}{% endblock %}
 {% endblock %}

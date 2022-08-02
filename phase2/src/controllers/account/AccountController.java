@@ -36,4 +36,8 @@ public class AccountController {
         accountManager.deleteSelf(managerData.getCurrentUser());
         managerData.setCurrentUser(null);
     }
+
+    public boolean isFollowing(String user1, String user2) {
+        return accountManager.getFolloweesOf(user1).contains(user2);
+    }
 }
