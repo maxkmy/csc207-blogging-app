@@ -36,6 +36,8 @@ public class RoutingHandlerFactory {
                 return new DeletePostHandler(managerData);
             case "addComment":
                 return new AddCommentHandler(managerData);
+            case "viewComments":
+                return new ViewCommentHandler(managerData);
         }
         return new ErrorMessageHandler("No handler exists in RoutingHandlers factory named: " + request);
     }

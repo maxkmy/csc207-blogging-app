@@ -6,6 +6,8 @@ import gateway.ICommentSorter;
 import useCases.CommentManager;
 import useCases.ManagerData;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.UUID;
 
 public class CommentController {
@@ -19,7 +21,7 @@ public class CommentController {
         commentManager.addComment(postId, comment, author);
     }
 
-    public void getCommentsUnder(UUID postId) {
+    public ArrayList<HashMap<String, String>> getCommentsUnder(UUID postId) {
         ICommentSorter commentSorter = new CommentTimeSorter();
         commentManager.setCommentSorter(commentSorter);
         DataMapper commentModel = new DataMapper();
@@ -27,5 +29,6 @@ public class CommentController {
                 commentManager.getCommentsUnder(postId),
                 new String[]{ "content", "author", "timePosted" }
         );
+        return commentModel.getModel();
     }
 }

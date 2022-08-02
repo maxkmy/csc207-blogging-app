@@ -1,0 +1,10 @@
+{% extends "templates/base.jinja" %}
+{% block content %}
+    {% for comment in comments %}
+        <div class="comment">
+            <p>author: {{ comment.author }}</p>
+            <p>time posted: {{ comment.timePosted }} </p>
+            <p>comment: {{ comment.content }} </p>
+        </div>
+    {% endfor %}
+{% endblock content %}
