@@ -1,4 +1,5 @@
-{% block head %}
+{% block Posthead %}
+    {{ super() }}
     <script>
         function deletePost(postId) {
             endpoint = `http://localhost:8080/deletePost/${postId}`;
@@ -11,7 +12,8 @@
     </script>
 {% endblock %}
 
-{% block content %}
+{% block Postcontent %}
+    {{ super() }}
     {% for post in posts %}
         <div class="post">
             <p> time: {{ post.timePosted }} </p>
