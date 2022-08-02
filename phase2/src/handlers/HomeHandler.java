@@ -1,5 +1,6 @@
 package handlers;
 
+import controllers.post.PostController;
 import io.undertow.server.HttpHandler;
 import io.undertow.server.HttpServerExchange;
 import io.undertow.util.Headers;
@@ -15,9 +16,11 @@ import java.util.Map;
 public class HomeHandler implements HttpHandler {
 
     ManagerData managerData;
+    PostController postController;
 
     public HomeHandler(ManagerData managerData) {
         this.managerData = managerData;
+        this.postController = new PostController(managerData);
     }
 
     @Override
@@ -59,6 +62,8 @@ public class HomeHandler implements HttpHandler {
 
             Map<String, Object> context = new HashMap<>();
             context.put("requests", requests);
+
+            context.put("posts", postController.getFollowingPosts(managerData.getCurrentUser()));
 
             String templatePath = "src/templates/menu.jinja";
             try {

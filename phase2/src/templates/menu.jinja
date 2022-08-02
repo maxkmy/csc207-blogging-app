@@ -1,7 +1,16 @@
 {% extends "templates/base.jinja" %}
+{% include "templates/posts.jinja" %}
+
+{% block head %}
+{% block Posthead %}{% endblock %}
+{% endblock %}
+
 {% block content %}
     {% for request in requests %}
         <a href="{{ request.endpoint }}"> {{ request.description }} </a>
         <br>
     {% endfor %}
+
+{% block Postcontent %}{% endblock %}
+
 {% endblock content %}
