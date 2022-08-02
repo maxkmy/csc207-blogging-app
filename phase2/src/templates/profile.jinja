@@ -12,7 +12,12 @@ function follow(username) {
     location.reload();
 }
 function unfollow(username) {
-
+    endpoint = `http://localhost:8080/unfollow/${username}`;
+    console.log(endpoint);
+    fetch(endpoint, {
+        method: "DELETE"
+    });
+    location.reload();
 }
 </script>
 {% block Posthead %}{% endblock %}
