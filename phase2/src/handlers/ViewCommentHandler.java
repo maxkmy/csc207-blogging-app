@@ -30,6 +30,7 @@ public class ViewCommentHandler implements HttpHandler {
         ArrayList<HashMap<String, String>> comments = commentController.getCommentsUnder(postId);
         context.put("comments", comments);
         context.put("postId", postIdString);
+        context.put("returnEndpoint", "/viewPost/" + postIdString);
 
         String templatePath = "src/templates/comments.jinja";
 

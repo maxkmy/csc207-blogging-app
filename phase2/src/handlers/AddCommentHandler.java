@@ -6,9 +6,12 @@ import io.undertow.server.HttpHandler;
 import io.undertow.server.HttpServerExchange;
 import io.undertow.util.Headers;
 import io.undertow.util.QueryParameterUtils;
+import presenters.JinjaPresenter;
 import useCases.ManagerData;
 
+import java.io.IOException;
 import java.util.Deque;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
@@ -35,6 +38,18 @@ public class AddCommentHandler implements HttpHandler {
                     comment = comment.replace('+', ' ');
                     String author = managerData.getCurrentUser();
                     commentController.addComment(postId, comment, author);
+
+                    Map<String, Object> context = new HashMap<>();
+                    context.put("endpoint", "viewComments/" + postIdString);
+                    String templatePath = "src/templates/redirect.jinja";
+                    try {
+                        JinjaPresenter presenter = new JinjaPresenter(context, templatePath);
+                        String htmlOutput = presenter.present();
+                        exchange.getResponseSender().send(htmlOutput);
+                    } catch (IOException e) {
+                        // TODO: redirect to appropriate status code
+                        System.out.println(e.getMessage());
+                    }
                 }
             }
         );

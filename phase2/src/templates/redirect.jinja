@@ -1,0 +1,7 @@
+{% extends "templates/base.jinja" %}
+
+{% block head %}
+    <script>
+        window.location.href = "http://localhost:8080/{{ endpoint }}"
+    </script>
+{% endblock %}
