@@ -42,6 +42,8 @@ public class RoutingHandlerFactory {
                 return new ViewPostHandler(managerData);
             case "viewProfile":
                 return new ViewProfileHandler(managerData);
+                case "follow":
+                return new followHandler(managerData);
         }
         return new ErrorMessageHandler("No handler exists in RoutingHandlers factory named: " + request);
     }

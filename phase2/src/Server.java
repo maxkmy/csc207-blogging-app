@@ -31,6 +31,7 @@ public class Server {
                 .get("/viewComments/{postId}", routingHandlerFactory.getHandler("viewComments", managerData))
                 .get("/viewPost/{postId}", routingHandlerFactory.getHandler("viewPost", managerData))
                 .get("/viewProfile/{username}", routingHandlerFactory.getHandler("viewProfile", managerData))
+                .delete("/follow/{username}", routingHandlerFactory.getHandler("follow", managerData))
                 .setFallbackHandler(exchange -> {
                     exchange.setStatusCode(404);
                     exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/plain");

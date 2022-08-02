@@ -1,5 +1,7 @@
 package controllers.account;
 
+import exception.UserFollowedException;
+import exception.UsernameNotFoundException;
 import useCases.AccountManager;
 import useCases.ManagerData;
 
@@ -39,5 +41,14 @@ public class AccountController {
 
     public boolean isFollowing(String user1, String user2) {
         return accountManager.getFolloweesOf(user1).contains(user2);
+    }
+
+    public void follow(String user1, String user2) {
+        try {
+            accountManager.follow(user1, user2);
+        } catch (UsernameNotFoundException | UserFollowedException e) {
+            // TODO change this to handle error cleaner
+            System.out.println(e.getMessage());
+        }
     }
 }

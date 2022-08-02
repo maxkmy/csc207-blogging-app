@@ -4,7 +4,12 @@
 {% block head %}
 <script>
 function follow(username) {
-
+    endpoint = `http://localhost:8080/follow/${username}`;
+    console.log(endpoint);
+    fetch(endpoint, {
+        method: "DELETE"
+    });
+    location.reload();
 }
 function unfollow(username) {
 
