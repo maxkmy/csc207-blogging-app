@@ -33,10 +33,11 @@ public class CommentManager {
      * @param reader a gateway responsible for reading objects
      * @param writer a gateway responsible for writing objects
      */
-    public CommentManager(IReader reader, IWriter writer) {
+    public CommentManager(IReader reader, IWriter writer, ICommentSorter commentSorter) {
         this.reader = reader;
         this.writer = writer;
         comments = reader.read(comments.getClass());
+        this.commentSorter = commentSorter;
     }
 
     /**
@@ -124,13 +125,6 @@ public class CommentManager {
     public Comment getComment(UUID id) {
         return comments.get(id);
     }
-
-    /**
-     * Set the commentSorter to be used
-     *
-     * @param commentSorter an ICommentSorter strategy for sorting comments
-     */
-    public void setCommentSorter(ICommentSorter commentSorter) { this.commentSorter = commentSorter; }
 
     /**
      * Saves the current data.

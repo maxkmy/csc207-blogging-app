@@ -22,8 +22,6 @@ public class CommentController {
     }
 
     public ArrayList<HashMap<String, String>> getCommentsUnder(UUID postId) {
-        ICommentSorter commentSorter = new CommentTimeSorter();
-        commentManager.setCommentSorter(commentSorter);
         DataMapper commentModel = new DataMapper();
         commentModel.addItems(
                 commentManager.getCommentsUnder(postId),

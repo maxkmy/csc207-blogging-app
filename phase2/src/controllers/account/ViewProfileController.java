@@ -47,7 +47,6 @@ public class ViewProfileController extends RequestController {
      * @param target    the target profile to open
      */
     private void showProfile(String requester, String target) {
-        postManager.setPostSorter(new PostTimeSorter());
         postModel.reset();
         postModel.addItems(
                 postManager.getPostsWrittenBy(target),

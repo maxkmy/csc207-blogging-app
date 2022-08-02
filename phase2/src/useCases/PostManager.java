@@ -33,10 +33,11 @@ public class PostManager {
      * @param reader a gateway responsible for reading objects
      * @param writer a gateway responsible for writing objects
      */
-    public PostManager(IReader reader, IWriter writer) {
+    public PostManager(IReader reader, IWriter writer, IPostSorter postSorter) {
         this.reader = reader;
         this.writer = writer;
         posts = reader.read(posts.getClass());
+        this.postSorter = postSorter;
     }
 
     /**
@@ -112,14 +113,5 @@ public class PostManager {
      */
     public void save() {
         writer.write(posts);
-    }
-
-    /**
-     * Set the postSorter to be used
-     *
-     * @param postSorter an IPostSorter strategy for sorting comments
-     */
-    public void setPostSorter(IPostSorter postSorter) {
-        this.postSorter = postSorter;
     }
 }

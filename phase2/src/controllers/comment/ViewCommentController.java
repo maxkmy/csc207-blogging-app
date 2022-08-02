@@ -37,7 +37,6 @@ public class ViewCommentController extends RequestController {
      */
     @Override
     public boolean handleRequest(String requester) {
-        commentManager.setCommentSorter(new CommentTimeSorter());
         commentModel.reset();
         commentModel.addItems(
                 commentManager.getCommentsUnder(UUID.fromString(requester)),

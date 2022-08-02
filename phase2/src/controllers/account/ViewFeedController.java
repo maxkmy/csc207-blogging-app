@@ -46,7 +46,6 @@ public class ViewFeedController extends RequestController {
     @Override
     public boolean handleRequest(String requester) {
         IPostSorter postSorter = new PostTimeSorter();
-        postManager.setPostSorter(postSorter);
         HashSet<String> followees = accountManager.getFolloweesOf(requester);
         ArrayList<Post> postsList = new ArrayList<>();
         for (String followee : followees) { postsList.addAll(postManager.getPostsWrittenBy(followee)); }
