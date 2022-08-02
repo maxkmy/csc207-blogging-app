@@ -26,7 +26,7 @@ public class ViewSelfProfileHandler implements HttpHandler {
         exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/html");
 
         // designate a template path
-        String templatePath = "src/templates/posts.jinja";
+        String templatePath = "src/templates/profile.jinja";
 
         // Populate context map
         Map<String, Object> context = new HashMap<>();
