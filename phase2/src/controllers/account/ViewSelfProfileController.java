@@ -43,7 +43,6 @@ public class ViewSelfProfileController extends RequestController {
      */
     @Override
     public boolean handleRequest(String requester) {
-        postManager.setPostSorter(new PostTimeSorter());
         postModel.reset();
         postModel.addItems(
                 postManager.getPostsWrittenBy(requester),

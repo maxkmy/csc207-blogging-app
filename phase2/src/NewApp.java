@@ -1,8 +1,5 @@
-import gateway.IWriter;
-import gateway.Writer;
+import gateway.*;
 import useCases.*;
-import gateway.IReader;
-import gateway.Reader;
 
 public class NewApp {
     public static void main(String[] args) {
@@ -17,9 +14,10 @@ public class NewApp {
         IWriter writer3 = new Writer(commentDataFileDirectory);
 
         Server server = new Server(new ManagerData(
-                new AccountManager(reader1, writer1),
-                new PostManager(reader2, writer2),
-                new CommentManager(reader3, writer3)));
+                new AccountManager(reader1, writer1, new AccountSorter()),
+                new PostManager(reader2, writer2, new PostTimeSorter()),
+                new CommentManager(reader3, writer3, new CommentTimeSorter()))
+        );
         server.start();
     }
 }

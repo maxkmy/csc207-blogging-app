@@ -27,8 +27,6 @@ public class PostController {
     }
 
     public ArrayList<HashMap<String, String>> getPostsWrittenBy(String author) {
-        IPostSorter postSorter = new PostTimeSorter();
-        postManager.setPostSorter(postSorter);
         DataMapper postModel = new DataMapper();
         postModel.addItems(
                 postManager.getPostsWrittenBy(author),
@@ -50,15 +48,12 @@ public class PostController {
     }
 
     public ArrayList<HashMap<String, String>> getFollowingPosts(String requester) {
-        IPostSorter postSorter = new PostTimeSorter();
-        postManager.setPostSorter(postSorter);
         HashSet<String> followees = accountManager.getFolloweesOf(requester);
         ArrayList<Post> postsList = new ArrayList<>();
         for (String followee : followees) { postsList.addAll(postManager.getPostsWrittenBy(followee)); }
-
         postModel.reset();
         postModel.addItems(
-                postSorter.sort(postsList),
+                postsList,
                 new String[]{ "title", "author", "content", "timePosted", "id"}
         );
         return postModel.getModel();

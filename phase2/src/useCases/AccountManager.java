@@ -22,6 +22,10 @@ public class AccountManager {
      * a gateway responsible for writing objects
      */
     private IWriter writer;
+    /**
+     * a sorter that sorts accounts
+     */
+    private IAccountSorter accountSorter;
 
     /**
      * Constructor of a use case responsible for managing accounts.
@@ -29,10 +33,11 @@ public class AccountManager {
      * @param reader a gateway responsible for reading objects
      * @param writer a gateway responsible for writing objects
      */
-    public AccountManager(IReader reader, IWriter writer) {
+    public AccountManager(IReader reader, IWriter writer, IAccountSorter accountSorter) {
         this.reader = reader;
         this.writer = writer;
         accountMap = reader.read(accountMap.getClass());
+        this.accountSorter = accountSorter;
     }
 
     /**
