@@ -13,7 +13,6 @@
 {% endblock %}
 
 {% block Postcontent %}
-    {{ super() }}
     {% for post in posts %}
         <div class="post">
             <p> time: {{ post.timePosted }} </p>
