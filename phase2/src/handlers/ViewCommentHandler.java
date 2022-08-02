@@ -21,8 +21,6 @@ public class ViewCommentHandler implements HttpHandler {
 
     @Override
     public void handleRequest(HttpServerExchange exchange) {
-        // TODO: delete after testing
-        System.out.println("reached view comments endpoing");
         exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/html");
         Map<String, Deque<String>> props = exchange.getQueryParameters();
         String postIdString = props.get("postId").getFirst();
@@ -30,11 +28,10 @@ public class ViewCommentHandler implements HttpHandler {
 
         Map<String, Object> context = new HashMap<>();
         ArrayList<HashMap<String, String>> comments = commentController.getCommentsUnder(postId);
-        // TODO: delete after testing
-        System.out.println(comments.toString());
         context.put("comments", comments);
+        context.put("postId", postIdString);
 
-        String templatePath = "templates/comments.jinja";
+        String templatePath = "src/templates/comments.jinja";
 
         // get response from Jinja and send response back to client
         try {
