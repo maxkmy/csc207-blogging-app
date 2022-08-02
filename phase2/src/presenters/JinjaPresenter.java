@@ -15,7 +15,7 @@ public class JinjaPresenter {
         this.context = context;
         try {
             template = Files.readString(Paths.get(templatePath));
-        } catch(IOException e) { // TODO: handlers should redirect users to some error status code
+        } catch(IOException e) {
             throw e;
         }
     }

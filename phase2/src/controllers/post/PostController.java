@@ -38,4 +38,12 @@ public class PostController {
     public void deletePost(UUID postId) {
         postManager.deletePost(postId);
     }
+
+    public Map<String, String> getPost(UUID postId) {
+        DataMapper postModel = new DataMapper();
+        return postModel.getItemMap(
+                postManager.getPost(postId),
+                new String[]{ "title", "author", "content", "timePosted", "id" }
+        );
+    }
 }

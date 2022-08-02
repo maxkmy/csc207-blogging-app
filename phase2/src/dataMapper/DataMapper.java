@@ -3,6 +3,8 @@ package dataMapper;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class DataMapper {
     /**
@@ -88,5 +90,13 @@ public class DataMapper {
      */
     public ArrayList<HashMap<String, String>> getModel() {
         return model;
+    }
+
+    public <T> Map<String, String> getItemMap(T item, String[] attributes) {
+        Map<String, String> itemMap = new HashMap<>();
+        for (String attribute : attributes) {
+            itemMap.put(attribute, getAttr(item, attribute));
+        }
+        return itemMap;
     }
 }

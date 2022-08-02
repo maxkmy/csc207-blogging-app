@@ -1,0 +1,12 @@
+{% extends "templates/base.jinja" %}
+
+{% block content %}
+    <p> time: {{ post.timePosted }} </p>
+    <p> author: {{ post.author }} </p>
+    <p> title: {{ post.title }} </p>
+    <p> content: {{ post.content }} </p>
+    {% if author == post.author or isAdmin %}
+        <button onclick="deletePost('{{ post.id }}')"> delete post</button>
+    {% endif %}
+    <a href="viewComments/{{ post.id }}">view comments</a>
+{% endblock content %}

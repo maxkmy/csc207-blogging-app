@@ -19,16 +19,11 @@
             <p> time: {{ post.timePosted }} </p>
             <p> author: {{ post.author }} </p>
             <p> title: {{ post.title }} </p>
-            <p> content: {{ post.content }} </p>
-            <button onclick="deletePost('{{ post.id }}')"> delete post</button>
-            <form action="/addComment/{{ post.id }}" method="post">
-                <div class="form-group">
-                    <label for="{{ post.id }}"> comment </label>
-                    <input type="text" id="{{ post.id }}" name="comment">
-                </div>
-                <button type="submit" class="btn btn-primary"> add comment </button>
-            </form>
-            <button href="viewComments/{{ post.id }}">view comments</button>
+            {% if author == post.author or isAdmin %}
+                <button onclick="deletePost('{{ post.id }}')"> delete post</button>
+            {% endif %}
+            <a href="viewComments/{{ post.id }}">view comments</a>
+            <a href="viewPost/{{ post.id }}">view post</a>
         </div>
     {% endfor %}
 {% endblock content %}
