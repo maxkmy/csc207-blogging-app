@@ -2,12 +2,27 @@
 {% include "templates/posts.jinja" %}
 
 {% block head %}
+<script>
+function follow(username) {
+
+}
+function unfollow(username) {
+
+}
+</script>
 {% block Posthead %}{% endblock %}
 {% endblock %}
 
 {% block content %}
-{% if followStatus is defined%}
-{% endif %}
+
 {{username}}
+{% if followStatus is defined%}
+    {% if followStatus is true %}
+        <button onclick="unfollow('{{ username }}')"> unfollow </button> <br>
+    {% else %}
+        <button onclick="follow('{{ username }}')"> follow </button> <br>
+    {% endif %}
+{% endif %}
+
 {% block Postcontent %}{% endblock %}
 {% endblock %}
