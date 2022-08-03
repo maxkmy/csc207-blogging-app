@@ -77,7 +77,7 @@ public class AccountHandlers {
     public void deleteSelf(HttpServerExchange exchange) {
         exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/html");
         accountController.deleteSelf();
-        new LoginHandler().handleRequest(exchange);
+        new LandingHandlers(managerData).login(exchange);
     }
 
     public void follow(HttpServerExchange exchange) {
@@ -89,7 +89,7 @@ public class AccountHandlers {
     public void logout(HttpServerExchange exchange) {
         exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/html");
         accountController.logout();
-        new LoginHandler().handleRequest(exchange);
+        new LandingHandlers(managerData).login(exchange);
     }
 
     public void unfollow(HttpServerExchange exchange) {

@@ -17,6 +17,6 @@ public class DeleteSelfHandler implements HttpHandler {
     @Override
     public void handleRequest(HttpServerExchange exchange) {
         accountController.deleteSelf();
-        new LoginHandler().handleRequest(exchange);
+        new LandingHandlers(managerData).login(exchange);
     }
 }

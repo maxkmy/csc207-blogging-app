@@ -150,7 +150,7 @@ public class LandingHandlers {
                     else {
                         // TODO: SignUpHandler's constructor should be changed to take in a base context mapping
                         // TODO: this way we can pass in {"errorMessage": result}
-                        new SignUpHandler().handleRequest(exchange);
+                        new LandingHandlers(managerData).signUp(exchange);
                     }
                 }
             }
