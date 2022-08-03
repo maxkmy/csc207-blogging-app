@@ -116,20 +116,26 @@ public class PostHandlers {
     public void viewProfile(HttpServerExchange exchange) {
         exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/html");
 
-        String templatePath = "src/templates/profile.jinja";
-
+        String templatePath;
         Map<String, Deque<String>> props = exchange.getQueryParameters();
-        String username = props.get("username").getFirst();
-        String requester = managerData.getCurrentUser();
-        List<Map<String, String>> posts = postController.getPostsWrittenBy(username);
-
         Map<String, Object> context = new HashMap<>();
-        context.put("posts", posts);
+        String username = props.get("username").getFirst();
 
-        context.put("username", username);
-        context.put("isAdmin", managerData.getCurrentUserRole());
+        if (!username.equals(managerData.getCurrentUser())) {
+            templatePath = "src/templates/profile.jinja";
+            String requester = managerData.getCurrentUser();
+            List<Map<String, String>> posts = postController.getPostsWrittenBy(username);
 
-        context.put("followStatus", accountController.isFollowing(requester, username));
+            context.put("posts", posts);
+            context.put("username", username);
+            context.put("isAdmin", managerData.getCurrentUserRole());
+            context.put("followStatus", accountController.isFollowing(requester, username));
+        }
+        else {
+            templatePath = "src/templates/redirect.jinja";
+
+            context.put("endpoint", "viewSelfProfile");
+        }
 
         try {
             JinjaPresenter presenter = new JinjaPresenter(context, templatePath);
