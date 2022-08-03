@@ -2,6 +2,7 @@ package handlers;
 
 import controllers.account.AccountController;
 import io.undertow.server.HttpServerExchange;
+import io.undertow.util.Headers;
 import presenters.JinjaPresenter;
 import useCases.ManagerData;
 
@@ -9,9 +10,11 @@ import java.io.IOException;
 import java.util.*;
 
 public class AccountHandlers {
+    private ManagerData managerData;
     private AccountController accountController;
     public AccountHandlers(ManagerData managerData) {
         accountController = new AccountController(managerData);
+        this.managerData = managerData;
     }
 
     // endpoint for POST request
@@ -52,6 +55,50 @@ public class AccountHandlers {
 
         String templatePath = "src/templates/accounts.jinja";
 
+        try {
+            JinjaPresenter presenter = new JinjaPresenter(context, templatePath);
+            String htmlOutput = presenter.present();
+            exchange.getResponseSender().send(htmlOutput);
+        } catch (IOException e) {
+            // TODO: redirect to appropriate status code
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void deleteSelf(HttpServerExchange exchange) {
+        exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/html");
+        accountController.deleteSelf();
+        new LoginHandler().handleRequest(exchange);
+    }
+
+    public void follow(HttpServerExchange exchange) {
+        exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/html");
+        String userToFollow = exchange.getQueryParameters().get("username").getFirst();
+        accountController.follow(managerData.getCurrentUser(), userToFollow);
+    }
+
+    public void logout(HttpServerExchange exchange) {
+        exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/html");
+        accountController.logout();
+        new LoginHandler().handleRequest(exchange);
+    }
+
+    public void unfollow(HttpServerExchange exchange) {
+        exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/html");
+        String userToFollow = exchange.getQueryParameters().get("username").getFirst();
+        accountController.unfollow(managerData.getCurrentUser(), userToFollow);
+    }
+
+    public void viewHistory(HttpServerExchange exchange) {
+        String templatePath = "src/templates/history.jinja";
+        Map<String, Object> context = new HashMap<>();
+        context.put("returnEndpoint", "/");
+
+        List<String> dates = accountController.viewHistory();
+
+        context.put("dates", dates);
+
+        // get response from Jinja and send response back to client
         try {
             JinjaPresenter presenter = new JinjaPresenter(context, templatePath);
             String htmlOutput = presenter.present();

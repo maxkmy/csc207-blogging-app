@@ -1,6 +1,4 @@
-import handlers.AccountHandlers;
-import handlers.LandingHandlers;
-import handlers.RoutingHandlerFactory;
+import handlers.*;
 import io.undertow.Undertow;
 import io.undertow.server.HttpHandler;
 import io.undertow.server.RoutingHandler;
@@ -16,27 +14,29 @@ public class Server {
         RoutingHandlerFactory routingHandlerFactory = new RoutingHandlerFactory();
         LandingHandlers landingHandlers = new LandingHandlers(managerData);
         AccountHandlers accountHandlers = new AccountHandlers(managerData);
+        CommentHandlers commentHandlers = new CommentHandlers(managerData);
+        PostHandlers postHandlers = new PostHandlers(managerData);
 
         ROUTES = new RoutingHandler()
                 .get("/login", landingHandlers::login)
-                .post("/login", routingHandlerFactory.getHandler("loginRedirect", managerData))
+                .post("/login", landingHandlers::loginRedirect)
                 .get("/", routingHandlerFactory.getHandler("home", managerData))
                 .post("/", routingHandlerFactory.getHandler("homeRedirect", managerData))
-                .get("/signUp", routingHandlerFactory.getHandler("signUp", managerData))
-                .post("/signUp", routingHandlerFactory.getHandler("signUpRedirect", managerData))
-                .get("/history", routingHandlerFactory.getHandler("viewHistory", managerData))
-                .get("/logout", routingHandlerFactory.getHandler("logout", managerData))
-                .get("/deleteSelf", routingHandlerFactory.getHandler("deleteSelf", managerData))
-                .get("/addPost", routingHandlerFactory.getHandler("addPost", managerData))
-                .post("/addPost", routingHandlerFactory.getHandler("addPostRedirect", managerData))
-                .get("/viewSelfProfile", routingHandlerFactory.getHandler("viewSelfProfile", managerData))
-                .delete("/deletePost/{postId}", routingHandlerFactory.getHandler("deletePost", managerData))
-                .post("/addComment/{postId}", routingHandlerFactory.getHandler("addComment", managerData))
-                .get("/viewComments/{postId}", routingHandlerFactory.getHandler("viewComments", managerData))
-                .get("/viewPost/{postId}", routingHandlerFactory.getHandler("viewPost", managerData))
-                .get("/viewProfile/{username}", routingHandlerFactory.getHandler("viewProfile", managerData))
-                .delete("/follow/{username}", routingHandlerFactory.getHandler("follow", managerData))
-                .delete("/unfollow/{username}", routingHandlerFactory.getHandler("unfollow", managerData))
+                .get("/signUp", landingHandlers::signUp)
+                .post("/signUp", landingHandlers::signUpRedirect)
+                .get("/history", accountHandlers::viewHistory)
+                .get("/logout", accountHandlers::logout)
+                .get("/deleteSelf", accountHandlers::deleteSelf)
+                .get("/addPost", postHandlers::addPost)
+                .post("/addPost", postHandlers::addPostRedirect)
+                .get("/viewSelfProfile", postHandlers::viewSelfProfile)
+                .delete("/deletePost/{postId}", postHandlers::deletePost)
+                .post("/addComment/{postId}", commentHandlers::addComment)
+                .get("/viewComments/{postId}", commentHandlers::viewComments)
+                .get("/viewPost/{postId}", postHandlers::viewPost)
+                .get("/viewProfile/{username}", postHandlers::viewProfile)
+                .delete("/follow/{username}", accountHandlers::follow)
+                .delete("/unfollow/{username}", accountHandlers::unfollow)
                 .get("/searchUsername", accountHandlers::searchUsername)
                 .get("/searchUsernameResults", accountHandlers::searchUsernameResults)
                 .setFallbackHandler(exchange -> {
