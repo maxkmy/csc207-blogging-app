@@ -39,7 +39,7 @@ public class LandingHandlers {
         Map<String, String> password = new HashMap<>();
         password.put("id", "password");
         password.put("label", "password");
-        password.put("type", "text");
+        password.put("type", "password");
 
         List<Map<String, String>> fields = new ArrayList<>();
         fields.add(username);
@@ -107,7 +107,7 @@ public class LandingHandlers {
         Map<String, String> password = new HashMap<>();
         password.put("id", "password");
         password.put("label", "password");
-        password.put("type", "text");
+        password.put("type", "password");
 
         List<Map<String, String>> fields = new ArrayList<>();
         fields.add(username);
