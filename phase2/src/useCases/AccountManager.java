@@ -318,4 +318,20 @@ public class AccountManager {
     public void save() {
         writer.write(accountMap);
     }
+
+    /**
+     * Searches all accounts based on a similar uesrname and returns top-limit closest usernames
+     *
+     * @param targetUsername the username of the account whose followee list will be returned
+     * @param limit the number of users to be returned
+     * @return a list of accounts whose username matches the search query
+     */
+    public List<Account> search(String targetUsername, int limit) {
+        ArrayList<Account> accounts = new ArrayList<>();
+        for (Account account : accountMap.values()) {
+            accounts.add(account);
+        }
+        accountSorter.sort(accounts, targetUsername, limit);
+        return accounts.subList(0, Math.min(limit + 1, accounts.size()));
+    }
 }

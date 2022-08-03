@@ -27,7 +27,7 @@ public class ViewCommentHandler implements HttpHandler {
         UUID postId = UUID.fromString(postIdString);
 
         Map<String, Object> context = new HashMap<>();
-        ArrayList<HashMap<String, String>> comments = commentController.getCommentsUnder(postId);
+        List<Map<String, String>> comments = commentController.getCommentsUnder(postId);
         context.put("comments", comments);
         context.put("postId", postIdString);
         context.put("returnEndpoint", "/viewPost/" + postIdString);

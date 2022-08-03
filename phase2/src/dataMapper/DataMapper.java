@@ -10,7 +10,7 @@ public class DataMapper {
     /**
      * A data structure usable by presenters
      */
-    private ArrayList<HashMap<String, String>> model = new ArrayList<>();
+    private List<Map<String, String>> model = new ArrayList<>();
 
     /**
      * Return a string representing the value for the attribute of the object.
@@ -44,10 +44,7 @@ public class DataMapper {
      * @param attributes  a list of attributes to be extracted from item
      */
     public <T> void addItem(T item, String[] attributes) {
-        HashMap<String, String> itemMap = new HashMap<>();
-        for (String attribute : attributes) {
-            itemMap.put(attribute, getAttr(item, attribute));
-        }
+        Map<String, String> itemMap = getItemMap(item, attributes);
         model.add(itemMap);
     }
 
@@ -60,14 +57,12 @@ public class DataMapper {
      */
     public <T> void deleteItem(String attribute, String value) {
         int i = 0;
-        for (HashMap<String, String> item : model) {
+        for (Map<String, String> item : model) {
             if (item.get(attribute).equals(value)) {
+                model.remove(i);
                 break;
             }
             i++;
-        }
-        if (i < model.size()) {
-            model.remove(i);
         }
     }
 
@@ -88,7 +83,7 @@ public class DataMapper {
      *
      * @return the model built from the data mapper
      */
-    public ArrayList<HashMap<String, String>> getModel() {
+    public List<Map<String, String>> getModel() {
         return model;
     }
 

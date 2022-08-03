@@ -9,10 +9,7 @@ import presenters.JinjaPresenter;
 import useCases.ManagerData;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Deque;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class ViewProfileHandler implements HttpHandler {
 
@@ -35,7 +32,7 @@ public class ViewProfileHandler implements HttpHandler {
         Map<String, Deque<String>> props = exchange.getQueryParameters();
         String username = props.get("username").getFirst();
         String requester = managerData.getCurrentUser();
-        ArrayList<HashMap<String, String>> posts = postController.getPostsWrittenBy(username);
+        List<Map<String, String>> posts = postController.getPostsWrittenBy(username);
 
         Map<String, Object> context = new HashMap<>();
         context.put("posts", posts);

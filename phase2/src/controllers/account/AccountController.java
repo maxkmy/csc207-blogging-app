@@ -1,5 +1,6 @@
 package controllers.account;
 
+import dataMapper.DataMapper;
 import exception.UserFollowedException;
 import exception.UserNotFollowedException;
 import exception.UsernameNotFoundException;
@@ -10,6 +11,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class AccountController {
     // NEW account controller for WEB
@@ -60,5 +62,14 @@ public class AccountController {
             // TODO change this to handle error cleaner
             System.out.println(e.getMessage());
         }
+    }
+
+    public List<Map<String, String>> search(String targetUsername, int limit) {
+        DataMapper accountModel = new DataMapper();
+        accountModel.addItems(
+                accountManager.search(targetUsername, limit),
+                new String[] { "username", "isAdmin" }
+        );
+        return accountModel.getModel();
     }
 }

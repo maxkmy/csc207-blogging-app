@@ -10,6 +10,7 @@ import useCases.ManagerData;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ViewSelfProfileHandler implements HttpHandler {
@@ -31,7 +32,7 @@ public class ViewSelfProfileHandler implements HttpHandler {
         // Populate context map
         Map<String, Object> context = new HashMap<>();
         String username = managerData.getCurrentUser();
-        ArrayList<HashMap<String, String>> posts = postController.getPostsWrittenBy(username);
+        List<Map<String, String>> posts = postController.getPostsWrittenBy(username);
 
         context.put("posts", posts);
         context.put("returnEndpoint", "/");

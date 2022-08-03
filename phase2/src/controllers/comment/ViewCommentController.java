@@ -42,7 +42,7 @@ public class ViewCommentController extends RequestController {
                 commentManager.getCommentsUnder(UUID.fromString(requester)),
                 new String[]{ "content", "author", "timePosted"}
         );
-        commentPresenter.printComments(commentModel.getModel());
+        // commentPresenter.printComments(commentModel.getModel());
 
         RequestFacade viewCommentFacade = new RequestFacade(
                 new RequestController[] {
