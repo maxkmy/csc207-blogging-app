@@ -11,10 +11,21 @@
             {% endfor %}
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
-        {% for account in accounts %}
-            <div class="account">
-                <a href="viewProfile/{{ account.username }}">{{ account.username }}</a>
-            </div>
-        {% endfor %}
     </div>
+    {% if accounts %}
+        <div class="container mt-5">
+            <h3>Results</h3>
+            <table class="table">
+                <tbody>
+                {% for account in accounts %}
+                    <tr>
+                        <th class="account" scope="row">
+                            <a href="viewProfile/{{ account.username }}">{{ account.username }}</a>
+                        </th>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% endif %}
 {% endblock content %}
