@@ -97,6 +97,7 @@ public class LandingHandlers {
 
         // Populate context map
         Map<String, Object> context = new HashMap<>();
+        context.put("errorMessage", "<p> Already have an account? </p> <a href=\"login\"> Log in </a>");
         context.put("submitBtnName", "sign up");
 
         Map<String, String> username = new HashMap<>();

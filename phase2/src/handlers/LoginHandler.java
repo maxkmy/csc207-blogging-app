@@ -25,7 +25,7 @@ public class LoginHandler implements HttpHandler {
         // Populate context map
         Map<String, Object> context = new HashMap<>();
         context.put("errorMessage", "<p> Don't have an account? </p> <a href=\"signUp\"> Sign up </a>");
-        context.put("submitBtnName", "log in");
+        context.put("submitBtnName", "Log in");
 
         Map<String, String> username = new HashMap<>();
         username.put("id", "username");

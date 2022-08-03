@@ -3,14 +3,13 @@ package handlers;
 import io.undertow.server.HttpHandler;
 import io.undertow.server.HttpServerExchange;
 import io.undertow.util.Headers;
+import presenters.JinjaPresenter;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.HashMap;
-
-import presenters.JinjaPresenter;
 
 public class SignUpHandler implements HttpHandler {
     @Override
@@ -22,7 +21,8 @@ public class SignUpHandler implements HttpHandler {
 
         // Populate context map
         Map<String, Object> context = new HashMap<>();
-        context.put("submitBtnName", "sign up");
+        context.put("errorMessage", "<p> Already have an account? </p> <a href=\"login\"> Log in </a>");
+        context.put("submitBtnName", "Sign up");
 
         Map<String, String> username = new HashMap<>();
         username.put("id", "username");
