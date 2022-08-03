@@ -60,6 +60,11 @@ public class HomeHandler implements HttpHandler {
             viewSelfProfile.put("description", "profile");
             requests.add(viewSelfProfile);
 
+            Map<String, String> searchUsername = new HashMap<>();
+            searchUsername.put("endpoint", "/searchUsername");
+            searchUsername.put("description", "search username");
+            requests.add(searchUsername);
+
             Map<String, Object> context = new HashMap<>();
             context.put("requests", requests);
 

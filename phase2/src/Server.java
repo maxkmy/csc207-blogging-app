@@ -1,3 +1,4 @@
+import handlers.AccountHandlers;
 import handlers.LandingHandlers;
 import handlers.RoutingHandlerFactory;
 import io.undertow.Undertow;
@@ -14,6 +15,8 @@ public class Server {
 
         RoutingHandlerFactory routingHandlerFactory = new RoutingHandlerFactory();
         LandingHandlers landingHandlers = new LandingHandlers(managerData);
+        AccountHandlers accountHandlers = new AccountHandlers(managerData);
+
         ROUTES = new RoutingHandler()
                 .get("/login", landingHandlers::login)
                 .post("/login", routingHandlerFactory.getHandler("loginRedirect", managerData))
@@ -34,6 +37,8 @@ public class Server {
                 .get("/viewProfile/{username}", routingHandlerFactory.getHandler("viewProfile", managerData))
                 .delete("/follow/{username}", routingHandlerFactory.getHandler("follow", managerData))
                 .delete("/unfollow/{username}", routingHandlerFactory.getHandler("unfollow", managerData))
+                .get("/searchUsername", accountHandlers::searchUsername)
+                .get("/searchUsernameResults", accountHandlers::searchUsernameResults)
                 .setFallbackHandler(exchange -> {
                     exchange.setStatusCode(404);
                     exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/plain");

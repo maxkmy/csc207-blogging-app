@@ -1,0 +1,15 @@
+{% extends "templates/base.jinja" %}
+{% block content %}
+    <form action="/searchUsernameResults" method="get">
+        <div class="form-group">
+            <label for="targetUsername">username</label>
+            <input type="text" id="targetUsername" name="targetUsername">
+        </div>
+        <button type="submit" class="btn btn-primary">search</button>
+    </form>
+    {% for account in accounts %}
+        <div class="account">
+            <a href="viewProfile/{{ account.username }}">{{ account.username }}</a>
+        </div>
+    {% endfor %}
+{% endblock content %}
