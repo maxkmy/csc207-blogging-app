@@ -98,6 +98,27 @@ public class AccountHandlers {
         accountController.unfollow(managerData.getCurrentUser(), userToFollow);
     }
 
+    public void followers(HttpServerExchange exchange) {
+        String templatePath = "src/templates/followers.jinja";
+        exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/html");
+
+        String user = exchange.getQueryParameters().get("username").getFirst();
+
+        List<Map<String, String>> accounts = accountController.getFollowers(user);
+
+        Map<String, Object> context = new HashMap<>();
+        context.put("accounts", accounts);
+
+        try {
+            JinjaPresenter presenter = new JinjaPresenter(context, templatePath);
+            String htmlOutput = presenter.present();
+            exchange.getResponseSender().send(htmlOutput);
+        } catch (IOException e) {
+            // TODO: redirect to appropriate status code
+            System.out.println(e.getMessage());
+        }
+    }
+
     public void viewHistory(HttpServerExchange exchange) {
         String templatePath = "src/templates/history.jinja";
         Map<String, Object> context = new HashMap<>();

@@ -303,6 +303,21 @@ public class AccountManager {
     }
 
     /**
+     * Returns a set of followers of an account
+     *
+     * @param username the username of the account whose follower list will be returned
+     * @return         a set of followers of the account with the provided username
+     */
+    public List<Account> getFollowerListOf(String username) {
+        HashSet<String> followers = getFollowersOf(username);
+        ArrayList<Account> accounts = new ArrayList<>();
+        for (String user: followers) {
+            accounts.add(getUser(user));
+        }
+        return accounts;
+    }
+
+    /**
      * Returns a set of followees of an account
      *
      * @param username the username of the account whose followee list will be returned

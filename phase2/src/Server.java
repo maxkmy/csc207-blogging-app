@@ -39,6 +39,7 @@ public class Server {
                 .delete("/unfollow/{username}", accountHandlers::unfollow)
                 .get("/searchUsername", accountHandlers::searchUsername)
                 .get("/searchUsernameResults", accountHandlers::searchUsernameResults)
+                .get("/followers/{username}", accountHandlers::followers)
                 .setFallbackHandler(exchange -> {
                     exchange.setStatusCode(404);
                     exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/plain");

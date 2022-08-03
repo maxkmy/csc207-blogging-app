@@ -1,15 +1,18 @@
 package controllers.account;
 
 import dataMapper.DataMapper;
+import entities.Account;
 import exception.UserFollowedException;
 import exception.UserNotFollowedException;
 import exception.UsernameNotFoundException;
 import useCases.AccountManager;
 import useCases.ManagerData;
 
+import java.sql.Array;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -69,6 +72,16 @@ public class AccountController {
         accountModel.addItems(
                 accountManager.search(targetUsername, limit),
                 new String[] { "username", "isAdmin" }
+        );
+        return accountModel.getModel();
+    }
+
+    public List<Map<String, String>> getFollowers(String user) {
+        DataMapper accountModel = new DataMapper();
+
+        accountModel.addItems(
+                accountManager.getFollowerListOf(user),
+                new String[] { "username", "isAdmin"}
         );
         return accountModel.getModel();
     }
