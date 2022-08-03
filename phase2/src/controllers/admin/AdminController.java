@@ -20,6 +20,7 @@ public class AdminController {
         try {
             accountManager.promoteToAdmin(user);
         } catch (UsernameNotFoundException | UserIsAdminException e) {
+            System.out.println(user);
             System.out.println(e.getMessage());
         }
     }

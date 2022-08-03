@@ -19,6 +19,14 @@ function unfollow(username) {
     });
     location.reload();
 }
+function promote(username) {
+    endpoint = `http://localhost:8080/promote/${username}`;
+    console.log(endpoint);
+    fetch(endpoint, {
+        method: "DELETE"
+    });
+    location.reload();
+}
 </script>
 {% block Posthead %}{% endblock %}
 {% endblock %}
@@ -30,10 +38,16 @@ function unfollow(username) {
 <a href="/following/{{ username }}">View Following</a>
 {% if followStatus is defined%}
     {% if followStatus is true %}
-        <button onclick="unfollow('{{ username }}')"> unfollow </button> <br>
+        <button onclick="unfollow('{{ username }}')"> unfollow </button>
     {% else %}
-        <button onclick="follow('{{ username }}')"> follow </button> <br>
+        <button onclick="follow('{{ username }}')"> follow </button>
     {% endif %}
+
+    {% if promote and not isAdmin%}
+    <button onclick="promote('{{ username }}')"> promote </button>
+    {% endif %}
+
+    <br>
 {% endif %}
 
 {% block Postcontent %}{% endblock %}

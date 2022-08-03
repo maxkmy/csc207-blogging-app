@@ -17,7 +17,12 @@ public class AdminHandlers {
 
     public void promote(HttpServerExchange exchange) {
         exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/html");
-        String userToPromote = exchange.getQueryParameters().get("username").getFirst();
-        adminController.promote(userToPromote);
+        if (managerData.getCurrentUserRole()) {
+            String userToPromote = exchange.getQueryParameters().get("username").getFirst();
+            adminController.promote(userToPromote);
+        }
+        else {
+            exchange.getResponseSender().send("invalid permissions");
+        }
     }
 }

@@ -14,6 +14,7 @@ public class Server {
         RoutingHandlerFactory routingHandlerFactory = new RoutingHandlerFactory();
         LandingHandlers landingHandlers = new LandingHandlers(managerData);
         AccountHandlers accountHandlers = new AccountHandlers(managerData);
+        AdminHandlers adminHandlers = new AdminHandlers(managerData);
         CommentHandlers commentHandlers = new CommentHandlers(managerData);
         PostHandlers postHandlers = new PostHandlers(managerData);
 
@@ -41,6 +42,7 @@ public class Server {
                 .get("/searchUsernameResults", accountHandlers::searchUsernameResults)
                 .get("/followers/{username}", accountHandlers::followers)
                 .get("/following/{username}", accountHandlers::following)
+                .delete("/promote/{username}", adminHandlers::promote)
                 .setFallbackHandler(exchange -> {
                     exchange.setStatusCode(404);
                     exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/plain");

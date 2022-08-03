@@ -128,8 +128,9 @@ public class PostHandlers {
 
             context.put("posts", posts);
             context.put("username", username);
-            context.put("isAdmin", managerData.getCurrentUserRole());
+            context.put("isAdmin", accountController.isAdmin(username));
             context.put("followStatus", accountController.isFollowing(requester, username));
+            context.put("promote", managerData.getCurrentUserRole());
         }
         else {
             templatePath = "src/templates/redirect.jinja";

@@ -26,6 +26,7 @@ public class AccountHandlers {
 
         Map<String, Object> context = new HashMap<>();
         context.put("accounts", accounts);
+        context.put("promote", managerData.getCurrentUserRole());
 
         Map<String, String> newTargetUsername = new HashMap<>();
         newTargetUsername.put("id", "targetUsername");
@@ -109,6 +110,7 @@ public class AccountHandlers {
         Map<String, Object> context = new HashMap<>();
         context.put("accounts", accounts);
         context.put("message", "Followers");
+        context.put("promote", managerData.getCurrentUserRole());
 
         try {
             JinjaPresenter presenter = new JinjaPresenter(context, templatePath);
@@ -131,6 +133,7 @@ public class AccountHandlers {
         Map<String, Object> context = new HashMap<>();
         context.put("accounts", accounts);
         context.put("message", "Following");
+        context.put("promote", managerData.getCurrentUserRole());
 
         try {
             JinjaPresenter presenter = new JinjaPresenter(context, templatePath);

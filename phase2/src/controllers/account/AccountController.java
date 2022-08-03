@@ -95,4 +95,8 @@ public class AccountController {
         );
         return accountModel.getModel();
     }
+
+    public boolean isAdmin(String username) {
+        return accountManager.isAdmin(username);
+    }
 }
