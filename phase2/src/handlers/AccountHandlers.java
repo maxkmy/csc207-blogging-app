@@ -27,6 +27,15 @@ public class AccountHandlers {
         Map<String, Object> context = new HashMap<>();
         context.put("accounts", accounts);
 
+        Map<String, String> newTargetUsername = new HashMap<>();
+        newTargetUsername.put("id", "targetUsername");
+        newTargetUsername.put("label", "username");
+        newTargetUsername.put("type", "text");
+
+        List<Map<String, String>> fields = new ArrayList<>();
+        fields.add(newTargetUsername);
+        context.put("fields", fields);
+
         String templatePath = "src/templates/accounts.jinja";
 
         try {
