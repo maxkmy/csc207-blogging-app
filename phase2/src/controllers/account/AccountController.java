@@ -85,4 +85,14 @@ public class AccountController {
         );
         return accountModel.getModel();
     }
+
+    public List<Map<String, String>> getFollowing(String user) {
+        DataMapper accountModel = new DataMapper();
+
+        accountModel.addItems(
+                accountManager.getFolloweeListOf(user),
+                new String[] { "username", "isAdmin"}
+        );
+        return accountModel.getModel();
+    }
 }

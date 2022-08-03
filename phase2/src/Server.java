@@ -40,6 +40,7 @@ public class Server {
                 .get("/searchUsername", accountHandlers::searchUsername)
                 .get("/searchUsernameResults", accountHandlers::searchUsernameResults)
                 .get("/followers/{username}", accountHandlers::followers)
+                .get("/following/{username}", accountHandlers::following)
                 .setFallbackHandler(exchange -> {
                     exchange.setStatusCode(404);
                     exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/plain");

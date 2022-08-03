@@ -25,7 +25,9 @@ function unfollow(username) {
 
 {% block content %}
 
-{{username}} <a href="/followers/{{ username }}">View Followers</a>
+{{username}}
+<a href="/followers/{{ username }}">View Followers</a>
+<a href="/following/{{ username }}">View Following</a>
 {% if followStatus is defined%}
     {% if followStatus is true %}
         <button onclick="unfollow('{{ username }}')"> unfollow </button> <br>

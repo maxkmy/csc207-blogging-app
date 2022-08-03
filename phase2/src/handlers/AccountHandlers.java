@@ -108,6 +108,29 @@ public class AccountHandlers {
 
         Map<String, Object> context = new HashMap<>();
         context.put("accounts", accounts);
+        context.put("message", "Followers");
+
+        try {
+            JinjaPresenter presenter = new JinjaPresenter(context, templatePath);
+            String htmlOutput = presenter.present();
+            exchange.getResponseSender().send(htmlOutput);
+        } catch (IOException e) {
+            // TODO: redirect to appropriate status code
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void following(HttpServerExchange exchange) {
+        String templatePath = "src/templates/followers.jinja";
+        exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/html");
+
+        String user = exchange.getQueryParameters().get("username").getFirst();
+
+        List<Map<String, String>> accounts = accountController.getFollowing(user);
+
+        Map<String, Object> context = new HashMap<>();
+        context.put("accounts", accounts);
+        context.put("message", "Following");
 
         try {
             JinjaPresenter presenter = new JinjaPresenter(context, templatePath);

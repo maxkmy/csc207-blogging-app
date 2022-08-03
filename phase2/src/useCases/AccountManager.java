@@ -303,13 +303,28 @@ public class AccountManager {
     }
 
     /**
-     * Returns a set of followers of an account
+     * Returns a list of followers of an account
      *
      * @param username the username of the account whose follower list will be returned
-     * @return         a set of followers of the account with the provided username
+     * @return         a list of followers of the account with the Account entity
      */
     public List<Account> getFollowerListOf(String username) {
         HashSet<String> followers = getFollowersOf(username);
+        ArrayList<Account> accounts = new ArrayList<>();
+        for (String user: followers) {
+            accounts.add(getUser(user));
+        }
+        return accounts;
+    }
+
+    /**
+     * Returns a list of followees of an account
+     *
+     * @param username the username of the account whose follower list will be returned
+     * @return         a list of followers of the account with the Account entity
+     */
+    public List<Account> getFolloweeListOf(String username) {
+        HashSet<String> followers = getFolloweesOf(username);
         ArrayList<Account> accounts = new ArrayList<>();
         for (String user: followers) {
             accounts.add(getUser(user));
