@@ -39,6 +39,7 @@ public class AddPostRedirectHandler implements HttpHandler {
                     content = content.replace('+', ' ');
 
                     postController.addPost(title, content, author);
+
                     new HomeHandler(managerData).handleRequest(exchange);
                 }
             }

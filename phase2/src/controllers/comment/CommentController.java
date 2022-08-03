@@ -1,14 +1,10 @@
 package controllers.comment;
 
 import dataMapper.DataMapper;
-import gateway.CommentTimeSorter;
-import gateway.ICommentSorter;
 import useCases.CommentManager;
 import useCases.ManagerData;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.UUID;
+import java.util.*;
 
 public class CommentController {
     private CommentManager commentManager;
@@ -21,7 +17,7 @@ public class CommentController {
         commentManager.addComment(postId, comment, author);
     }
 
-    public ArrayList<HashMap<String, String>> getCommentsUnder(UUID postId) {
+    public List<Map<String, String>> getCommentsUnder(UUID postId) {
         DataMapper commentModel = new DataMapper();
         commentModel.addItems(
                 commentManager.getCommentsUnder(postId),

@@ -52,7 +52,7 @@ public class ViewProfileController extends RequestController {
                 postManager.getPostsWrittenBy(target),
                 new String[]{ "title", "author", "content", "timePosted", "id"}
         );
-        postPresenter.printPosts(postModel.getModel());
+        // postPresenter.printPosts(postModel.getModel());
         RequestFacade profileFacade = new RequestFacade(
                 new RequestController[] {
                         new ViewPostNoPermissionController(postModel, postManager, commentModel, commentManager),

@@ -2,8 +2,6 @@ package controllers.post;
 
 import dataMapper.DataMapper;
 import entities.Post;
-import gateway.IPostSorter;
-import gateway.PostTimeSorter;
 import useCases.AccountManager;
 import useCases.ManagerData;
 import useCases.PostManager;
@@ -13,11 +11,9 @@ import java.util.*;
 public class PostController {
     private AccountManager accountManager;
     private PostManager postManager;
-    private ManagerData managerData;
     DataMapper postModel = new DataMapper();
 
     public PostController(ManagerData managerData) {
-        this.managerData = managerData;
         accountManager = managerData.getAccountManager();
         postManager = managerData.getPostManager();
     }
@@ -26,7 +22,7 @@ public class PostController {
         postManager.addPost(title, content, author);
     }
 
-    public ArrayList<HashMap<String, String>> getPostsWrittenBy(String author) {
+    public List<Map<String, String>> getPostsWrittenBy(String author) {
         DataMapper postModel = new DataMapper();
         postModel.addItems(
                 postManager.getPostsWrittenBy(author),
@@ -47,7 +43,7 @@ public class PostController {
         );
     }
 
-    public ArrayList<HashMap<String, String>> getFollowingPosts(String requester) {
+    public List<Map<String, String>> getFollowingPosts(String requester) {
         HashSet<String> followees = accountManager.getFolloweesOf(requester);
         ArrayList<Post> postsList = new ArrayList<>();
         for (String followee : followees) { postsList.addAll(postManager.getPostsWrittenBy(followee)); }

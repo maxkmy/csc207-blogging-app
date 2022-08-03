@@ -9,9 +9,7 @@ import dataMapper.DataMapper;
 import useCases.CommentManager;
 import useCases.PostManager;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Scanner;
+import java.util.*;
 
 public class ViewPostPermissionController extends RequestController {
     /**
@@ -53,8 +51,8 @@ public class ViewPostPermissionController extends RequestController {
     @Override
     protected boolean handleRequest(String requester) {
         try {
-            ArrayList<HashMap<String, String>> posts = postModel.getModel();
-            postPresenter.printPosts(posts);
+            List<Map<String, String>> posts = postModel.getModel();
+            // postPresenter.printPosts(posts);
             Scanner scanner = new Scanner(System.in);
             presenter.inlinePrint("Enter the number of the post you wish to view or 0 to return to your profile: ");
             int request = Integer.parseInt(scanner.nextLine());
@@ -62,8 +60,8 @@ public class ViewPostPermissionController extends RequestController {
                 return false;
             } else if (request  <= posts.size()) {
                 int postNumber = request - 1;
-                HashMap<String, String> post = posts.get(postNumber);
-                postPresenter.printPost(post);
+                Map<String, String> post = posts.get(postNumber);
+                // postPresenter.printPost(post);
                 RequestFacade postRequests = new RequestFacade(new RequestController[]{
                         new DeletePostController(postModel, postManager),
                         new AddCommentController(commentModel, commentManager, requester),
