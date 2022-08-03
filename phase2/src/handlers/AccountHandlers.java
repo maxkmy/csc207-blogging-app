@@ -36,7 +36,7 @@ public class AccountHandlers {
         fields.add(newTargetUsername);
         context.put("fields", fields);
 
-        String templatePath = "src/templates/accounts.jinja";
+        String templatePath = "src/templates/search.jinja";
 
         try {
             JinjaPresenter presenter = new JinjaPresenter(context, templatePath);
@@ -62,7 +62,7 @@ public class AccountHandlers {
         fields.add(targetUsername);
         context.put("fields", fields);
 
-        String templatePath = "src/templates/accounts.jinja";
+        String templatePath = "src/templates/search.jinja";
 
         try {
             JinjaPresenter presenter = new JinjaPresenter(context, templatePath);
