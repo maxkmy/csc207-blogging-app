@@ -58,20 +58,6 @@ public class AdminHandlers {
         if (managerData.getCurrentUserRole()) {
             String user = exchange.getQueryParameters().get("username").getFirst();
             adminController.deleteUser(user);
-
-            Map<String, Object> context = new HashMap<>();
-            context.put("endpoint", "/");
-            String templatePath = "src/templates/redirect.jinja";
-
-            try {
-                JinjaPresenter presenter = new JinjaPresenter(context, templatePath);
-                String htmlOutput = presenter.present();
-                exchange.getResponseSender().send(htmlOutput);
-            } catch (IOException e) {
-                // TODO: redirect to appropriate status code
-                System.out.println(e.getMessage());
-            }
-
         }
         else {
             exchange.getResponseSender().send("invalid permissions");
