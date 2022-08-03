@@ -1,13 +1,6 @@
 {% block Accountcontent %}
 <script>
-    function promote(username) {
-        endpoint = `http://localhost:8080/promote/${username}`;
-        console.log(endpoint);
-        fetch(endpoint, {
-            method: "DELETE"
-        });
-        location.reload();
-    }
+
 </script>
 {% if accounts %}
 <div class="container mt-5">
@@ -18,9 +11,7 @@
         <tr>
             <th class="account" scope="row">
                 <a href="/viewProfile/{{ account.username }}">{{ account.username }}</a>
-                {% if promote and not account.isAdmin %}
-                <button onclick="promote('{{ account.username }}')"> promote </button> <br>
-                {% endif %}
+
             </th>
         </tr>
         {% endfor %}
