@@ -43,6 +43,9 @@ public class Server {
                 .get("/followers/{username}", accountHandlers::followers)
                 .get("/following/{username}", accountHandlers::following)
                 .delete("/promote/{username}", adminHandlers::promote)
+                .delete("/deleteUser/{username}", adminHandlers::deleteUser)
+                .delete("/ban/{username}", adminHandlers::ban)
+                .delete("/unban/{username}", adminHandlers::unban)
                 .setFallbackHandler(exchange -> {
                     exchange.setStatusCode(404);
                     exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/plain");
