@@ -61,6 +61,16 @@ public class AccountManager {
     }
 
     /**
+     * Checks if a user is banned
+     *
+     * @param username a string representing a username of a user.
+     * @return whether an account with a given username is an admin.
+     */
+    public boolean isBanned(String username) {
+        return accountMap.get(username).getIsBanned();
+    }
+
+    /**
      * Return the account entity with a given username.
      *
      * @param username a string representing a username of a user.

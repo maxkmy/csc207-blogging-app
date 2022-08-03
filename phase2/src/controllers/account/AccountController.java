@@ -99,4 +99,8 @@ public class AccountController {
     public boolean isAdmin(String username) {
         return accountManager.isAdmin(username);
     }
+
+    public boolean isBanned(String username) {
+        return accountManager.isBanned(username);
+    }
 }
