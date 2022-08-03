@@ -8,5 +8,5 @@
     {% if author == post.author or isAdmin %}
         <button onclick="deletePost('{{ post.id }}')"> delete post</button>
     {% endif %}
-    <a href="viewComments/{{ post.id }}">view comments</a>
+    <a href="/viewComments/{{ post.id }}">view comments</a>
 {% endblock content %}
