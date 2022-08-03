@@ -1,3 +1,4 @@
+import handlers.LandingHandlers;
 import handlers.RoutingHandlerFactory;
 import io.undertow.Undertow;
 import io.undertow.server.HttpHandler;
@@ -12,9 +13,9 @@ public class Server {
     public Server(ManagerData managerData) {
 
         RoutingHandlerFactory routingHandlerFactory = new RoutingHandlerFactory();
-
+        LandingHandlers landingHandlers = new LandingHandlers(managerData);
         ROUTES = new RoutingHandler()
-                .get("/login", routingHandlerFactory.getHandler("login", managerData))
+                .get("/login", landingHandlers::login)
                 .post("/login", routingHandlerFactory.getHandler("loginRedirect", managerData))
                 .get("/", routingHandlerFactory.getHandler("home", managerData))
                 .post("/", routingHandlerFactory.getHandler("homeRedirect", managerData))
