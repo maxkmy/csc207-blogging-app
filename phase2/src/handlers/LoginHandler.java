@@ -19,11 +19,12 @@ public class LoginHandler implements HttpHandler {
     public void handleRequest(HttpServerExchange exchange) {
         exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/html");
 
-        // designate a template path (TODO: maybe this should be moved to SignUpHandler's constructor)
-        String templatePath = "src/templates/login.jinja";
+        // designate a template path
+        String templatePath = "src/templates/form.jinja";
 
         // Populate context map
         Map<String, Object> context = new HashMap<>();
+        context.put("errorMessage", "<p> Don't have an account? </p> <a href=\"signUp\"> Sign up </a>");
         context.put("submitBtnName", "log in");
 
         Map<String, String> username = new HashMap<>();

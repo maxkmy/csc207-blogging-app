@@ -17,7 +17,7 @@ public class SignUpHandler implements HttpHandler {
     public void handleRequest(HttpServerExchange exchange) {
         exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/html");
 
-        // designate a template path (TODO: maybe this should be moved to SignUpHandler's constructor)
+        // designate a template path
         String templatePath = "src/templates/form.jinja";
 
         // Populate context map
