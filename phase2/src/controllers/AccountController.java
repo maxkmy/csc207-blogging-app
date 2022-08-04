@@ -73,27 +73,38 @@ public class AccountController {
                 accountManager.search(targetUsername, limit),
                 new String[] { "username", "isAdmin" }
         );
-        return accountModel.getModel();
+        return putFolloweeStatus(accountModel.getModel());
     }
 
     public List<Map<String, String>> getFollowers(String user) {
         DataMapper accountModel = new DataMapper();
-
         accountModel.addItems(
                 accountManager.getFollowerListOf(user),
                 new String[] { "username", "isAdmin"}
         );
-        return accountModel.getModel();
+        return putFolloweeStatus(accountModel.getModel());
     }
 
     public List<Map<String, String>> getFollowing(String user) {
         DataMapper accountModel = new DataMapper();
-
         accountModel.addItems(
                 accountManager.getFolloweeListOf(user),
                 new String[] { "username", "isAdmin"}
         );
-        return accountModel.getModel();
+        return putFolloweeStatus(accountModel.getModel());
+    }
+
+    private List<Map<String, String>> putFolloweeStatus(List<Map<String, String>> accounts) {
+        for (Map<String, String> account: accounts) {
+            if (isFollowing(managerData.getCurrentUser(), account.get("username"))) {
+                account.put("followeeStatus", "followee");
+            } else if (account.get("username").equals(managerData.getCurrentUser())) {
+                account.put("followeeStatus", "self");
+            } else {
+                account.put("followeeStatus", "not followee");
+            }
+        }
+        return accounts;
     }
 
     public boolean isAdmin(String username) {
