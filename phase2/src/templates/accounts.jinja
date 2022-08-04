@@ -1,6 +1,21 @@
 {% block Accountcontent %}
 <script>
-
+    function follow(username) {
+        endpoint = `http://localhost:8080/follow/${username}`;
+        console.log(endpoint);
+        fetch(endpoint, {
+            method: "DELETE"
+        });
+        location.reload();
+    }
+    function unfollow(username) {
+        endpoint = `http://localhost:8080/unfollow/${username}`;
+        console.log(endpoint);
+        fetch(endpoint, {
+            method: "DELETE"
+        });
+        location.reload();
+    }
 </script>
 {% if accounts %}
 <div class="container mt-5">
@@ -11,7 +26,11 @@
         <tr>
             <th class="account" scope="row">
                 <a href="/viewProfile/{{ account.username }}">{{ account.username }}</a>
-
+                {% if account.followeeStatus == 'followee' %}
+                <button onclick="unfollow('{{ account.username }}')"> unfollow </button>
+                {% elif account.followeeStatus == 'not followee' %}
+                <button onclick="follow('{{ account.username }}')"> follow </button>
+                {% endif %}
             </th>
         </tr>
         {% endfor %}
