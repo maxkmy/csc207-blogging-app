@@ -1,4 +1,4 @@
-package controllers.comment;
+package controllers;
 
 import dataMapper.DataMapper;
 import useCases.CommentManager;

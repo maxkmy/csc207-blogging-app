@@ -1,14 +1,9 @@
 package handlers;
 
-import controllers.admin.AdminController;
+import controllers.AdminController;
 import io.undertow.server.HttpServerExchange;
 import io.undertow.util.Headers;
-import presenters.JinjaPresenter;
 import useCases.ManagerData;
-
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 public class AdminHandlers {
 

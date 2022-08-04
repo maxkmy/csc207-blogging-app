@@ -1,6 +1,6 @@
 package handlers;
 
-import controllers.account.AccountController;
+import controllers.AccountController;
 import io.undertow.server.HttpServerExchange;
 import io.undertow.util.Headers;
 import presenters.JinjaPresenter;

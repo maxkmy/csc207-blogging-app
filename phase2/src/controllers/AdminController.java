@@ -1,4 +1,4 @@
-package controllers.admin;
+package controllers;
 
 import exception.UserFollowedException;
 import exception.UserIsAdminException;

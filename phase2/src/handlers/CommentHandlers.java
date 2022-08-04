@@ -1,6 +1,6 @@
 package handlers;
 
-import controllers.comment.CommentController;
+import controllers.CommentController;
 import io.undertow.io.Receiver;
 import io.undertow.server.HttpServerExchange;
 import io.undertow.util.Headers;

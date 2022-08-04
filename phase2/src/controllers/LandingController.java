@@ -1,4 +1,4 @@
-package controllers.landing;
+package controllers;
 
 import exception.*;
 import useCases.AccountManager;

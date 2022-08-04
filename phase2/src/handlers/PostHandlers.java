@@ -1,7 +1,7 @@
 package handlers;
 
-import controllers.account.AccountController;
-import controllers.post.PostController;
+import controllers.AccountController;
+import controllers.PostController;
 import io.undertow.io.Receiver;
 import io.undertow.server.HttpServerExchange;
 import io.undertow.util.Headers;

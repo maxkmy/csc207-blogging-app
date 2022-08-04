@@ -10,8 +10,6 @@ public class Server {
     Undertow server;
 
     public Server(ManagerData managerData) {
-
-        RoutingHandlerFactory routingHandlerFactory = new RoutingHandlerFactory();
         LandingHandlers landingHandlers = new LandingHandlers(managerData);
         AccountHandlers accountHandlers = new AccountHandlers(managerData);
         AdminHandlers adminHandlers = new AdminHandlers(managerData);
@@ -21,8 +19,8 @@ public class Server {
         ROUTES = new RoutingHandler()
                 .get("/login", landingHandlers::login)
                 .post("/login", landingHandlers::loginRedirect)
-                .get("/", routingHandlerFactory.getHandler("home", managerData))
-                .post("/", routingHandlerFactory.getHandler("homeRedirect", managerData))
+                .get("/", new HomeHandler(managerData))
+                .post("/", new HomeRedirectHandler(managerData))
                 .get("/signUp", landingHandlers::signUp)
                 .post("/signUp", landingHandlers::signUpRedirect)
                 .get("/history", accountHandlers::viewHistory)

@@ -1,6 +1,6 @@
 package handlers;
 
-import controllers.post.PostController;
+import controllers.PostController;
 import io.undertow.server.HttpHandler;
 import io.undertow.server.HttpServerExchange;
 import io.undertow.util.Headers;

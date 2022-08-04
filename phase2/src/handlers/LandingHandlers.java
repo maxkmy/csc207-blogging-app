@@ -1,6 +1,6 @@
 package handlers;
 
-import controllers.landing.LandingController;
+import controllers.LandingController;
 import io.undertow.io.Receiver;
 import io.undertow.server.HttpServerExchange;
 import io.undertow.util.Headers;

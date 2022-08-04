@@ -1,4 +1,4 @@
-package controllers.post;
+package controllers;
 
 import dataMapper.DataMapper;
 import entities.Post;

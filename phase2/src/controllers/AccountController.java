@@ -1,4 +1,4 @@
-package controllers.account;
+package controllers;
 
 import dataMapper.DataMapper;
 import entities.Account;
