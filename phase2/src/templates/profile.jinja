@@ -75,7 +75,7 @@ function unban(username) {
     <button onclick="deleteUser('{{ username }}')"> delete user </button>
     {% endif%}
 
-    {% if permissions and not userIsBanned %}
+    {% if permissions and not userIsAdmin  not userIsBanned %}
     <button onclick="ban('{{ username }}')"> ban </button>
     {% elif permissions and userIsBanned %}
     <button onclick="unban('{{ username }}')"> unban </button>
