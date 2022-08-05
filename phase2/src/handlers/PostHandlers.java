@@ -176,4 +176,23 @@ public class PostHandlers {
             System.out.println(e.getMessage());
         }
     }
+
+    public void getFeed(HttpServerExchange exchange) {
+        exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/html");
+
+        String templatePath = "src/templates/posts.jinja";
+        Map<String, Object> context = new HashMap<>();
+        List<Map<String, String>> posts = postController.getFollowingPosts(managerData.getCurrentUser());
+        context.put("posts", posts);
+
+        // get response from Jinja and send response back to client
+        try {
+            JinjaPresenter presenter = new JinjaPresenter(context, templatePath);
+            String htmlOutput = presenter.present();
+            exchange.getResponseSender().send(htmlOutput);
+        } catch (IOException e) {
+            // TODO: redirect to appropriate status code
+            System.out.println(e.getMessage());
+        }
+    }
 }

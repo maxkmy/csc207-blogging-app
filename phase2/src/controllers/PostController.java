@@ -43,8 +43,8 @@ public class PostController {
         );
     }
 
-    public List<Map<String, String>> getFollowingPosts(String requester) {
-        HashSet<String> followees = accountManager.getFolloweesOf(requester);
+    public List<Map<String, String>> getFollowingPosts(String username) {
+        HashSet<String> followees = accountManager.getFolloweesOf(username);
         ArrayList<Post> postsList = new ArrayList<>();
         for (String followee : followees) { postsList.addAll(postManager.getPostsWrittenBy(followee)); }
         postModel.reset();

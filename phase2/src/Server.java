@@ -44,6 +44,7 @@ public class Server {
                 .delete("/deleteUser/{username}", adminHandlers::deleteUser)
                 .delete("/ban/{username}", adminHandlers::ban)
                 .delete("/unban/{username}", adminHandlers::unban)
+                .get("/feed", postHandlers::getFeed)
                 .setFallbackHandler(exchange -> {
                     exchange.setStatusCode(404);
                     exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/plain");
