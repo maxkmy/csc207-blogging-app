@@ -10,7 +10,6 @@ public class JinjaPresenter {
     Map<String, Object> context;
     Jinjava jinja = new Jinjava();
     String template;
-    // context should contain field -> List[Field], submitBtnName -> String
     public JinjaPresenter(Map<String, Object> context, String templatePath) throws IOException {
         this.context = context;
         try {

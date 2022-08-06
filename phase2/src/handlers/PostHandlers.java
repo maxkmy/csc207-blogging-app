@@ -23,9 +23,7 @@ public class PostHandlers extends Handlers {
 
     public void addPost(HttpServerExchange exchange) {
         exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/html");
-        // designate a template path
         String templatePath = "src/templates/form.jinja";
-        // Populate context map
         ViewModel viewModel = new ViewModel();
         viewModel.put("submitBtnName", "add post");
         viewModel.addFormField("title", "title", "text");
@@ -43,7 +41,6 @@ public class PostHandlers extends Handlers {
                 public void handle(HttpServerExchange exchange, String message) {
                     Map<String, Deque<String>> props = QueryParameterUtils.parseQueryString(message, "UTF_8");
                     String author = managerData.getCurrentUser();
-                    // note "username" and "password" are labels in HTML forms
                     String title = props.get("title").getFirst();
                     String content = props.get("content").getFirst();
                     title = title.replace('+', ' ');
@@ -107,11 +104,8 @@ public class PostHandlers extends Handlers {
 
     public void viewSelfProfile(HttpServerExchange exchange) {
         exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/html");
-
-        // designate a template path
         String templatePath = "src/templates/profile.jinja";
 
-        // Populate context map
         ViewModel viewModel = new ViewModel();
         String username = managerData.getCurrentUser();
         List<Map<String, String>> posts = postController.getPostsWrittenBy(username);

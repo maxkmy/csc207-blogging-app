@@ -7,8 +7,6 @@ public class ManagerData {
     private final CommentManager commentManager;
     private String currentUser;
 
-    // TODO remove comment below
-    // Addresses the data clump code smell
     public ManagerData(AccountManager accountManager,
                        PostManager postManager,
                        CommentManager commentManager) {
