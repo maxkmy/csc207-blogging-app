@@ -38,4 +38,10 @@ public class ManagerData {
     public boolean getCurrentUserRole() {
         return currentUser != null && accountManager.isAdmin(currentUser);
     }
+
+    public void save() {
+        accountManager.save();
+        postManager.save();
+        commentManager.save();
+    }
 }

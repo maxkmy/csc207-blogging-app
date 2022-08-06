@@ -51,6 +51,7 @@ public class AccountController {
      * Logs the current user out
      */
     public void logout() {
+        managerData.save();
         managerData.setCurrentUser(null);
     }
 
