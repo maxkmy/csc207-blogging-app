@@ -9,18 +9,30 @@ import useCases.ManagerData;
 import useCases.PostManager;
 
 public class AdminController {
-
+    /**
+     * a use case responsible for managing accounts
+     */
     private AccountManager accountManager;
+    /**
+     * a use case responsible for managing posts
+     */
     private PostManager postManager;
+    /**
+     * a use case responsible for managing comments
+     */
     private CommentManager commentManager;
-    private ManagerData managerData;
 
+    /**
+     * Constructor of a controller for admins
+     *
+     * @param managerData an object that groups use cases together
+     */
     public AdminController(ManagerData managerData) {
         accountManager = managerData.getAccountManager();
         postManager = managerData.getPostManager();
         commentManager = managerData.getCommentManager();
-        this.managerData = managerData;
     }
+
 
     public void promote(String user) {
         try {

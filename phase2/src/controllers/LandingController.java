@@ -5,8 +5,16 @@ import useCases.AccountManager;
 import useCases.ManagerData;
 
 public class LandingController {
+    /**
+     * a use case responsible for managing accounts
+     */
     AccountManager accountManager;
 
+    /**
+     * Constructor of a controller for sign up and login
+     *
+     * @param managerData an object that groups use cases together
+     */
     public LandingController(ManagerData managerData) {
         this.accountManager = managerData.getAccountManager();
     }

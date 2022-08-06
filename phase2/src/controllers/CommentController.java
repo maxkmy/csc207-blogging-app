@@ -7,8 +7,16 @@ import useCases.ManagerData;
 import java.util.*;
 
 public class CommentController {
+    /**
+     * a use case responsible for managing comments
+     */
     private CommentManager commentManager;
 
+    /**
+     * Constructor of a controller for comments
+     *
+     * @param managerData an object that groups use cases together
+     */
     public CommentController(ManagerData managerData) {
         commentManager = managerData.getCommentManager();
     }

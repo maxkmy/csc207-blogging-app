@@ -9,10 +9,20 @@ import useCases.PostManager;
 import java.util.*;
 
 public class PostController {
+    /**
+     * a use case responsible for managing accounts
+     */
     private AccountManager accountManager;
+    /**
+     * a use case responsible for managing posts
+     */
     private PostManager postManager;
-    DataMapper postModel = new DataMapper();
 
+    /**
+     * Constructor of a controller for posts
+     *
+     * @param managerData an object that groups use cases together
+     */
     public PostController(ManagerData managerData) {
         accountManager = managerData.getAccountManager();
         postManager = managerData.getPostManager();
@@ -44,6 +54,7 @@ public class PostController {
     }
 
     public List<Map<String, String>> getFollowingPosts(String username) {
+        DataMapper postModel = new DataMapper();
         HashSet<String> followees = accountManager.getFolloweesOf(username);
         ArrayList<Post> postsList = new ArrayList<>();
         for (String followee : followees) { postsList.addAll(postManager.getPostsWrittenBy(followee)); }
