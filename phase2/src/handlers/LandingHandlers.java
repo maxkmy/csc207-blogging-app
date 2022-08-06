@@ -22,9 +22,7 @@ public class LandingHandlers extends Handlers {
     public void login(HttpServerExchange exchange) {
         exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/html");
 
-        // designate a template path
         String templatePath = "src/templates/form.jinja";
-        // Populate context map
         ViewModel viewModel = new ViewModel();
         viewModel.put("errorMessage", "<p> Don't have an account? </p> <a href=\"signUp\"> Sign up </a>");
         viewModel.put("submitBtnName", "log in");
@@ -43,7 +41,6 @@ public class LandingHandlers extends Handlers {
             @Override
             public void handle(HttpServerExchange exchange, String message) {
                 Map<String, Deque<String>> props = QueryParameterUtils.parseQueryString(message, "UTF_8");
-                // note "username" and "password" are labels in HTML forms
                 String username = props.get("username").getFirst();
                 String password = props.get("password").getFirst();
 
@@ -68,7 +65,6 @@ public class LandingHandlers extends Handlers {
 
         String templatePath = "src/templates/form.jinja";
 
-        // Populate context map
         ViewModel viewModel = new ViewModel();
         viewModel.put("errorMessage", "<p> Already have an account? </p> <a href=\"login\"> Log in </a>");
         viewModel.put("submitBtnName", "sign up");
@@ -77,7 +73,6 @@ public class LandingHandlers extends Handlers {
         viewModel.put("action", "/signUp");
         viewModel.put("method", "post");
 
-        // get response from Jinja and send response back to client
         present(exchange, viewModel.getContext(), templatePath);
     }
 
@@ -87,7 +82,6 @@ public class LandingHandlers extends Handlers {
         exchange.getRequestReceiver().receiveFullString(new Receiver.FullStringCallback() {
                 public void handle(HttpServerExchange exchange, String message) {
                     Map<String, Deque<String>> props = QueryParameterUtils.parseQueryString(message, "UTF_8");
-                    // note "username" and "password" are labels in HTML forms
                     String username = props.get("username").getFirst();
                     String password = props.get("password").getFirst();
 

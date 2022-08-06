@@ -16,7 +16,6 @@ public class AccountHandlers extends Handlers {
         this.managerData = managerData;
     }
 
-    // endpoint for POST request
     public void searchUsernameResults(HttpServerExchange exchange) {
         int limit = 10;
         Map<String, Deque<String>> props = exchange.getQueryParameters();
@@ -26,14 +25,15 @@ public class AccountHandlers extends Handlers {
         viewModel.put("accounts", accounts);
         viewModel.addFormField("targetUsername", "username", "text");
         String templatePath = "src/templates/search.jinja";
+        viewModel.put("returnEndpoint", "/");
         present(exchange, viewModel.getContext(), templatePath);
     }
 
-    // endpoint for search bar (with no posts yet)
     public void searchUsername(HttpServerExchange exchange) {
         ViewModel viewModel = new ViewModel();
         viewModel.put("submitBtnName", "search");
         viewModel.addFormField("targetUsername", "username", "text");
+        viewModel.put("returnEndpoint", "/");
         String templatePath = "src/templates/search.jinja";
         present(exchange, viewModel.getContext(), templatePath);
     }

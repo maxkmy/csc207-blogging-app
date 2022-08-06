@@ -17,8 +17,6 @@ import java.util.List;
 import java.util.Map;
 
 public class AccountController {
-    // NEW account controller for WEB
-    // replaces the account package
     private AccountManager accountManager;
     private ManagerData managerData;
 
@@ -53,7 +51,6 @@ public class AccountController {
         try {
             accountManager.follow(user1, user2);
         } catch (UsernameNotFoundException | UserFollowedException e) {
-            // TODO change this to handle error cleaner
             System.out.println(e.getMessage());
         }
     }
@@ -62,7 +59,6 @@ public class AccountController {
         try {
             accountManager.unfollow(user1, user2);
         } catch (UsernameNotFoundException | UserNotFollowedException e) {
-            // TODO change this to handle error cleaner
             System.out.println(e.getMessage());
         }
     }

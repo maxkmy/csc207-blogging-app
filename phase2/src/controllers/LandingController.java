@@ -5,10 +5,6 @@ import useCases.AccountManager;
 import useCases.ManagerData;
 
 public class LandingController {
-    // TODO Remove below comments:
-    // NEW CONTROLLER FOR WEB
-    // COMBINES THIS PACKAGE INTO ONE
-
     AccountManager accountManager;
 
     public LandingController(ManagerData managerData) {
