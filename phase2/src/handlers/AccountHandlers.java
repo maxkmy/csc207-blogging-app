@@ -3,10 +3,8 @@ package handlers;
 import controllers.AccountController;
 import io.undertow.server.HttpServerExchange;
 import io.undertow.util.Headers;
-import presenters.JinjaPresenter;
 import useCases.ManagerData;
 
-import java.io.IOException;
 import java.util.*;
 
 public class AccountHandlers extends Handlers {

@@ -6,10 +6,8 @@ import io.undertow.io.Receiver;
 import io.undertow.server.HttpServerExchange;
 import io.undertow.util.Headers;
 import io.undertow.util.QueryParameterUtils;
-import presenters.JinjaPresenter;
 import useCases.ManagerData;
 
-import java.io.IOException;
 import java.util.*;
 
 public class PostHandlers extends Handlers {
