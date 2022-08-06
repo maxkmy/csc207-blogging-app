@@ -87,6 +87,13 @@ public class DataMapper {
         return model;
     }
 
+    /**
+     * Returns a map created by extracting attributes from an object
+     *
+     * @param item        an objects to be converted into a map
+     * @param attributes  a list of attributes to be extracted from each item in the iterable of object
+     * @return a map created by extracting attributes from an object
+     */
     public <T> Map<String, String> getItemMap(T item, String[] attributes) {
         Map<String, String> itemMap = new HashMap<>();
         for (String attribute : attributes) {

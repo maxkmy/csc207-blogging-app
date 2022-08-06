@@ -1,7 +1,14 @@
 package gateway;
 
 public class StringMatcher {
-    // returns the distance between 2 words where we can insert, delete or replace chars
+    /**
+     * Returns the number of operations (adding a character, deleting a character, changing a character) needed
+     * to get from a start string to a target string
+     *
+     * @param word1 the start string
+     * @param word2 the target string
+     * @return the number of operations needed to convert word1 to word2
+     */
     public int editDistance(String word1, String word2) {
         int length1 = word1.length();
         int length2 = word2.length();
@@ -18,6 +25,7 @@ public class StringMatcher {
             dp[i][length2] = dp[i + 1][length2] + 1;
         }
 
+        // fill in remainder of dp matrix
         for (int i = length1 - 1; i >= 0; i--) {
             for (int j = length2 - 1; j >= 0; j--) {
                 if (word1.charAt(i) == word2.charAt(j)) {
