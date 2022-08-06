@@ -12,7 +12,7 @@ import useCases.ManagerData;
 import java.io.IOException;
 import java.util.*;
 
-public class PostHandlers {
+public class PostHandlers extends Handlers {
     private PostController postController;
     private AccountController accountController;
     private ManagerData managerData;
@@ -50,15 +50,7 @@ public class PostHandlers {
         context.put("action", "/addPost");
         context.put("method", "post");
 
-        // get response from Jinja and send response back to client
-        try {
-            JinjaPresenter presenter = new JinjaPresenter(context, templatePath);
-            String htmlOutput = presenter.present();
-            exchange.getResponseSender().send(htmlOutput);
-        } catch (IOException e) {
-            // TODO: redirect to appropriate status code
-            System.out.println(e.getMessage());
-        }
+        present(exchange, context, templatePath);
     }
 
     public void addPostRedirect(HttpServerExchange exchange) {
@@ -101,16 +93,7 @@ public class PostHandlers {
 
         String templatePath = "src/templates/post.jinja";
 
-        try {
-            JinjaPresenter presenter = new JinjaPresenter(context, templatePath);
-            String htmlOutput = presenter.present();
-            // TODO: delete after testing
-            System.out.println("html: " + htmlOutput);
-            exchange.getResponseSender().send(htmlOutput);
-        } catch (IOException e) {
-            System.out.println("error occured");
-            System.out.println(e.getMessage());
-        }
+        present(exchange, context, templatePath);
     }
 
     public void viewProfile(HttpServerExchange exchange) {
@@ -139,14 +122,7 @@ public class PostHandlers {
             context.put("endpoint", "viewSelfProfile");
         }
 
-        try {
-            JinjaPresenter presenter = new JinjaPresenter(context, templatePath);
-            String htmlOutput = presenter.present();
-            exchange.getResponseSender().send(htmlOutput);
-        } catch (IOException e) {
-            // TODO: redirect to appropriate status code
-            System.out.println(e.getMessage());
-        }
+        present(exchange, context, templatePath);
     }
 
     public void viewSelfProfile(HttpServerExchange exchange) {
@@ -166,15 +142,7 @@ public class PostHandlers {
         context.put("username", managerData.getCurrentUser());
         context.put("isAdmin", managerData.getCurrentUserRole());
 
-        // get response from Jinja and send response back to client
-        try {
-            JinjaPresenter presenter = new JinjaPresenter(context, templatePath);
-            String htmlOutput = presenter.present();
-            exchange.getResponseSender().send(htmlOutput);
-        } catch (IOException e) {
-            // TODO: redirect to appropriate status code
-            System.out.println(e.getMessage());
-        }
+        present(exchange, context, templatePath);
     }
 
     public void getFeed(HttpServerExchange exchange) {
@@ -185,14 +153,6 @@ public class PostHandlers {
         List<Map<String, String>> posts = postController.getFollowingPosts(managerData.getCurrentUser());
         context.put("posts", posts);
 
-        // get response from Jinja and send response back to client
-        try {
-            JinjaPresenter presenter = new JinjaPresenter(context, templatePath);
-            String htmlOutput = presenter.present();
-            exchange.getResponseSender().send(htmlOutput);
-        } catch (IOException e) {
-            // TODO: redirect to appropriate status code
-            System.out.println(e.getMessage());
-        }
+        present(exchange, context, templatePath);
     }
 }

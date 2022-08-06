@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class HomeHandler implements HttpHandler {
+public class HomeHandler extends Handlers implements HttpHandler {
 
     ManagerData managerData;
     PostController postController;
@@ -71,14 +71,7 @@ public class HomeHandler implements HttpHandler {
             context.put("posts", postController.getFollowingPosts(managerData.getCurrentUser()));
 
             String templatePath = "src/templates/menu.jinja";
-            try {
-                JinjaPresenter presenter = new JinjaPresenter(context, templatePath);
-                String htmlOutput = presenter.present();
-                exchange.getResponseSender().send(htmlOutput);
-            } catch (IOException e) {
-                // TODO: redirect to appropriate status code
-                System.out.println(e.getMessage());
-            }
+            present(exchange, context, templatePath);
         }
     }
 }

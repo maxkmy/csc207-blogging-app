@@ -11,7 +11,7 @@ import useCases.ManagerData;
 import java.io.IOException;
 import java.util.*;
 
-public class CommentHandlers {
+public class CommentHandlers extends Handlers {
     private ManagerData managerData;
     private CommentController commentController;
     public CommentHandlers(ManagerData managerData) {
@@ -36,14 +36,7 @@ public class CommentHandlers {
                     Map<String, Object> context = new HashMap<>();
                     context.put("endpoint", "viewComments/" + postIdString);
                     String templatePath = "src/templates/redirect.jinja";
-                    try {
-                        JinjaPresenter presenter = new JinjaPresenter(context, templatePath);
-                        String htmlOutput = presenter.present();
-                        exchange.getResponseSender().send(htmlOutput);
-                    } catch (IOException e) {
-                        // TODO: redirect to appropriate status code
-                        System.out.println(e.getMessage());
-                    }
+                    present(exchange, context, templatePath);
                 }
             }
         );
@@ -62,15 +55,6 @@ public class CommentHandlers {
         context.put("returnEndpoint", "/viewPost/" + postIdString);
 
         String templatePath = "src/templates/comments.jinja";
-
-        // get response from Jinja and send response back to client
-        try {
-            JinjaPresenter presenter = new JinjaPresenter(context, templatePath);
-            String htmlOutput = presenter.present();
-            exchange.getResponseSender().send(htmlOutput);
-        } catch (IOException e) {
-            // TODO: redirect to appropriate status code
-            System.out.println(e.getMessage());
-        }
+        present(exchange, context, templatePath);
     }
 }

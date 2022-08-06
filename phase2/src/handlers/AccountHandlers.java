@@ -9,7 +9,7 @@ import useCases.ManagerData;
 import java.io.IOException;
 import java.util.*;
 
-public class AccountHandlers {
+public class AccountHandlers extends Handlers {
     private ManagerData managerData;
     private AccountController accountController;
     public AccountHandlers(ManagerData managerData) {
@@ -38,14 +38,7 @@ public class AccountHandlers {
 
         String templatePath = "src/templates/search.jinja";
 
-        try {
-            JinjaPresenter presenter = new JinjaPresenter(context, templatePath);
-            String htmlOutput = presenter.present();
-            exchange.getResponseSender().send(htmlOutput);
-        } catch (IOException e) {
-            // TODO: redirect to appropriate status code
-            System.out.println(e.getMessage());
-        }
+        present(exchange, context, templatePath);
     }
 
     // endpoint for search bar (with no posts yet)
@@ -64,14 +57,7 @@ public class AccountHandlers {
 
         String templatePath = "src/templates/search.jinja";
 
-        try {
-            JinjaPresenter presenter = new JinjaPresenter(context, templatePath);
-            String htmlOutput = presenter.present();
-            exchange.getResponseSender().send(htmlOutput);
-        } catch (IOException e) {
-            // TODO: redirect to appropriate status code
-            System.out.println(e.getMessage());
-        }
+        present(exchange, context, templatePath);
     }
 
     public void deleteSelf(HttpServerExchange exchange) {
@@ -111,14 +97,7 @@ public class AccountHandlers {
         context.put("message", "Followers");
         context.put("promote", managerData.getCurrentUserRole());
 
-        try {
-            JinjaPresenter presenter = new JinjaPresenter(context, templatePath);
-            String htmlOutput = presenter.present();
-            exchange.getResponseSender().send(htmlOutput);
-        } catch (IOException e) {
-            // TODO: redirect to appropriate status code
-            System.out.println(e.getMessage());
-        }
+        present(exchange, context, templatePath);
     }
 
     public void following(HttpServerExchange exchange) {
@@ -134,14 +113,7 @@ public class AccountHandlers {
         context.put("message", "Following");
         context.put("promote", managerData.getCurrentUserRole());
 
-        try {
-            JinjaPresenter presenter = new JinjaPresenter(context, templatePath);
-            String htmlOutput = presenter.present();
-            exchange.getResponseSender().send(htmlOutput);
-        } catch (IOException e) {
-            // TODO: redirect to appropriate status code
-            System.out.println(e.getMessage());
-        }
+        present(exchange, context, templatePath);
     }
 
     public void viewHistory(HttpServerExchange exchange) {
@@ -152,15 +124,6 @@ public class AccountHandlers {
         List<String> dates = accountController.viewHistory();
 
         context.put("dates", dates);
-
-        // get response from Jinja and send response back to client
-        try {
-            JinjaPresenter presenter = new JinjaPresenter(context, templatePath);
-            String htmlOutput = presenter.present();
-            exchange.getResponseSender().send(htmlOutput);
-        } catch (IOException e) {
-            // TODO: redirect to appropriate status code
-            System.out.println(e.getMessage());
-        }
+        present(exchange, context, templatePath);
     }
 }

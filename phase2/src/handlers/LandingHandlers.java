@@ -11,7 +11,7 @@ import useCases.ManagerData;
 import java.io.IOException;
 import java.util.*;
 
-public class LandingHandlers {
+public class LandingHandlers extends Handlers {
     private ManagerData managerData;
     private LandingController landingController;
 
@@ -50,14 +50,7 @@ public class LandingHandlers {
         context.put("method", "post");
 
         // get response from Jinja and send response back to client
-        try {
-            JinjaPresenter presenter = new JinjaPresenter(context, templatePath);
-            String htmlOutput = presenter.present();
-            exchange.getResponseSender().send(htmlOutput);
-        } catch (IOException e) {
-            // TODO: redirect to appropriate status code
-            System.out.println(e.getMessage());
-        }
+        present(exchange, context, templatePath);
     }
 
     public void loginRedirect(HttpServerExchange exchange) {
@@ -119,14 +112,7 @@ public class LandingHandlers {
         context.put("method", "post");
 
         // get response from Jinja and send response back to client
-        try {
-            JinjaPresenter presenter = new JinjaPresenter(context, templatePath);
-            String htmlOutput = presenter.present();
-            exchange.getResponseSender().send(htmlOutput);
-        } catch (IOException e) {
-            // TODO: redirect to appropriate status code
-            System.out.println(e.getMessage());
-        }
+        present(exchange, context, templatePath);
     }
 
     public void signUpRedirect(HttpServerExchange exchange) {
