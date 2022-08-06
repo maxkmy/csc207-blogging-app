@@ -34,6 +34,11 @@ public class AdminController {
     }
 
 
+    /**
+     * Promotes a user
+     *
+     * @param user a username
+     */
     public void promote(String user) {
         try {
             accountManager.promoteToAdmin(user);
@@ -42,6 +47,11 @@ public class AdminController {
         }
     }
 
+    /**
+     * Bans a user
+     *
+     * @param user a username
+     */
     public void ban(String user) {
         try {
             accountManager.ban(user);
@@ -50,6 +60,11 @@ public class AdminController {
         }
     }
 
+    /**
+     * Unbans a user
+     *
+     * @param user a username
+     */
     public void unban(String user) {
         try {
             accountManager.unban(user);
@@ -58,6 +73,11 @@ public class AdminController {
         }
     }
 
+    /**
+     * Deletes a user
+     *
+     * @param user a username
+     */
     public void deleteUser(String user) {
         try {
             accountManager.deleteUser(user);
