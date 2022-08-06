@@ -19,6 +19,12 @@ public class LandingHandlers extends Handlers {
         landingController = new LandingController(managerData);
     }
 
+    /**
+     * Represents HttpHandler Class
+     * Handles GET request for login page
+     *
+     * @param exchange An HTTP server request/response exchange
+     */
     public void login(HttpServerExchange exchange) {
         exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/html");
 
@@ -34,6 +40,12 @@ public class LandingHandlers extends Handlers {
         present(exchange, viewModel.getContext(), templatePath);
     }
 
+    /**
+     * Represents HttpHandler Class
+     * Handles POST request from login form
+     *
+     * @param exchange An HTTP server request/response exchange
+     */
     public void loginRedirect(HttpServerExchange exchange) {
         exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/html");
 
@@ -60,6 +72,12 @@ public class LandingHandlers extends Handlers {
         });
     }
 
+    /**
+     * Represents HttpHandler Class
+     * Handles GET request for sign up page
+     *
+     * @param exchange An HTTP server request/response exchange
+     */
     public void signUp(HttpServerExchange exchange) {
         exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/html");
 
@@ -76,6 +94,12 @@ public class LandingHandlers extends Handlers {
         present(exchange, viewModel.getContext(), templatePath);
     }
 
+    /**
+     * Represents HttpHandler Class
+     * Handles POST request from sign up form
+     *
+     * @param exchange An HTTP server request/response exchange
+     */
     public void signUpRedirect(HttpServerExchange exchange) {
         exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/html");
 
