@@ -13,16 +13,25 @@
 {% endblock %}
 
 {% block Postcontent %}
-    {% for post in posts %}
-        <div class="post">
-            <p> time: {{ post.timePosted }} </p>
-            <p> author: {{ post.author }} </p>
-            <p> title: {{ post.title }} </p>
-            {% if author == post.author or isAdmin %}
-                <button onclick="deletePost('{{ post.id }}')"> delete post</button>
-            {% endif %}
-            <a href="/viewComments/{{ post.id }}">view comments</a>
-            <a href="/viewPost/{{ post.id }}">view post</a>
-        </div>
-    {% endfor %}
+    <div class="container mb-3">
+        {% if not posts %}
+            <p class="text-center"><i>No posts yet</i></p>
+        {% elif posts %}
+            {% for post in posts %}
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ post.title }}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">{{ post.author }} • {{ post.timePosted }}</h6>
+                        <p class="card-text">{{ post.content }}</p>
+
+                        {% if author == post.author or isAdmin %}
+                            <button type="button" class="btn btn-danger btn-md mr-3" onclick="deletePost('{{ post.id }}')"> Delete post</button>
+                        {% endif %}
+                        <a class="card-link" href="/viewComments/{{ post.id }}">View comments</a>
+                        <a class="card-link" href="/viewPost/{{ post.id }}">View post</a>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
 {% endblock content %}

@@ -58,32 +58,55 @@ function unban(username) {
 
 {% block content %}
 
-{{username}}
-<a href="/followers/{{ username }}">View Followers</a>
-<a href="/following/{{ username }}">View Following</a>
-{% if followStatus is defined%}
-    {% if followStatus is true %}
-        <button onclick="unfollow('{{ username }}')"> unfollow </button>
-    {% else %}
-        <button onclick="follow('{{ username }}')"> follow </button>
+<div class="container mt-5 pb-3 mb-5" style="border-bottom: 1px solid gray">
+    <div class="row">
+        <div class="col-sm">
+            <h1>{{username}}</h1>
+        </div>
+        <div class="col-sm">
+            <a href="/followers/{{ username }}">View Followers</a>
+        </div>
+        <div class="col-sm">
+            <a href="/following/{{ username }}">View Following</a>
+        </div>
+    </div>
+
+
+
+
+    {% if followStatus is defined%}
+        {% if followStatus is true %}
+            <button type="button" class="btn btn-primary btn-md btn-block mt-3" onclick="unfollow('{{ username }}')"> Unfollow </button>
+        {% else %}
+            <button type="button" class="btn btn-secondary btn-md btn-block mt-3" onclick="follow('{{ username }}')"> Follow </button>
+        {% endif %}
+
+        {% if permissions %}
+            <div class="row mt-3">
+                {% if not userIsAdmin and not userIsBanned%}
+                    <div class="col-sm">
+                        <button type="button" class="btn btn-info btn-sm" onclick="promote('{{ username }}')"> Promote </button>
+                    </div>
+                {% endif %}
+                {% if not userIsAdmin %}
+                    <div class="col-sm">
+                        <button type="button" class="btn btn-info btn-sm" onclick="deleteUser('{{ username }}')"> Delete user </button>
+                    </div>
+                {% endif%}
+                {% if not userIsAdmin and not userIsBanned %}
+                    <div class="col-sm">
+                        <button type="button" class="btn btn-info btn-sm" onclick="ban('{{ username }}')"> Ban </button>
+                    </div>
+                {% elif userIsBanned %}
+                    <div class="col-sm">
+                        <button type="button" class="btn btn-info btn-sm" onclick="unban('{{ username }}')"> Unban </button>
+                    </div>
+                {% endif %}
+            </div>
+        {% endif %}
+        <br>
     {% endif %}
-
-    {% if permissions and not userIsAdmin and not userIsBanned%}
-    <button onclick="promote('{{ username }}')"> promote </button>
-    {% endif %}
-
-    {% if permissions and not userIsAdmin %}
-    <button onclick="deleteUser('{{ username }}')"> delete user </button>
-    {% endif%}
-
-    {% if permissions and not userIsAdmin and not userIsBanned %}
-    <button onclick="ban('{{ username }}')"> ban </button>
-    {% elif permissions and userIsBanned %}
-    <button onclick="unban('{{ username }}')"> unban </button>
-    {% endif %}
-
-    <br>
-{% endif %}
+</div>
 
 {% block Postcontent %}{% endblock %}
 {% endblock %}

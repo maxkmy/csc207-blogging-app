@@ -1,12 +1,16 @@
 {% extends "templates/base.jinja" %}
 
 {% block content %}
-    <p> time: {{ post.timePosted }} </p>
-    <p> author: {{ post.author }} </p>
-    <p> title: {{ post.title }} </p>
-    <p> content: {{ post.content }} </p>
-    {% if author == post.author or isAdmin %}
-        <button onclick="deletePost('{{ post.id }}')"> delete post</button>
-    {% endif %}
-    <a href="/viewComments/{{ post.id }}">view comments</a>
+    <div class="card">
+        <div class="card-body">
+            <h2 class="card-title">{{ post.title }}</h2>
+            <h4 class="card-subtitle mb-2 text-muted">{{ post.author }} • {{ post.timePosted }}</h4>
+            <p class="card-text">{{ post.content }}</p>
+
+            {% if author == post.author or isAdmin %}
+                <button type="button" class="btn btn-danger btn-md mr-5" onclick="deletePost('{{ post.id }}')"> Delete post</button>
+            {% endif %}
+            <a class="card-link" href="/viewComments/{{ post.id }}">View comments</a>
+        </div>
+    </div>
 {% endblock content %}
