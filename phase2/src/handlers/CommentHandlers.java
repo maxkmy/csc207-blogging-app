@@ -18,6 +18,12 @@ public class CommentHandlers extends Handlers {
         commentController = new CommentController(managerData);
     }
 
+    /**
+     * Represents HttpHandler Class
+     * Handles POST request for adding comments
+     *
+     * @param exchange An HTTP server request/response exchange
+     */
     public void addComment(HttpServerExchange exchange) {
         exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/html");
         exchange.getRequestReceiver().receiveFullString(new Receiver.FullStringCallback() {
@@ -40,6 +46,12 @@ public class CommentHandlers extends Handlers {
         );
     }
 
+    /**
+     * Represents HttpHandler Class
+     * Handles GET request for viewing comments
+     *
+     * @param exchange An HTTP server request/response exchange
+     */
     public void viewComments(HttpServerExchange exchange) {
         exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/html");
         Map<String, Deque<String>> props = exchange.getQueryParameters();
