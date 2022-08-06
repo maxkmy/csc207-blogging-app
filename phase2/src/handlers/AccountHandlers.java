@@ -26,6 +26,7 @@ public class AccountHandlers extends Handlers {
         viewModel.put("accounts", accounts);
         viewModel.addFormField("targetUsername", "username", "text");
         String templatePath = "src/templates/search.jinja";
+        viewModel.put("returnEndpoint", "/");
         present(exchange, viewModel.getContext(), templatePath);
     }
 
@@ -34,6 +35,7 @@ public class AccountHandlers extends Handlers {
         ViewModel viewModel = new ViewModel();
         viewModel.put("submitBtnName", "search");
         viewModel.addFormField("targetUsername", "username", "text");
+        viewModel.put("returnEndpoint", "/");
         String templatePath = "src/templates/search.jinja";
         present(exchange, viewModel.getContext(), templatePath);
     }

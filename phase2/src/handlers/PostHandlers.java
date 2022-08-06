@@ -32,6 +32,7 @@ public class PostHandlers extends Handlers {
         viewModel.addFormField("content", "content", "text");
         viewModel.put("action", "/addPost");
         viewModel.put("method", "post");
+        viewModel.put("returnEndpoint", "/");
         present(exchange, viewModel.getContext(), templatePath);
     }
 
@@ -69,8 +70,8 @@ public class PostHandlers extends Handlers {
         String postIdString = props.get("postId").getFirst();
         UUID postId = UUID.fromString(postIdString);
         Map<String, String> post = postController.getPost(postId);
-
         ViewModel viewModel = new ViewModel();
+        viewModel.put("returnEndpoint", "/");
         viewModel.put("post", post);
         String templatePath = "src/templates/post.jinja";
         present(exchange, viewModel.getContext(), templatePath);
@@ -126,11 +127,11 @@ public class PostHandlers extends Handlers {
 
     public void getFeed(HttpServerExchange exchange) {
         exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/html");
-
         String templatePath = "src/templates/posts.jinja";
         ViewModel viewModel = new ViewModel();
         List<Map<String, String>> posts = postController.getFollowingPosts(managerData.getCurrentUser());
         viewModel.put("posts", posts);
+        viewModel.put("returnEndpoint", "/");
         present(exchange, viewModel.getContext(), templatePath);
     }
 }
