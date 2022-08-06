@@ -6,6 +6,7 @@ import io.undertow.server.HttpServerExchange;
 import io.undertow.util.Headers;
 import io.undertow.util.QueryParameterUtils;
 import useCases.ManagerData;
+import viewModel.ViewModel;
 
 import java.util.*;
 
@@ -23,32 +24,16 @@ public class LandingHandlers extends Handlers {
 
         // designate a template path
         String templatePath = "src/templates/form.jinja";
-
         // Populate context map
-        Map<String, Object> context = new HashMap<>();
-        context.put("errorMessage", "<p> Don't have an account? </p> <a href=\"signUp\"> Sign up </a>");
-        context.put("submitBtnName", "log in");
-
-        Map<String, String> username = new HashMap<>();
-        username.put("id", "username");
-        username.put("label", "username");
-        username.put("type", "text");
-
-        Map<String, String> password = new HashMap<>();
-        password.put("id", "password");
-        password.put("label", "password");
-        password.put("type", "password");
-
-        List<Map<String, String>> fields = new ArrayList<>();
-        fields.add(username);
-        fields.add(password);
-        context.put("fields", fields);
-
-        context.put("action", "/login");
-        context.put("method", "post");
-
+        ViewModel viewModel = new ViewModel();
+        viewModel.put("errorMessage", "<p> Don't have an account? </p> <a href=\"signUp\"> Sign up </a>");
+        viewModel.put("submitBtnName", "log in");
+        viewModel.addFormField("username", "username", "text");
+        viewModel.addFormField("password", "password", "password");
+        viewModel.put("action", "/login");
+        viewModel.put("method", "post");
         // get response from Jinja and send response back to client
-        present(exchange, context, templatePath);
+        present(exchange, viewModel.getContext(), templatePath);
     }
 
     public void loginRedirect(HttpServerExchange exchange) {
@@ -72,8 +57,6 @@ public class LandingHandlers extends Handlers {
                             "url =\n /\" />\n");
                 }
                 else {
-                    // TODO: SignUpHandler's constructor should be changed to take in a base context mapping
-                    // TODO: this way we can pass in {"errorMessage": result}
                     login(exchange);
                 }
             }
@@ -83,34 +66,19 @@ public class LandingHandlers extends Handlers {
     public void signUp(HttpServerExchange exchange) {
         exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/html");
 
-        // designate a template path (TODO: maybe this should be moved to SignUpHandler's constructor)
         String templatePath = "src/templates/form.jinja";
 
         // Populate context map
-        Map<String, Object> context = new HashMap<>();
-        context.put("errorMessage", "<p> Already have an account? </p> <a href=\"login\"> Log in </a>");
-        context.put("submitBtnName", "sign up");
-
-        Map<String, String> username = new HashMap<>();
-        username.put("id", "username");
-        username.put("label", "username");
-        username.put("type", "text");
-
-        Map<String, String> password = new HashMap<>();
-        password.put("id", "password");
-        password.put("label", "password");
-        password.put("type", "password");
-
-        List<Map<String, String>> fields = new ArrayList<>();
-        fields.add(username);
-        fields.add(password);
-        context.put("fields", fields);
-
-        context.put("action", "/signUp");
-        context.put("method", "post");
+        ViewModel viewModel = new ViewModel();
+        viewModel.put("errorMessage", "<p> Already have an account? </p> <a href=\"login\"> Log in </a>");
+        viewModel.put("submitBtnName", "sign up");
+        viewModel.addFormField("username", "username", "text");
+        viewModel.addFormField("password", "password", "password");
+        viewModel.put("action", "/signUp");
+        viewModel.put("method", "post");
 
         // get response from Jinja and send response back to client
-        present(exchange, context, templatePath);
+        present(exchange, viewModel.getContext(), templatePath);
     }
 
     public void signUpRedirect(HttpServerExchange exchange) {
@@ -133,8 +101,6 @@ public class LandingHandlers extends Handlers {
                                 "url =\n /\" />\n");
                     }
                     else {
-                        // TODO: SignUpHandler's constructor should be changed to take in a base context mapping
-                        // TODO: this way we can pass in {"errorMessage": result}
                         new LandingHandlers(managerData).signUp(exchange);
                     }
                 }

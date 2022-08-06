@@ -7,6 +7,7 @@ import io.undertow.server.HttpServerExchange;
 import io.undertow.util.Headers;
 import io.undertow.util.QueryParameterUtils;
 import useCases.ManagerData;
+import viewModel.ViewModel;
 
 import java.util.*;
 
@@ -22,33 +23,16 @@ public class PostHandlers extends Handlers {
 
     public void addPost(HttpServerExchange exchange) {
         exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/html");
-
         // designate a template path
         String templatePath = "src/templates/form.jinja";
-
         // Populate context map
-        Map<String, Object> context = new HashMap<>();
-        context.put("submitBtnName", "add post");
-
-        Map<String, String> title = new HashMap<>();
-        title.put("id", "title");
-        title.put("label", "title");
-        title.put("type", "text");
-
-        Map<String, String> content = new HashMap<>();
-        content.put("id", "content");
-        content.put("label", "content");
-        content.put("type", "text");
-
-        List<Map<String, String>> fields = new ArrayList<>();
-        fields.add(title);
-        fields.add(content);
-        context.put("fields", fields);
-
-        context.put("action", "/addPost");
-        context.put("method", "post");
-
-        present(exchange, context, templatePath);
+        ViewModel viewModel = new ViewModel();
+        viewModel.put("submitBtnName", "add post");
+        viewModel.addFormField("title", "title", "text");
+        viewModel.addFormField("content", "content", "text");
+        viewModel.put("action", "/addPost");
+        viewModel.put("method", "post");
+        present(exchange, viewModel.getContext(), templatePath);
     }
 
     public void addPostRedirect(HttpServerExchange exchange) {
@@ -86,12 +70,10 @@ public class PostHandlers extends Handlers {
         UUID postId = UUID.fromString(postIdString);
         Map<String, String> post = postController.getPost(postId);
 
-        Map<String, Object> context = new HashMap<>();
-        context.put("post", post);
-
+        ViewModel viewModel = new ViewModel();
+        viewModel.put("post", post);
         String templatePath = "src/templates/post.jinja";
-
-        present(exchange, context, templatePath);
+        present(exchange, viewModel.getContext(), templatePath);
     }
 
     public void viewProfile(HttpServerExchange exchange) {
@@ -99,7 +81,7 @@ public class PostHandlers extends Handlers {
 
         String templatePath;
         Map<String, Deque<String>> props = exchange.getQueryParameters();
-        Map<String, Object> context = new HashMap<>();
+        ViewModel viewModel = new ViewModel();
         String username = props.get("username").getFirst();
 
         if (!username.equals(managerData.getCurrentUser())) {
@@ -107,20 +89,19 @@ public class PostHandlers extends Handlers {
             String requester = managerData.getCurrentUser();
             List<Map<String, String>> posts = postController.getPostsWrittenBy(username);
 
-            context.put("posts", posts);
-            context.put("username", username);
-            context.put("userIsAdmin", accountController.isAdmin(username));
-            context.put("userIsBanned", accountController.isBanned(username));
-            context.put("followStatus", accountController.isFollowing(requester, username));
-            context.put("permissions", managerData.getCurrentUserRole());
+            viewModel.put("posts", posts);
+            viewModel.put("username", username);
+            viewModel.put("userIsAdmin", accountController.isAdmin(username));
+            viewModel.put("userIsBanned", accountController.isBanned(username));
+            viewModel.put("followStatus", accountController.isFollowing(requester, username));
+            viewModel.put("permissions", managerData.getCurrentUserRole());
         }
         else {
             templatePath = "src/templates/redirect.jinja";
-
-            context.put("endpoint", "viewSelfProfile");
+            viewModel.put("endpoint", "viewSelfProfile");
         }
 
-        present(exchange, context, templatePath);
+        present(exchange, viewModel.getContext(), templatePath);
     }
 
     public void viewSelfProfile(HttpServerExchange exchange) {
@@ -130,27 +111,26 @@ public class PostHandlers extends Handlers {
         String templatePath = "src/templates/profile.jinja";
 
         // Populate context map
-        Map<String, Object> context = new HashMap<>();
+        ViewModel viewModel = new ViewModel();
         String username = managerData.getCurrentUser();
         List<Map<String, String>> posts = postController.getPostsWrittenBy(username);
 
-        context.put("posts", posts);
-        context.put("returnEndpoint", "/");
+        viewModel.put("posts", posts);
+        viewModel.put("returnEndpoint", "/");
 
-        context.put("username", managerData.getCurrentUser());
-        context.put("isAdmin", managerData.getCurrentUserRole());
+        viewModel.put("username", managerData.getCurrentUser());
+        viewModel.put("isAdmin", managerData.getCurrentUserRole());
 
-        present(exchange, context, templatePath);
+        present(exchange, viewModel.getContext(), templatePath);
     }
 
     public void getFeed(HttpServerExchange exchange) {
         exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/html");
 
         String templatePath = "src/templates/posts.jinja";
-        Map<String, Object> context = new HashMap<>();
+        ViewModel viewModel = new ViewModel();
         List<Map<String, String>> posts = postController.getFollowingPosts(managerData.getCurrentUser());
-        context.put("posts", posts);
-
-        present(exchange, context, templatePath);
+        viewModel.put("posts", posts);
+        present(exchange, viewModel.getContext(), templatePath);
     }
 }

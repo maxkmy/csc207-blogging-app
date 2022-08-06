@@ -6,6 +6,7 @@ import io.undertow.server.HttpServerExchange;
 import io.undertow.util.Headers;
 import io.undertow.util.QueryParameterUtils;
 import useCases.ManagerData;
+import viewModel.ViewModel;
 
 import java.util.*;
 
@@ -30,11 +31,10 @@ public class CommentHandlers extends Handlers {
                     comment = comment.replace('+', ' ');
                     String author = managerData.getCurrentUser();
                     commentController.addComment(postId, comment, author);
-
-                    Map<String, Object> context = new HashMap<>();
-                    context.put("endpoint", "viewComments/" + postIdString);
+                    ViewModel viewModel = new ViewModel();
+                    viewModel.put("endpoint", "viewComments/" + postIdString);
                     String templatePath = "src/templates/redirect.jinja";
-                    present(exchange, context, templatePath);
+                    present(exchange, viewModel.getContext(), templatePath);
                 }
             }
         );
@@ -46,13 +46,13 @@ public class CommentHandlers extends Handlers {
         String postIdString = props.get("postId").getFirst();
         UUID postId = UUID.fromString(postIdString);
 
-        Map<String, Object> context = new HashMap<>();
+        ViewModel viewModel = new ViewModel();
         List<Map<String, String>> comments = commentController.getCommentsUnder(postId);
-        context.put("comments", comments);
-        context.put("postId", postIdString);
-        context.put("returnEndpoint", "/viewPost/" + postIdString);
+        viewModel.put("comments", comments);
+        viewModel.put("postId", postIdString);
+        viewModel.put("returnEndpoint", "/viewPost/" + postIdString);
 
         String templatePath = "src/templates/comments.jinja";
-        present(exchange, context, templatePath);
+        present(exchange, viewModel.getContext(), templatePath);
     }
 }
