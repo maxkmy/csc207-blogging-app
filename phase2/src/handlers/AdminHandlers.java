@@ -15,6 +15,12 @@ public class AdminHandlers {
         adminController = new AdminController(managerData);
     }
 
+    /**
+     * Represents HttpHandler Class
+     * Handles DELETE requests for promoting users
+     *
+     * @param exchange An HTTP server request/response exchange
+     */
     public void promote(HttpServerExchange exchange) {
         exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/html");
         if (managerData.getCurrentUserRole()) {
@@ -26,6 +32,12 @@ public class AdminHandlers {
         }
     }
 
+    /**
+     * Represents HttpHandler Class
+     * Handles DELETE requests for banning users
+     *
+     * @param exchange An HTTP server request/response exchange
+     */
     public void ban(HttpServerExchange exchange) {
         exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/html");
         if (managerData.getCurrentUserRole()) {
@@ -37,6 +49,12 @@ public class AdminHandlers {
         }
     }
 
+    /**
+     * Represents HttpHandler Class
+     * Handles DELETE requests for unbanning users
+     *
+     * @param exchange An HTTP server request/response exchange
+     */
     public void unban(HttpServerExchange exchange) {
         exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/html");
         if (managerData.getCurrentUserRole()) {
@@ -48,6 +66,12 @@ public class AdminHandlers {
         }
     }
 
+    /**
+     * Represents HttpHandler Class
+     * Handles DELETE requests for deleteUser
+     *
+     * @param exchange An HTTP server request/response exchange
+     */
     public void deleteUser(HttpServerExchange exchange) {
         exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/html");
         if (managerData.getCurrentUserRole()) {
