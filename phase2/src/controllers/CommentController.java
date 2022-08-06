@@ -21,10 +21,23 @@ public class CommentController {
         commentManager = managerData.getCommentManager();
     }
 
+    /**
+     * Adds a comment under a post
+     *
+     * @param postId the id of the post
+     * @param comment the content of the comment
+     * @param author the author of the comment
+     */
     public void addComment(UUID postId, String comment, String author) {
         commentManager.addComment(postId, comment, author);
     }
 
+    /**
+     * Returns the comments under a post
+     *
+     * @param postId the id of the post
+     * @return the comments under the post with id postId
+     */
     public List<Map<String, String>> getCommentsUnder(UUID postId) {
         DataMapper commentModel = new DataMapper();
         commentModel.addItems(
