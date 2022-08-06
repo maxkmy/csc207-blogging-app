@@ -19,6 +19,13 @@ public class LandingController {
         this.accountManager = managerData.getAccountManager();
     }
 
+    /**
+     * Logs in a user
+     *
+     * @param username a username
+     * @param password a password
+     * @return the status of the login
+     */
     public String login(String username, String password) {
         try {
             accountManager.login(username, password);
@@ -28,6 +35,13 @@ public class LandingController {
         }
     }
 
+    /**
+     * Signs up a user
+     *
+     * @param username a username
+     * @param password a password
+     * @return the status of the sign up
+     */
     public String signUp(String username, String password) {
         try {
             accountManager.signUp(username, password);

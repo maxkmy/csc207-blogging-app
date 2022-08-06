@@ -28,10 +28,23 @@ public class PostController {
         postManager = managerData.getPostManager();
     }
 
+    /**
+     * Add a post
+     *
+     * @param title title of the post
+     * @param content content of the post
+     * @param author author of the post
+     */
     public void addPost(String title, String content, String author) {
         postManager.addPost(title, content, author);
     }
 
+    /**
+     * Returns posts written by an author
+     *
+     * @param author an author
+     * @return a list of posts written by an author
+     */
     public List<Map<String, String>> getPostsWrittenBy(String author) {
         DataMapper postModel = new DataMapper();
         postModel.addItems(
@@ -41,10 +54,21 @@ public class PostController {
         return postModel.getModel();
     }
 
+    /**
+     * Deletes a post based on an Id
+     *
+     * @param postId the id of the post to be deleted
+     */
     public void deletePost(UUID postId) {
         postManager.deletePost(postId);
     }
 
+    /**
+     * Returns the post based on a postId
+     *
+     * @param postId the id of the post
+     * @return the post with given postId
+     */
     public Map<String, String> getPost(UUID postId) {
         DataMapper postModel = new DataMapper();
         return postModel.getItemMap(
@@ -53,6 +77,12 @@ public class PostController {
         );
     }
 
+    /**
+     * Returns a list of posts written by followees
+     *
+     * @param username a username
+     * @return a list of posts written by followees of the user with provided username
+     */
     public List<Map<String, String>> getFollowingPosts(String username) {
         DataMapper postModel = new DataMapper();
         HashSet<String> followees = accountManager.getFolloweesOf(username);
