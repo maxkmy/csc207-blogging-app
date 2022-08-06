@@ -56,6 +56,9 @@ public class Server {
                 .build();
     }
 
+    /**
+     * Starts the server
+     */
     public void start() {
         server.start();
     }
