@@ -21,6 +21,12 @@ public class PostHandlers extends Handlers {
         accountController = new AccountController(managerData);
     }
 
+    /**
+     * Represents HttpHandler Class
+     * Handles GET request for add posting page
+     *
+     * @param exchange An HTTP server request/response exchange
+     */
     public void addPost(HttpServerExchange exchange) {
         exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/html");
         String templatePath = "src/templates/form.jinja";
@@ -34,6 +40,12 @@ public class PostHandlers extends Handlers {
         present(exchange, viewModel.getContext(), templatePath);
     }
 
+    /**
+     * Represents HttpHandler Class
+     * Handles POST request for add posting form
+     *
+     * @param exchange An HTTP server request/response exchange
+     */
     public void addPostRedirect(HttpServerExchange exchange) {
         exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/html");
 
@@ -54,6 +66,12 @@ public class PostHandlers extends Handlers {
         );
     }
 
+    /**
+     * Represents HttpHandler Class
+     * Handles DELETE request for deleting post form
+     *
+     * @param exchange An HTTP server request/response exchange
+     */
     public void deletePost(HttpServerExchange exchange) {
         exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/html");
         String postIdString = exchange.getQueryParameters().get("postId").getFirst();
