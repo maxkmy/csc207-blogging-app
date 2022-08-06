@@ -12,30 +12,20 @@
     {% endblock %}
 </head>
 <body>
+    <nav class="nav nav-pills nav-justified">
+        {% set navigation_bar = [
+        ('/viewSelfProfile', 'profile', 'Profile'),
+        ('/feed', 'feed', 'Feed'),
+        ('/searchUsername', 'search', 'Search')
+        ] -%}
 
+        {% set active_page = active_page|default('profile') -%}
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-            <div class="collapse navbar-collapse">
-
-                <a href="{{ returnEndpoint }}" class="btn btn-outline-success" role="button" aria-pressed="true">Return</a>
-                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-
-                    <!--TODO: Find a way to make current page active, right now Profile is always active-->
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/viewSelfProfile">Profile </a>
-                    </li>
-
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="/feed">Feed</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/searchUsername">Search </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
+        {% for href, id, caption in navigation_bar %}
+            <a {% if id == active_page %} class="nav-item nav-link active"
+            {% else %} class = "nav-item nav-link" {% endif %}
+               href="{{ href|e }}">{{ caption|e }}</a>
+        {% endfor %}
     </nav>
 
 
