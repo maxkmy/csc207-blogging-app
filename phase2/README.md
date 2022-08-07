@@ -9,8 +9,8 @@
 # Downloading libraries 
 - Navigate to `File -> Project Structure -> Libraries`
 - Select `+ -> From Maven`
-- Search for `undertow-core` and add `io.undertow:undertow-core:2.2.18.Final` library. 
-- Search for `jinjava` and add `com.hubspot.jinjava:jinjava:2.6.0` library. 
+- Search for `undertow-core` and add the `io.undertow:undertow-core:2.2.18.Final` library. 
+- Search for `jinjava` and add the `com.hubspot.jinjava:jinjava:2.6.0` library. 
 
 # Generating data to test the program
 - Run the main methods within `CommentDataGenerator.java`, `PostDataGenerator.java` and `UserDataGenerator.java`.
@@ -28,7 +28,7 @@
 # Functionalities of the program 
 - The program contains the same functionalities as phase 0. 
   - Users can sign up, login, view login history, quit the app and delete their accounts. 
-  - In addition, admins can ban users, unban users, delete other accounts, promote users and create new admins. 
+  - In addition, admins can ban users, unban users, delete other accounts, and promote users. 
 - Additionally, some new features were added in phase 1. We split these changes into 4 categories (further discussed below). 
 - In phase 2, we made the app into a webapp that can be ran on localhost.
 
