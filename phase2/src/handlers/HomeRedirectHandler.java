@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class HomeRedirectHandler implements HttpHandler {
 
-    ManagerData managerData;
+    private ManagerData managerData;
 
     public HomeRedirectHandler(ManagerData managerData) {
         this.managerData = managerData;

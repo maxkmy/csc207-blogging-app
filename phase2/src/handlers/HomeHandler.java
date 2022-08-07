@@ -9,8 +9,8 @@ import viewModel.ViewModel;
 
 public class HomeHandler extends Handlers implements HttpHandler {
 
-    ManagerData managerData;
-    PostController postController;
+    private ManagerData managerData;
+    private PostController postController;
 
     public HomeHandler(ManagerData managerData) {
         this.managerData = managerData;

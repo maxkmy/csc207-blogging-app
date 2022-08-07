@@ -6,8 +6,8 @@ import io.undertow.util.Headers;
 import useCases.ManagerData;
 
 public class Server {
-    HttpHandler ROUTES;
-    Undertow server;
+    private HttpHandler ROUTES;
+    private Undertow server;
 
     public Server(ManagerData managerData) {
         LandingHandlers landingHandlers = new LandingHandlers(managerData);

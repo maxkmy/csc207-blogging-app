@@ -8,7 +8,7 @@ public class LandingController {
     /**
      * a use case responsible for managing accounts
      */
-    AccountManager accountManager;
+    private AccountManager accountManager;
 
     /**
      * Constructor of a controller for sign up and login

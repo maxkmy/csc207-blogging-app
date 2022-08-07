@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 public class ViewModel {
-    public Map<String, Object> context;
+    private Map<String, Object> context;
 
     public ViewModel() {
         context = new HashMap<>();
