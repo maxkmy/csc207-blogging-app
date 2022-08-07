@@ -1,7 +1,6 @@
 package useCases;
 
 public class ManagerData {
-
     private final AccountManager accountManager;
     private final PostManager postManager;
     private final CommentManager commentManager;

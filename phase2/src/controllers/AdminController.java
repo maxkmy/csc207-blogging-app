@@ -1,6 +1,5 @@
 package controllers;
 
-import exception.UserFollowedException;
 import exception.UserIsAdminException;
 import exception.UsernameNotFoundException;
 import useCases.AccountManager;
