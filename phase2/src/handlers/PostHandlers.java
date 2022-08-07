@@ -111,6 +111,8 @@ public class PostHandlers extends Handlers {
             viewModel.put("userIsBanned", accountController.isBanned(username));
             viewModel.put("followStatus", accountController.isFollowing(requester, username));
             viewModel.put("permissions", managerData.getCurrentUserRole());
+            viewModel.put("followers", accountController.getFollowers(username).size());
+            viewModel.put("following", accountController.getFollowing(username).size());
         }
         else {
             templatePath = "src/templates/redirect.jinja";
@@ -133,6 +135,9 @@ public class PostHandlers extends Handlers {
 
         viewModel.put("username", managerData.getCurrentUser());
         viewModel.put("isAdmin", managerData.getCurrentUserRole());
+
+        viewModel.put("followers", accountController.getFollowers(username).size());
+        viewModel.put("following", accountController.getFollowing(username).size());
 
         present(exchange, viewModel.getContext(), templatePath);
     }
