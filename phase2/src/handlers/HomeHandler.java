@@ -32,7 +32,6 @@ public class HomeHandler extends Handlers implements HttpHandler {
             viewModel.addEndpoint("/logout", "logout");
             viewModel.addEndpoint("/deleteSelf",  "delete account");
             viewModel.addEndpoint("/addPost", "add post");
-            viewModel.addEndpoint("/viewSelfProfile", "profile");
             viewModel.put("posts", postController.getPostsWrittenBy(managerData.getCurrentUser()));
             String templatePath = "src/templates/menu.jinja";
             present(exchange, viewModel.getContext(), templatePath);
