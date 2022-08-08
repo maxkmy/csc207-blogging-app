@@ -60,7 +60,10 @@ public class PostHandlers extends Handlers {
 
                     postController.addPost(title, content, author);
 
-                    new HomeHandler(managerData).handleRequest(exchange);
+                    ViewModel viewModel = new ViewModel();
+                    viewModel.put("endpoint",  "");
+                    String templatePath = "src/templates/redirect.jinja";
+                    present(exchange, viewModel.getContext(), templatePath);
                 }
             }
         );
