@@ -7,10 +7,28 @@
 {% endblock %}
 
 {% block content %}
-    {% for request in requests %}
-        <a href="{{ request.endpoint }}"> {{ request.description }} </a>
-        <br>
-    {% endfor %}
+
+<div class="container mt-5 pb-3 mb-5" style="border-bottom: 1px solid gray">
+    <div class="row">
+        <div class="col-sm">
+            <h1>{{username}}</h1>
+        </div>
+        <div class="col-sm">
+            {% for request in requests %}
+            <a href="{{ request.endpoint }}"> {{ request.description }} </a>
+            <br>
+            {% endfor %}
+        </div>
+        <div class="col-sm">
+            <a href="/followers/{{ username }}">View Followers</a>
+            <p>{{followers}}</p>
+        </div>
+        <div class="col-sm">
+            <a href="/following/{{ username }}">View Following</a>
+            <p>{{following}}</p>
+        </div>
+    </div>
+</div>
 
 {% block Postcontent %}{% endblock %}
 
