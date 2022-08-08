@@ -1,0 +1,24 @@
+{% extends "templates/navbarBase.jinja" %}
+{% set active_page = "feed" %}
+{% include "templates/posts.jinja" %}
+
+{% block head %}
+{% block Posthead %}{% endblock %}
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5 pb-3 mb-5" style="border-bottom: 1px solid gray">
+    <div class="row">
+        <div class="col-sm">
+            <h1>{{username}}'s Feed</h1>
+        </div>
+        <div class="col-sm">
+            <a href="/following/{{ username }}">View Following</a>
+            <p>{{following}}</p>
+        </div>
+    </div>
+</div>
+{% block Postcontent %}{% endblock %}
+
+{% endblock content %}

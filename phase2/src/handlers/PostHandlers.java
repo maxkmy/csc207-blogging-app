@@ -144,11 +144,17 @@ public class PostHandlers extends Handlers {
 
     public void getFeed(HttpServerExchange exchange) {
         exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/html");
-        String templatePath = "src/templates/posts.jinja";
+        String templatePath = "src/templates/feed.jinja";
+
         ViewModel viewModel = new ViewModel();
+        String username = managerData.getCurrentUser();
         List<Map<String, String>> posts = postController.getFollowingPosts(managerData.getCurrentUser());
+
         viewModel.put("posts", posts);
         viewModel.put("returnEndpoint", "/");
+        viewModel.put("username", managerData.getCurrentUser());
+        viewModel.put("following", accountController.getFollowing(username).size());
+
         present(exchange, viewModel.getContext(), templatePath);
     }
 }
