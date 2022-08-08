@@ -1,17 +1,25 @@
 {% extends "templates/base.jinja" %}
 {% block content %}
-    {% for comment in comments %}
-        <div class="comment">
-            <p>author: {{ comment.author }}</p>
-            <p>time posted: {{ comment.timePosted }} </p>
-            <p>comment: {{ comment.content }} </p>
-        </div>
-    {% endfor %}
-    <form action="/addComment/{{ postId }}" method="post">
-        <div class="form-group">
-            <label for="comment">comment</label>
-            <input type="text" id="comment" name="comment">
-        </div>
-        <button type="submit" class="btn btn-primary">comment</button>
-    </form>
+    <div class="container">
+        {% if not comments %}
+            <p class="text-center"><i>No comments yet</i></p>
+        {% elif comments %}
+            {% for comment in comments %}
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h6 class="card-subtitle mb-2 text-muted">{{ comment.author }} • {{ comment.timePosted }}</h6>
+                        <p class="card-text">{{ comment.content }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+        <form class="inline mt-4" action="/addComment/{{ postId }}" method="post">
+            <div class="form-group">
+                <label for="comment">Comment</label>
+                <input class="form-control" type="text" id="comment" name="comment" placeholder="Add a comment">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
 {% endblock content %}
