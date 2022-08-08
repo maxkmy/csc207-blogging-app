@@ -14,7 +14,11 @@ public class HomeHandler extends Handlers implements HttpHandler {
     private PostController postController;
 
     private AccountController accountController;
-
+    /**
+     * Constructor for a HomeHandler
+     *
+     * @param managerData a class that contains data for all 3 managers
+     */
     public HomeHandler(ManagerData managerData) {
         this.managerData = managerData;
         this.postController = new PostController(managerData);
@@ -22,6 +26,9 @@ public class HomeHandler extends Handlers implements HttpHandler {
     }
 
     @Override
+    /*
+     * @inheritdoc
+     */
     public void handleRequest(HttpServerExchange exchange) {
         exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/html");
         String username = managerData.getCurrentUser();

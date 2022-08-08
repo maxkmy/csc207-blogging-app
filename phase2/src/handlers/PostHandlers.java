@@ -79,6 +79,12 @@ public class PostHandlers extends Handlers {
         postController.deletePost(postId);
     }
 
+    /**
+     * Represents HttpHandler Class
+     * Handles GET request for viewing posts
+     *
+     * @param exchange An HTTP server request/response exchange
+     */
     public void viewPost(HttpServerExchange exchange) {
         exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/html");
         Map<String, Deque<String>> props = exchange.getQueryParameters();
@@ -91,6 +97,12 @@ public class PostHandlers extends Handlers {
         present(exchange, viewModel.getContext(), templatePath);
     }
 
+    /**
+     * Represents HttpHandler Class
+     * Handles GET request for viewing a user profile
+     *
+     * @param exchange An HTTP server request/response exchange
+     */
     public void viewProfile(HttpServerExchange exchange) {
         exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/html");
 
@@ -121,6 +133,12 @@ public class PostHandlers extends Handlers {
         present(exchange, viewModel.getContext(), templatePath);
     }
 
+    /**
+     * Represents HttpHandler Class
+     * Handles GET request for viewing a self-profile
+     *
+     * @param exchange An HTTP server request/response exchange
+     */
     public void viewSelfProfile(HttpServerExchange exchange) {
         exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/html");
         String templatePath = "src/templates/profile.jinja";
@@ -140,6 +158,12 @@ public class PostHandlers extends Handlers {
         present(exchange, viewModel.getContext(), templatePath);
     }
 
+    /**
+     * Represents HttpHandler Class
+     * Handles GET request for getting a user's feed
+     *
+     * @param exchange An HTTP server request/response exchange
+     */
     public void getFeed(HttpServerExchange exchange) {
         exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/html");
         String templatePath = "src/templates/feed.jinja";

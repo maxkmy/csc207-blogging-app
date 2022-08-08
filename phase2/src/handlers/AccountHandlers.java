@@ -59,6 +59,7 @@ public class AccountHandlers extends Handlers {
         exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/html");
         accountController.deleteSelf();
         new LandingHandlers(managerData).login(exchange);
+        managerData.save();
     }
 
     /**

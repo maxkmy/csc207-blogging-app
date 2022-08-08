@@ -12,6 +12,9 @@ public class ViewModel {
         context = new HashMap<>();
     }
 
+    /**
+     * Adds a field (for HTML forms) to the context map.
+     */
     public void addFormField(String id, String label, String type) {
         if (context.get("fields") == null) {
             List<Map<String, String>> fields = new ArrayList<>();
@@ -25,6 +28,9 @@ public class ViewModel {
         fields.add(field);
     }
 
+    /**
+     * Adds an HTTP endpoint and its description to the context map.
+     */
     public void addEndpoint(String endpoint, String description) {
         if (context.get("requests") == null) {
             List<Map<String, String>> requests = new ArrayList<>();
@@ -37,10 +43,16 @@ public class ViewModel {
         requests.add(request);
     }
 
+    /**
+     * Adds a key-value mapping to the context map.
+     */
     public void put(String key, Object value) {
         context.put(key, value);
     }
 
+    /**
+     * Returns the context mapping.
+     */
     public Map<String, Object> getContext() {
         return context;
     }

@@ -14,11 +14,19 @@ public class HomeRedirectHandler implements HttpHandler {
 
     private ManagerData managerData;
 
+    /**
+     * Constructor for a HomeRedirectHandler
+     *
+     * @param managerData a class that contains data for all 3 managers
+     */
     public HomeRedirectHandler(ManagerData managerData) {
         this.managerData = managerData;
     }
 
     @Override
+    /*
+     * @inheritdoc
+     */
     public void handleRequest(HttpServerExchange exchange) {
         exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/html");
 
