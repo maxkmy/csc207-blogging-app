@@ -1,7 +1,7 @@
 import gateway.*;
 import useCases.*;
 
-public class NewApp {
+public class App {
     public static void main(String[] args) {
         final String userDataFileDirectory = "data/userData.txt";
         final String postDataFileDirectory = "data/postData.txt";
