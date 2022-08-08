@@ -8,6 +8,9 @@ import java.util.Map;
 public class ViewModel {
     private Map<String, Object> context;
 
+    /**
+     * Constructor for ViewModel
+     */
     public ViewModel() {
         context = new HashMap<>();
     }
