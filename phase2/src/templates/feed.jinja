@@ -1,5 +1,5 @@
 {% extends "templates/navbarBase.jinja" %}
-{% set active_page = "profile" %}
+{% set active_page = "feed" %}
 {% include "templates/posts.jinja" %}
 
 {% block head %}
@@ -11,17 +11,7 @@
 <div class="container mt-5 pb-3 mb-5" style="border-bottom: 1px solid gray">
     <div class="row">
         <div class="col-sm">
-            <h1>{{username}}</h1>
-        </div>
-        <div class="col-sm">
-            {% for request in requests %}
-            <a href="{{ request.endpoint }}"> {{ request.description }} </a>
-            <br>
-            {% endfor %}
-        </div>
-        <div class="col-sm">
-            <a href="/followers/{{ username }}">View Followers</a>
-            <p>{{followers}}</p>
+            <h1>{{username}}'s Feed</h1>
         </div>
         <div class="col-sm">
             <a href="/following/{{ username }}">View Following</a>
@@ -29,7 +19,6 @@
         </div>
     </div>
 </div>
-
 {% block Postcontent %}{% endblock %}
 
 {% endblock content %}
