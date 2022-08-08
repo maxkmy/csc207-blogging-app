@@ -62,7 +62,6 @@ public class CommentHandlers extends Handlers {
         List<Map<String, String>> comments = commentController.getCommentsUnder(postId);
         viewModel.put("comments", comments);
         viewModel.put("postId", postIdString);
-        viewModel.put("returnEndpoint", "/viewPost/" + postIdString);
 
         String templatePath = "src/templates/comments.jinja";
         present(exchange, viewModel.getContext(), templatePath);

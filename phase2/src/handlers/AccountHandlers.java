@@ -31,7 +31,6 @@ public class AccountHandlers extends Handlers {
         viewModel.put("accounts", accounts);
         viewModel.addFormField("targetUsername", "Username", "text");
         String templatePath = "src/templates/search.jinja";
-        viewModel.put("returnEndpoint", "/");
         viewModel.put("message", "Search Results");
         present(exchange, viewModel.getContext(), templatePath);
     }
@@ -46,7 +45,6 @@ public class AccountHandlers extends Handlers {
         ViewModel viewModel = new ViewModel();
         viewModel.put("submitBtnName", "search");
         viewModel.addFormField("targetUsername", "username", "text");
-        viewModel.put("returnEndpoint", "/");
         String templatePath = "src/templates/search.jinja";
         present(exchange, viewModel.getContext(), templatePath);
     }
@@ -146,7 +144,6 @@ public class AccountHandlers extends Handlers {
     public void viewHistory(HttpServerExchange exchange) {
         String templatePath = "src/templates/history.jinja";
         ViewModel viewModel = new ViewModel();
-        viewModel.put("returnEndpoint", "/");
         List<String> dates = accountController.viewHistory();
         viewModel.put("dates", dates);
         present(exchange, viewModel.getContext(), templatePath);

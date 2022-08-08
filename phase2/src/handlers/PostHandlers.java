@@ -36,7 +36,6 @@ public class PostHandlers extends Handlers {
         viewModel.addFormField("content", "content", "text");
         viewModel.put("action", "/addPost");
         viewModel.put("method", "post");
-        viewModel.put("returnEndpoint", "/");
         present(exchange, viewModel.getContext(), templatePath);
     }
 
@@ -56,7 +55,9 @@ public class PostHandlers extends Handlers {
                     String title = props.get("title").getFirst();
                     String content = props.get("content").getFirst();
                     title = title.replace('+', ' ');
+                    title = title.replace("%27", "'");
                     content = content.replace('+', ' ');
+                    content = content.replace("%27", "'");
 
                     postController.addPost(title, content, author);
 
@@ -89,7 +90,6 @@ public class PostHandlers extends Handlers {
         UUID postId = UUID.fromString(postIdString);
         Map<String, String> post = postController.getPost(postId);
         ViewModel viewModel = new ViewModel();
-        viewModel.put("returnEndpoint", "/");
         viewModel.put("post", post);
         String templatePath = "src/templates/post.jinja";
         present(exchange, viewModel.getContext(), templatePath);
@@ -134,7 +134,6 @@ public class PostHandlers extends Handlers {
         List<Map<String, String>> posts = postController.getPostsWrittenBy(username);
 
         viewModel.put("posts", posts);
-        viewModel.put("returnEndpoint", "/");
 
         viewModel.put("username", managerData.getCurrentUser());
         viewModel.put("isAdmin", managerData.getCurrentUserRole());
@@ -154,7 +153,6 @@ public class PostHandlers extends Handlers {
         List<Map<String, String>> posts = postController.getFollowingPosts(managerData.getCurrentUser());
 
         viewModel.put("posts", posts);
-        viewModel.put("returnEndpoint", "/");
         viewModel.put("username", managerData.getCurrentUser());
         viewModel.put("following", accountController.getFollowing(username).size());
 
