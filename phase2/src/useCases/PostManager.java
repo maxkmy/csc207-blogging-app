@@ -15,10 +15,6 @@ public class PostManager {
      */
     private HashMap<UUID, Post> posts = new HashMap<>();
     /**
-     * a gateway responsible for reading objects
-     */
-    private IReader reader;
-    /**
      * a gateway responsible for writing objects
      */
     private IWriter writer;
@@ -34,7 +30,6 @@ public class PostManager {
      * @param writer a gateway responsible for writing objects
      */
     public PostManager(IReader reader, IWriter writer, IPostSorter postSorter) {
-        this.reader = reader;
         this.writer = writer;
         posts = reader.read(posts.getClass());
         this.postSorter = postSorter;

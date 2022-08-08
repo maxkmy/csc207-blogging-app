@@ -15,10 +15,6 @@ public class AccountManager {
      */
     private HashMap<String, Account> accountMap = new HashMap<>();
     /**
-     * a gateway responsible for reading objects
-     */
-    private IReader reader;
-    /**
      * a gateway responsible for writing objects
      */
     private IWriter writer;
@@ -34,7 +30,6 @@ public class AccountManager {
      * @param writer a gateway responsible for writing objects
      */
     public AccountManager(IReader reader, IWriter writer, IAccountSorter accountSorter) {
-        this.reader = reader;
         this.writer = writer;
         accountMap = reader.read(accountMap.getClass());
         this.accountSorter = accountSorter;

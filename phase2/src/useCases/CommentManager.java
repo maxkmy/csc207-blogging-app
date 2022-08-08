@@ -15,10 +15,6 @@ public class CommentManager {
      */
     private HashMap<UUID, Comment> comments = new HashMap<>();
     /**
-     * a gateway responsible for reading objects
-     */
-    private IReader reader;
-    /**
      * a gateway responsible for writing objects
      */
     private IWriter writer;
@@ -34,7 +30,6 @@ public class CommentManager {
      * @param writer a gateway responsible for writing objects
      */
     public CommentManager(IReader reader, IWriter writer, ICommentSorter commentSorter) {
-        this.reader = reader;
         this.writer = writer;
         comments = reader.read(comments.getClass());
         this.commentSorter = commentSorter;
