@@ -88,7 +88,6 @@ public class PostController {
         HashSet<String> followees = accountManager.getFolloweesOf(username);
         ArrayList<Post> postsList = new ArrayList<>();
         for (String followee : followees) { postsList.addAll(postManager.getPostsWrittenBy(followee)); }
-        postModel.reset();
         postModel.addItems(
                 postsList,
                 new String[]{ "title", "author", "content", "timePosted", "id"}

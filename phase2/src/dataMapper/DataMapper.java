@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
 
 public class DataMapper {
     /**
@@ -23,6 +25,9 @@ public class DataMapper {
         try {
             Field field = object.getClass().getDeclaredField(attribute);
             field.setAccessible(true);
+            if (attribute.equals("timePosted")) {
+                return DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm").format((LocalDateTime) field.get(object));
+            }
             return field.get(object).toString();
         } catch (NoSuchFieldException | IllegalAccessException e) {
             e.printStackTrace();
@@ -55,7 +60,7 @@ public class DataMapper {
      * @param attribute   a string representing the attribute of the item to be removed
      * @param value       a string representing the value of the attribute of the item to be removed
      */
-    public <T> void deleteItem(String attribute, String value) {
+    public void deleteItem(String attribute, String value) {
         int i = 0;
         for (Map<String, String> item : model) {
             if (item.get(attribute).equals(value)) {
