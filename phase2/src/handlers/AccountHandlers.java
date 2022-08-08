@@ -29,7 +29,7 @@ public class AccountHandlers extends Handlers {
         List<Map<String, String>> accounts = accountController.search(targetUsername, limit);
         ViewModel viewModel = new ViewModel();
         viewModel.put("accounts", accounts);
-        viewModel.addFormField("targetUsername", "username", "text");
+        viewModel.addFormField("targetUsername", "Username", "text");
         String templatePath = "src/templates/search.jinja";
         viewModel.put("returnEndpoint", "/");
         present(exchange, viewModel.getContext(), templatePath);

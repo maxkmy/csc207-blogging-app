@@ -9,10 +9,10 @@
         <div class="form-group mb-4">
             <label class="form-label" for="{{ field.id }}"> {{ field.label }} </label>
             <input type="{{ field.type }}" id="{{ field.id }}" name="{{ field.id }}" class="form-control"
-                   placeholder="Enter {{ field.id }}">
+                   placeholder="Enter {{ field.label }}">
         </div>
         {% endfor %}
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary">Search</button>
     </form>
 </div>
 
