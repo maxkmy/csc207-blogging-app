@@ -32,6 +32,7 @@ public class AccountHandlers extends Handlers {
         viewModel.addFormField("targetUsername", "Username", "text");
         String templatePath = "src/templates/search.jinja";
         viewModel.put("returnEndpoint", "/");
+        viewModel.put("message", "Search Results");
         present(exchange, viewModel.getContext(), templatePath);
     }
 
