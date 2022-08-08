@@ -52,12 +52,8 @@ public class PostHandlers extends Handlers {
                 public void handle(HttpServerExchange exchange, String message) {
                     Map<String, Deque<String>> props = QueryParameterUtils.parseQueryString(message, "UTF_8");
                     String author = managerData.getCurrentUser();
-                    String title = props.get("title").getFirst();
-                    String content = props.get("content").getFirst();
-                    title = title.replace('+', ' ');
-                    title = title.replace("%27", "'");
-                    content = content.replace('+', ' ');
-                    content = content.replace("%27", "'");
+                    String title = cleanText(props.get("title").getFirst());
+                    String content = cleanText(props.get("content").getFirst());
 
                     postController.addPost(title, content, author);
 
@@ -157,5 +153,13 @@ public class PostHandlers extends Handlers {
         viewModel.put("following", accountController.getFollowing(username).size());
 
         present(exchange, viewModel.getContext(), templatePath);
+    }
+
+    private String cleanText(String text) {
+        text = text.replace('+', ' ');
+        text = text.replace("%27", "'");
+        text = text.replace("%28", "(");
+        text = text.replace("%29", ")");
+        return text;
     }
 }
