@@ -13,7 +13,7 @@
 - Search for `jinjava` and add the `com.hubspot.jinjava:jinjava:2.6.0` library. 
 
 # Generating data to test the program
-- Run the main methods within `CommentDataGenerator.java`, `PostDataGenerator.java` and `UserDataGenerator.java`.
+- Run the main methods within `CommentDataGenerator.java`, `PostDataGenerator.java` and `UserDataGenerator.java`. Note that these classes are found within the `dataGenerator` folder.
 - `UserDataGenerator.java`'s main method creates an admin (which can later be used to login to the app). The credentials of the admin are as follows: 
   - username: admin
   - password: password 
@@ -24,18 +24,21 @@
 
 # Data persistence 
 - For the changes to data during a session to be stored, be sure to logout after signing up or logging into an account. 
+- The exception to this is if you self-delete an account. 
 
 # Functionalities of the program 
 - The program contains the same functionalities as phase 0. 
   - Users can sign up, login, view login history, quit the app and delete their accounts. 
   - In addition, admins can ban users, unban users, delete other accounts, and promote users. 
 - Additionally, some new features were added in phase 1. We split these changes into 4 categories (further discussed below). 
-- In phase 2, we made the app into a webapp that can be ran on localhost.
+- In phase 2, we made the app into a webapp that can be ran on localhost and added a search functionality.
+- Note: a manual test plan has been added to guide with some basic uses of the app. 
 
 ## User features 
 - Users can unfollow and follow other users by searching for other users' usernames. A list of top 10 closest match will be displayed. 
 - Users can view their own profiles. 
 - Users can view others' profiles by searching for other users' usernames. 
+- Users can view their followers and followees. 
 
 ## Post features 
 - Upon viewing their own profile, users can create a new post. 
