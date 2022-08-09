@@ -17,6 +17,7 @@
 - `UserDataGenerator.java`'s main method creates an admin (which can later be used to login to the app). The credentials of the admin are as follows: 
   - username: admin
   - password: password 
+- **NOTE**: If you wish to run any test files in the test folder, run the data generator files first. 
   
 # Running the app 
 - Run the main method in `app.java`. 
